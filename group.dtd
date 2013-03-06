@@ -1,0 +1,16 @@
+<!ELEMENT groups (group*)>
+
+<!ELEMENT group (student*)>
+<!ATTLIST group
+id CDATA #REQUIRED
+fakulty CDATA #REQUIRED
+number CDATA #REQUIRED
+>
+
+<!ELEMENT student (subject*)>
+<!ATTLIST student 
+id CDATA #REQUIRED
+firstname CDATA #REQUIRED
+lastname CDATA #REQUIRED
+groupnumber CDATA #REQUIRED
+>
