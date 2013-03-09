@@ -3,7 +3,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -92,14 +96,13 @@ public class Server {
     }
     
     public Group getStudentsGroup(Student student) throws ServerException {
-        Group group = null;
         ArrayList<Group> groups = (ArrayList<Group>) getGroups();
         for(Group g : groups) {
             if(g.getNumber().equals(student.getGroupNumber()) && g.getStudents().contains(student)) {
                 return g;
             }
         }
-        return group;
+        throw new ServerException("Group for this student does not exist.");
     }
     
     public List<Group> getGroups () throws ServerException {
@@ -112,12 +115,32 @@ public class Server {
         return groups;
     }
     
-    public void remove (int ID) throws ServerException {
+    public void removeStudent (int id) throws ServerException {
+        List<Group> groups = getGroups();
+        for(Group g : groups) {
+            if(g.containsStudent(id)) {
+                g.removeStudent(id, document);
+                saveXML("UTF-8");
+                return;
+            }
+        }
+        throw new ServerException("Student with ID " + id + " does not exist");
+    }
+    
+    public void removeGroup (String groupName) throws ServerException {
         try{
-            String id = new Integer(ID).toString();
-            document.removeChild(document.getElementById(id));
+            NodeList groups = document.getElementsByTagName("group");
+            for(int i = 0; i < groups.getLength(); i++) {
+                if (groups.item(i).getAttributes().getNamedItem("ID").getNodeValue().equals(groupName)){
+                    Element root = document.getDocumentElement();
+                    root.removeChild(groups.item(i));
+                    saveXML("UTF-8");
+                    return;
+                }
+            }
+            throw new ServerException("Group with name " + groupName + " does not exist");
         } catch(DOMException e) {
-            throw new ServerException("Can't remove this element!", e);
+            throw new ServerException("Can't remove this group!", e);
         }
     }
     
@@ -131,31 +154,29 @@ public class Server {
         return null;        
     }
     
-    public void addStudent (Student student) throws ServerException {
-        String studentsGroupID = new Integer(getStudentsGroup(student).getId()).toString();
-        Element group = document.getElementById(studentsGroupID);
-        if(group == null)
-            throw new ServerException(("There is no group! Please, create group first"), new NullPointerException());        
-        Element studNode = document.createElement("student");
-        String id = new Integer(student.getId()).toString();
-        studNode.setAttribute("id", id);
-        studNode.setAttribute("fio", student.getFio());
-        studNode.setAttribute("groupnumber", student.getGroupNumber());
-        group.appendChild(studNode);
-        saveXML("UTF-8");
+    public void addStudent(Student student) throws ServerException {
+        List<Group> groups = getGroups();
+        for(Group g : groups) {
+            if(g.containsStudent(student.getId())) 
+                throw new ServerException("Can't add the student! Student with ID " + student.getId() + " is already exist!");
+        }
+        for(Group g : groups) {
+            if(g.getNumber().equals(student.getGroupNumber())) {                
+                g.addStudent(student, document);
+                saveXML("UTF-8");
+                return;
+            }
+        }     
+        throw new ServerException ("Error! Can not add student, because group with name '" + student.getGroupNumber() + "' does not exist");
     }
     
     public void addGroup (Group group) throws ServerException {
-        Element root = document.getDocumentElement();
-        if(group == null)
-            throw new ServerException("There is no root element!", new NullPointerException());
-        Element groupNode = document.createElement("group");
-        groupNode.setAttribute("fakulty", group.getFakulty());
-        groupNode.setAttribute("number", group.getNumber());
-        String id = new Integer(group.getId()).toString();
-        groupNode.setAttribute("id", id);
-        groupNode.setTextContent(" ");
-        root.appendChild(groupNode);
+        List <Group> groups = getGroups();
+        for(Group g : groups) {
+            if (g.getNumber().equals(group.getNumber()))
+                throw new ServerException("A group with number " + g.getNumber() + "is alredy exist");
+        }
+        group.addToDocument(document);
         saveXML("UTF-8");
     }
 
@@ -167,7 +188,7 @@ public class Server {
         this.document = document;
     }
     
-    /*public static void main (String[] args) throws ServerException {
+    public static void main (String[] args) throws ServerException, ParseException {
         Server server = new Server("groups.xml","groups.dtd");
         server.readDocument();
         System.out.println("xml readed succesfully");
@@ -175,7 +196,6 @@ public class Server {
         for(Group g : gr) {
            System.out.println(g.getFakulty());
            System.out.println(g.getNumber());
-           System.out.println(g.getId());
            ArrayList<Student> st = (ArrayList<Student>) g.getStudents();
            for(Student s : st) {
                System.out.println(s.getFio());
@@ -184,10 +204,15 @@ public class Server {
                System.out.println(s.getEnrolled());
            }
         }
-        server.addGroup(new Group("Med", "pata01", 4, null));
-    }*/
+        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");  
+       // server.addGroup(new Group("Med", "pata01", 4, null));
+        //Student newst = new Student(13, "A.R.Shmidt", "pata01", format.parse("01.02.2007"));
+        //server.addStudent(newst);
+        //server.removeStudent(13);
+        //server.removeGroup("pata01");
+    }
     
-    private void saveXML(String charSet) {
+    private void saveXML(String charSet) throws ServerException {
         try {
             Writer target = new OutputStreamWriter(new FileOutputStream(xmlPath), charSet);
             Source source = new DOMSource(document);
@@ -201,7 +226,7 @@ public class Server {
             target.close();
         }
         catch (Exception e) {
-            throw new ServerException("Can't save the XML!", e);
+            throw new ServerException("Can't save xml!");
         }
     }
     
