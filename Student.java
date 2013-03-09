@@ -16,22 +16,21 @@ public class Student implements Serializable {
     private int id;
     private String fio;
     private String groupNumber;
-    private Date enrolled; //зачислен
+    private String enrolled; //Р·Р°С‡РёСЃР»РµРЅ
+    private static final DateFormat format = new SimpleDateFormat("dd.MM.yyyy");    
     
     public Student (Node node) throws ServerException {
         try{
-            setId(Integer.parseInt(node.getAttributes().getNamedItem("id").getNodeValue()));
+            setId(Integer.parseInt(node.getAttributes().getNamedItem("ID").getNodeValue()));
             setFio(node.getAttributes().getNamedItem("fio").getNodeValue());
-            setGroupNumber(node.getAttributes().getNamedItem("groupnumber").getNodeValue());
-            DateFormat format = new SimpleDateFormat("yyyy.MM.dd");
-            setEnrolled(format.parse(node.getAttributes().getNamedItem("enrolled").getNodeValue()));
-            
+            setGroupNumber(node.getAttributes().getNamedItem("groupnumber").getNodeValue());            
+            setEnrolled(format.parse(node.getAttributes().getNamedItem("enrolled").getNodeValue()));            
         } catch(NumberFormatException e){
             throw new ServerException("Can not create a student! Something wrong with id!",e);
         } catch (DOMException e) {
             throw new ServerException("Can not create a student! DOMException - something wrong with XML-file!",e);
         } catch (ParseException e) {
-            throw new ServerException("Can not create a student! Something wrong with date of enroll at the University!",e);
+            throw new ServerException("Can not create a student! Something wrong with date of enroll at the University, Date fromat must be dd.MM.yyyy!",e);
         }
     }
     
@@ -78,11 +77,12 @@ public class Student implements Serializable {
     }
 
     public Student(int iD, String fio, String groupNumber, Date enrolled) {
-        setId(id);
+        setId(iD);
         setFio(fio);
         setGroupNumber(groupNumber);
         setEnrolled(enrolled);
     }
+    
     
     public int getId() {
         return id;
@@ -102,11 +102,11 @@ public class Student implements Serializable {
     public void setGroupNumber(String groupNumber) {
         this.groupNumber = groupNumber;
     }
-    public Date getEnrolled() {
+    public String getEnrolled() {
         return enrolled;
     }
     public void setEnrolled(Date enrolled) {
-        this.enrolled = enrolled;
+        this.enrolled = format.format(enrolled);        
     }
     
     
