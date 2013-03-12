@@ -7,7 +7,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,34 +28,73 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 
+/**
+ * The Class Server, using XML as DB.
+ */
 public class Server {
     
+    /** The document. */
     private Document document = null;
+    
+    /** The xml path. */
     private String xmlPath;
+    
+    /** The dtd path. */
     private String dtdPath;
     
+    /**
+     * Gets the dtd path.
+     *
+     * @return the dtd path
+     */
     public String getDtdPath() {
         return dtdPath;
     }
 
+    /**
+     * Sets the dtd path.
+     *
+     * @param dtdPath the new dtd path
+     */
     public void setDtdPath(String dtdPath) {
         this.dtdPath = dtdPath;
     }
 
+    /**
+     * Instantiates a new server.
+     *
+     * @param xmlPath the xml path
+     * @param dtdPath the dtd path
+     */
     public Server (String xmlPath, String dtdPath) {
         setXmlPath(xmlPath);
         setDtdPath(dtdPath);
     }
     
+    /**
+     * Gets the xml path.
+     *
+     * @return the xml path
+     */
     public String getXmlPath() {
         return xmlPath;
     }
 
+    /**
+     * Sets the xml path.
+     *
+     * @param xmlPath the new xml path
+     */
     public void setXmlPath(String xmlPath) {
         this.xmlPath = xmlPath;
         
     }
 
+    /**
+     * Read document.
+     *
+     * @throws ServerException the server exception
+     */
     public void readDocument () throws ServerException {        
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -91,20 +129,22 @@ public class Server {
         }       
     }
     
+    /**
+     * Return the list of students for specified group.
+     *
+     * @param group the group
+     * @return the students
+     */
     public List<Student> getStudents (Group group) {        
         return group.getStudents();
     }
     
-    public Group getStudentsGroup(Student student) throws ServerException {
-        ArrayList<Group> groups = (ArrayList<Group>) getGroups();
-        for(Group g : groups) {
-            if(g.getNumber().equals(student.getGroupNumber()) && g.getStudents().contains(student)) {
-                return g;
-            }
-        }
-        throw new ServerException("Group for this student does not exist.");
-    }
-    
+    /**
+     * Gets the groups.
+     *
+     * @return the groups
+     * @throws ServerException the server exception
+     */
     public List<Group> getGroups () throws ServerException {
         ArrayList<Group> groups = new ArrayList<Group>();
         Element root = document.getDocumentElement();
@@ -115,6 +155,12 @@ public class Server {
         return groups;
     }
     
+    /**
+     * Removes the student from DB.
+     *
+     * @param id the id
+     * @throws ServerException the server exception
+     */
     public void removeStudent (int id) throws ServerException {
         List<Group> groups = getGroups();
         for(Group g : groups) {
@@ -127,6 +173,12 @@ public class Server {
         throw new ServerException("Student with ID " + id + " does not exist");
     }
     
+    /**
+     * Removes the group from DB.
+     *
+     * @param groupName the group name
+     * @throws ServerException the server exception
+     */
     public void removeGroup (String groupName) throws ServerException {
         try{
             NodeList groups = document.getElementsByTagName("group");
@@ -145,15 +197,23 @@ public class Server {
     }
     
     /**
-     * 
-     * @param ids
-     * @param hashs
+     * Checks if is updated.
+     *
+     * @param ids the ids
+     * @param hashs the hashs
      * @return can return keys "changed", "deleted", "added"
+     * @throws ServerException the server exception
      */
     public Map<String, Object> isUpdated (List<Integer> ids, List<Integer> hashs) throws ServerException {
         return null;        
     }
     
+    /**
+     * Adds the student.
+     *
+     * @param student the student
+     * @throws ServerException the server exception
+     */
     public void addStudent(Student student) throws ServerException {
         List<Group> groups = getGroups();
         for(Group g : groups) {
@@ -170,6 +230,12 @@ public class Server {
         throw new ServerException ("Error! Can not add student, because group with name '" + student.getGroupNumber() + "' does not exist");
     }
     
+    /**
+     * Adds the group.
+     *
+     * @param group the group
+     * @throws ServerException the server exception
+     */
     public void addGroup (Group group) throws ServerException {
         List <Group> groups = getGroups();
         for(Group g : groups) {
@@ -180,14 +246,31 @@ public class Server {
         saveXML("UTF-8");
     }
 
+    /**
+     * Gets the document.
+     *
+     * @return the document
+     */
     public Document getDocument() {
         return document;
     }
 
+    /**
+     * Sets the document.
+     *
+     * @param document the new document
+     */
     public void setDocument(Document document) {
         this.document = document;
     }
     
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     * @throws ServerException the server exception
+     * @throws ParseException the parse exception
+     */
     public static void main (String[] args) throws ServerException, ParseException {
         Server server = new Server("groups.xml","groups.dtd");
         server.readDocument();
@@ -212,6 +295,12 @@ public class Server {
         //server.removeGroup("pata01");
     }
     
+    /**
+     * Save changes to DB.
+     *
+     * @param charSet the char set
+     * @throws ServerException the server exception
+     */
     private void saveXML(String charSet) throws ServerException {
         try {
             Writer target = new OutputStreamWriter(new FileOutputStream(xmlPath), charSet);
