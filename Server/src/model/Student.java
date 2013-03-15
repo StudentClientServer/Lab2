@@ -1,3 +1,5 @@
+package model;
+
 import java.io.Serializable;
 
 import java.text.DateFormat;
@@ -16,7 +18,7 @@ public class Student implements Serializable {
     private int id;
     private String fio;
     private String groupNumber;
-    private String enrolled; //Р·Р°С‡РёСЃР»РµРЅ
+    private String enrolled; //зачислен
     private static final DateFormat format = new SimpleDateFormat("dd.MM.yyyy");    
     
     public Student (Node node) throws ServerException {
