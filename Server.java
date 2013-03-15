@@ -265,37 +265,6 @@ public class Server {
     }
     
     /**
-     * The main method.
-     *
-     * @param args the arguments
-     * @throws ServerException the server exception
-     * @throws ParseException the parse exception
-     */
-    public static void main (String[] args) throws ServerException, ParseException {
-        Server server = new Server("groups.xml","groups.dtd");
-        server.readDocument();
-        System.out.println("xml readed succesfully");
-        ArrayList<Group> gr = (ArrayList<Group>) server.getGroups();
-        for(Group g : gr) {
-           System.out.println(g.getFakulty());
-           System.out.println(g.getNumber());
-           ArrayList<Student> st = (ArrayList<Student>) g.getStudents();
-           for(Student s : st) {
-               System.out.println(s.getFio());
-               System.out.println(s.getGroupNumber());
-               System.out.println(s.getId());
-               System.out.println(s.getEnrolled());
-           }
-        }
-        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");  
-       // server.addGroup(new Group("Med", "pata01", 4, null));
-        //Student newst = new Student(13, "A.R.Shmidt", "pata01", format.parse("01.02.2007"));
-        //server.addStudent(newst);
-        //server.removeStudent(13);
-        //server.removeGroup("pata01");
-    }
-    
-    /**
      * Save changes to DB.
      *
      * @param charSet the char set
