@@ -7,10 +7,18 @@ number CDATA #REQUIRED
 >
 
 <!ELEMENT student EMPTY>
+<<<<<<< HEAD:Server/groups.dtd
 <!ATTLIST student
+=======
+<!ATTLIST student 
+>>>>>>> e57e6ae8a628e89c25143b3240b51cad7ddd2322:Server/group.dtd
 id CDATA #REQUIRED
 firstname CDATA #REQUIRED
 lastname CDATA #REQUIRED
 groupnumber CDATA #REQUIRED
 enrolled CDATA #REQUIRED
+<<<<<<< HEAD:Server/groups.dtd
 >
+=======
+>
+>>>>>>> e57e6ae8a628e89c25143b3240b51cad7ddd2322:Server/group.dtd
