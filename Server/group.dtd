@@ -13,4 +13,5 @@ id CDATA #REQUIRED
 firstname CDATA #REQUIRED
 lastname CDATA #REQUIRED
 groupnumber CDATA #REQUIRED
+enrolled CDATA #REQUIRED
 >
