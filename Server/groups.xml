@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE groups SYSTEM "groups.dtd">
 <groups>
@@ -14,27 +14,5 @@
 <student enrolled="04.09.2010" firstname="James" groupnumber="2" id="6" lastname="Bond"/>
 <student enrolled="04.09.2010" firstname="Leonardo" groupnumber="2" id="7" lastname="Dikaprio"/>
 <student enrolled="03.09.2010" firstname="Steeve" groupnumber="2" id="8" lastname="Jobs"/>
-
 </group>
-
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE group SYSTEM "group.dtd" >
-
-<groups>
-<group id="9999" fakulty="FizTeh" number="1">
-<student firstname="Tom" lastname="Cruzz" groupnumber="1" enrolled="02.09.2010"/>
-<student firstname="Bob" lastname="Tornton" groupnumber="1" enrolled="09.09.2010"/>
-<student firstname="Phil" lastname="Richards" groupnumber="1" enrolled="08.09.2010"/>
-<student firstname="John" lastname="Depp" groupnumber="1" enrolled="07.09.2010"/>
-
-</group>
-<group id="8888" fakulty="MehMat" number="2">
-<student firstname="Tony" lastname="Ellias" groupnumber="2" enrolled="05.09.2010"/>
-<student firstname="James" lastname="Bond" groupnumber="2" enrolled="04.09.2010"/>
-<student firstname="Leonardo" lastname="Dikaprio" groupnumber="2" enrolled="04.09.2010"/>
-<student firstname="Steeve" lastname="Jobs" groupnumber="2" enrolled="03.09.2010"/>
-
-</group>
->>>>>>> e57e6ae8a628e89c25143b3240b51cad7ddd2322
 </groups>
