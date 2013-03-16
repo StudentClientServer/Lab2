@@ -1,6 +1,5 @@
 package model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,74 +9,58 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 
-public class Group implements Serializable {
-    
-    private static final long serialVersionUID = 2843451388903919498L;
+public class Group {
     
     private String fakulty;
     private String number;  
-    private List<Student> students = new ArrayList<Student>();
     private Element group;
-    
-    public Group(String fakulty, String number, int id,
-            ArrayList<Student> students) {
-        setFakulty(fakulty);
-        setNumber(number);    
-        setStudents(students);
-    }
+    private Document document;
 
-    public Group(String fakulty, String number, int id) {
+    public Group(String fakulty, String number) {
         setFakulty(fakulty);
         setNumber(number);       
     }
     
-    public Group (Node node) throws ServerException {
+    public Document getDocument() {
+		return document;
+	}
+
+	public void setDocument(Document document) {
+		this.document = document;
+	}
+
+	public Group (Node node, Document document) throws ServerException {
         try {
+        	setDocument(document);
             group = (Element) node;
             setFakulty(group.getAttribute("fakulty"));
-            setNumber(group.getAttribute("ID"));
-            NodeList students = group.getElementsByTagName("student");
-            for(int i = 0; i < students.getLength(); i++) {
-                this.students.add(new Student (students.item(i)));
-            }
-            
+            setNumber(group.getAttribute("number"));
+            NodeList students = group.getElementsByTagName("student");           
         } catch(NumberFormatException e){
             throw new ServerException("Can not create a group! Something wrong with id!",e);
         }
     }
     
-    public void addStudent (Student student, Document document) {
-        students.add(student);
-        Element studentNode = document.createElement("student");
-        studentNode.setAttribute("ID", new Integer(student.getId()).toString());
-        studentNode.setAttribute("fio", student.getFio());
-        studentNode.setAttribute("groupnumber", student.getGroupNumber());
-        studentNode.setAttribute("enrolled", student.getEnrolled());                                  
-        group.appendChild(studentNode);
+    public void addStudent (Student student) {
+    	student.createNode(document, group);
     }
     
-    public void removeStudent (int id, Document document) throws ServerException {
-        for(Student s : students) {
-            if(s.getId() == id) {
-                students.remove(s);
+    public void removeStudent (int id) throws ServerException {
                 NodeList studentsNodes = group.getElementsByTagName("student");
                 for(int i = 0; i < studentsNodes.getLength(); i++) {
-                    if(studentsNodes.item(i).getAttributes().getNamedItem("ID").getNodeValue().equals(new Integer(id).toString())) {                        
-                        System.out.println(studentsNodes.item(i).getAttributes().getNamedItem("ID").getNodeValue());                                                
-                        if(removeStudentFromDocument(studentsNodes.item(i), document))
+                    if(studentsNodes.item(i).getAttributes().getNamedItem("id").getNodeValue().equals(new Integer(id).toString())) {                                                                     
+                        if(removeStudentFromDocument(studentsNodes.item(i)))
                             return;
                     }                        
-                }                
-            }               
-        }
+                }                             
         throw new ServerException("There is no student with id = " + id);
     }
     
-    private boolean removeStudentFromDocument(Node student, Document document) {
+    private boolean removeStudentFromDocument(Node student) {
         Element root = document.getDocumentElement();
         NodeList groups = root.getElementsByTagName("group");
         for(int i = 0; i < groups.getLength(); i++) {
-            if(groups.item(i).getAttributes().getNamedItem("ID").getNodeValue().equals(getNumber())) {
+            if(groups.item(i).getAttributes().getNamedItem("number").getNodeValue().equals(getNumber())) {
                 groups.item(i).removeChild(student);
                 return true;
             }
@@ -85,14 +68,15 @@ public class Group implements Serializable {
         return false;
     }
     
-    public void addToDocument(Document document) {
+    public void addToDocument() {
         Element root = document.getDocumentElement();
         Element groupNode = document.createElement("group");
         groupNode.setAttribute("fakulty",getFakulty());
-        groupNode.setAttribute("ID", getNumber());
-        groupNode.setTextContent(" ");
+        groupNode.setAttribute("number", getNumber());
         root.appendChild(groupNode);
     }
+    
+    
     
     public String getFakulty() {
         return fakulty;
@@ -107,18 +91,11 @@ public class Group implements Serializable {
         this.number = number;
     }
     
-    public void setStudents(ArrayList<Student> students) {
-        this.students = students;
-    }
-    
-    public List<Student> getStudents() {
-        return students;
-    }
-    
-    public boolean containsStudent (int id) {
-        for(Student s : students) {
-            if(s.getId() == id)
-                return true;
+    public boolean containsStudent (int id) throws ServerException {
+        List <Student> students = getStudents();
+        for(Student student : students) {
+        	if(student.getId() == id)
+        		return true;
         }
         return false;
     }
@@ -153,6 +130,13 @@ public class Group implements Serializable {
             return false;
         return true;
     }
-    
-    
+
+	public List<Student> getStudents() throws ServerException {
+		List<Student> students = new ArrayList <Student>();
+		NodeList studentsNodes = group.getElementsByTagName("student");
+        	for(int i = 0; i < studentsNodes.getLength(); i++) 
+        		students.add(new Student (studentsNodes.item(i)));
+        return students;
+	}
+      
 }

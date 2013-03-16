@@ -1,30 +1,141 @@
 package model;
 
-import java.io.Serializable;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 
-public class Student implements Serializable {
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Student.
+ */
+public class Student  {
     
-    private static final long serialVersionUID = 4378002506140942424L;
-    
+    /** The id. */
     private int id;
-    private String fio;
-    private String groupNumber;
-    private String enrolled; //–∑–∞—á–∏—Å–ª–µ–Ω
+    
+    /** The first name. */
+    private String firstName;
+    
+    /** The last name. */
+    private String lastName;
+    
+    /** The group number. */
+    private String groupNumber;    	
+	
+	/** The enrolled. */
+	private String enrolled; //Á‡˜ËÒÎÂÌ
+    
+    /** The Constant format. */
     private static final DateFormat format = new SimpleDateFormat("dd.MM.yyyy");    
     
+    /**
+     * Gets the last name.
+     *
+     * @return the last name
+     */
+    public String getLastName() {
+		return lastName;
+	}
+
+	/**
+	 * Sets the last name.
+	 *
+	 * @param lastName the new last name
+	 */
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+    
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+    
+    /**
+     * Sets the id.
+     *
+     * @param id the new id
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    /**
+     * Gets the first name.
+     *
+     * @return the first name
+     */
+    public String getFirstName() {
+        return firstName;
+    }
+    
+    /**
+     * Sets the first name.
+     *
+     * @param firstName the new first name
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    
+    /**
+     * Gets the group number.
+     *
+     * @return the group number
+     */
+    public String getGroupNumber() {
+        return groupNumber;
+    }
+    
+    /**
+     * Sets the group number.
+     *
+     * @param groupNumber the new group number
+     */
+    public void setGroupNumber(String groupNumber) {
+        this.groupNumber = groupNumber;
+    }
+    
+    /**
+     * Gets the enrolled.
+     *
+     * @return the enrolled
+     */
+    public String getEnrolled() {
+        return enrolled;
+    }
+    
+    /**
+     * Sets the enrolled.
+     *
+     * @param enrolled the new enrolled
+     */
+    public void setEnrolled(Date enrolled) {
+        this.enrolled = format.format(enrolled);        
+    }
+    
+    /**
+     * Instantiates a new student.
+     *
+     * @param node the node
+     * @throws ServerException the server exception
+     */
     public Student (Node node) throws ServerException {
         try{
-            setId(Integer.parseInt(node.getAttributes().getNamedItem("ID").getNodeValue()));
-            setFio(node.getAttributes().getNamedItem("fio").getNodeValue());
+            setId(Integer.parseInt(node.getAttributes().getNamedItem("id").getNodeValue()));
+            setFirstName(node.getAttributes().getNamedItem("firstname").getNodeValue());
+            setLastName(node.getAttributes().getNamedItem("lastname").getNodeValue());
             setGroupNumber(node.getAttributes().getNamedItem("groupnumber").getNodeValue());            
             setEnrolled(format.parse(node.getAttributes().getNamedItem("enrolled").getNodeValue()));            
         } catch(NumberFormatException e){
@@ -36,6 +147,9 @@ public class Student implements Serializable {
         }
     }
     
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -43,12 +157,15 @@ public class Student implements Serializable {
         result = prime * result + id;
         result = prime * result
                 + ((enrolled == null) ? 0 : enrolled.hashCode());
-        result = prime * result + ((fio == null) ? 0 : fio.hashCode());
+        result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
         result = prime * result
                 + ((groupNumber == null) ? 0 : groupNumber.hashCode());
         return result;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -65,10 +182,10 @@ public class Student implements Serializable {
                 return false;
         } else if (!enrolled.equals(other.enrolled))
             return false;
-        if (fio == null) {
-            if (other.fio != null)
+        if (firstName == null) {
+            if (other.firstName != null)
                 return false;
-        } else if (!fio.equals(other.fio))
+        } else if (!firstName.equals(other.firstName))
             return false;
         if (groupNumber == null) {
             if (other.groupNumber != null)
@@ -78,38 +195,35 @@ public class Student implements Serializable {
         return true;
     }
 
-    public Student(int iD, String fio, String groupNumber, Date enrolled) {
-        setId(iD);
-        setFio(fio);
+    public void createNode(Document document, Element group) {
+    	Element studentNode = document.createElement("student");
+        studentNode.setAttribute("id", new Integer(getId()).toString());
+        studentNode.setAttribute("firstname", getFirstName());
+        studentNode.setAttribute("lastname", getLastName());
+        studentNode.setAttribute("groupnumber", getGroupNumber());
+        studentNode.setAttribute("enrolled", getEnrolled());                                  
+        group.appendChild(studentNode);
+    }
+    
+    /**
+     * Instantiates a new student.
+     *
+     * @param iD the id
+     * @param firstName the first name
+     * @param lastName the last name
+     * @param groupNumber the group number
+     * @param enrolled the enrolled
+     */
+    public Student(int id, String firstName, String lastName, String groupNumber, Date enrolled) {
+        setId(id);
+        setFirstName(firstName);
+        setLastName(lastName);
         setGroupNumber(groupNumber);
         setEnrolled(enrolled);
     }
     
     
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public String getFio() {
-        return fio;
-    }
-    public void setFio(String fio) {
-        this.fio = fio;
-    }
-    public String getGroupNumber() {
-        return groupNumber;
-    }
-    public void setGroupNumber(String groupNumber) {
-        this.groupNumber = groupNumber;
-    }
-    public String getEnrolled() {
-        return enrolled;
-    }
-    public void setEnrolled(Date enrolled) {
-        this.enrolled = format.format(enrolled);        
-    }
+    
     
     
     

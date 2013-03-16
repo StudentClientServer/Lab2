@@ -5,12 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -27,7 +23,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
 
 
 /**
@@ -67,10 +62,12 @@ public class Server {
      *
      * @param xmlPath the xml path
      * @param dtdPath the dtd path
+     * @throws ServerException 
      */
-    public Server (String xmlPath, String dtdPath) {
+    public Server (String xmlPath, String dtdPath) throws ServerException {
         setXmlPath(xmlPath);
         setDtdPath(dtdPath);
+        readDocument();
     }
     
     /**
@@ -102,25 +99,6 @@ public class Server {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             dbf.setValidating(true);
             DocumentBuilder docBuilder = dbf.newDocumentBuilder();
-            docBuilder.setErrorHandler(new org.xml.sax.ErrorHandler() {
-
-                public void fatalError(SAXParseException exception) throws SAXException {
-                    System.out.println("Parsing error:  "+exception.getMessage());
-                    System.out.println("Cannot continue.");
-                    System.exit(1);
-                }
-
-                public void warning(SAXParseException err) throws SAXParseException {
-                    System.out.println(err.getMessage());
-                    System.exit(3);
-                }
-
-                public void error(SAXParseException e) throws SAXParseException {
-                    System.out.println("Error at " + e.getLineNumber() + " line.");
-                    System.out.println(e.getMessage());
-                    System.exit(2);
-                }
-            }); 
             setDocument(docBuilder.parse(new File(xmlPath)));
         }  catch (ParserConfigurationException e) {
             throw new ServerException("Can not read xml-file",e);
@@ -136,8 +114,9 @@ public class Server {
      *
      * @param group the group
      * @return the students
+     * @throws ServerException 
      */
-    public List<Student> getStudents (Group group) {        
+    public List<Student> getStudents (Group group) throws ServerException {        
         return group.getStudents();
     }
     
@@ -148,11 +127,11 @@ public class Server {
      * @throws ServerException the server exception
      */
     public List<Group> getGroups () throws ServerException {
-        ArrayList<Group> groups = new ArrayList<Group>();
+        List<Group> groups = new ArrayList<Group>();
         Element root = document.getDocumentElement();
         NodeList groupsNodes = root.getElementsByTagName("group");
         for(int i = 0; i < groupsNodes.getLength(); i++) {
-            groups.add(new Group(groupsNodes.item(i)));
+            groups.add(new Group(groupsNodes.item(i), document));
         }
         return groups;
     }
@@ -167,7 +146,7 @@ public class Server {
         List<Group> groups = getGroups();
         for(Group g : groups) {
             if(g.containsStudent(id)) {
-                g.removeStudent(id, document);
+                g.removeStudent(id);
                 saveXML("UTF-8");
                 return;
             }
@@ -178,40 +157,28 @@ public class Server {
     /**
      * Removes the group from DB.
      *
-     * @param groupName the group name
+     * @param groupNnumber the group name
      * @throws ServerException the server exception
      */
-    public void removeGroup (String groupName) throws ServerException {
+    public void removeGroup (String groupNnumber) throws ServerException {
         try{
             NodeList groups = document.getElementsByTagName("group");
             for(int i = 0; i < groups.getLength(); i++) {
-                if (groups.item(i).getAttributes().getNamedItem("ID").getNodeValue().equals(groupName)){
+                if (groups.item(i).getAttributes().getNamedItem("number").getNodeValue().equals(groupNnumber)){
                     Element root = document.getDocumentElement();
                     root.removeChild(groups.item(i));
                     saveXML("UTF-8");
                     return;
                 }
             }
-            throw new ServerException("Group with name " + groupName + " does not exist");
+            throw new ServerException("Group with name " + groupNnumber + " does not exist");
         } catch(DOMException e) {
             throw new ServerException("Can't remove this group!", e);
         }
     }
     
     /**
-     * Checks if is updated.
-     *
-     * @param ids the ids
-     * @param hashs the hashs
-     * @return can return keys "changed", "deleted", "added"
-     * @throws ServerException the server exception
-     */
-    public Map<String, Object> isUpdated (List<Integer> ids, List<Integer> hashs) throws ServerException {
-        return null;        
-    }
-    
-    /**
-     * Adds the student.
+     * Adds the student, check ID for uniqueness.
      *
      * @param student the student
      * @throws ServerException the server exception
@@ -224,7 +191,7 @@ public class Server {
         }
         for(Group g : groups) {
             if(g.getNumber().equals(student.getGroupNumber())) {                
-                g.addStudent(student, document);
+                g.addStudent(student);
                 saveXML("UTF-8");
                 return;
             }
@@ -233,7 +200,7 @@ public class Server {
     }
     
     /**
-     * Adds the group.
+     * Adds the group, check group number for uniqueness.
      *
      * @param group the group
      * @throws ServerException the server exception
@@ -244,7 +211,8 @@ public class Server {
             if (g.getNumber().equals(group.getNumber()))
                 throw new ServerException("A group with number " + g.getNumber() + "is alredy exist");
         }
-        group.addToDocument(document);
+        group.setDocument(document);
+        group.addToDocument();
         saveXML("UTF-8");
     }
 
@@ -261,9 +229,10 @@ public class Server {
      * Sets the document.
      *
      * @param document the new document
+     * @throws ServerException 
      */
-    public void setDocument(Document document) {
-        this.document = document;
+    public void setDocument(Document document) throws ServerException {
+    	this.document = document;
     }
     
     /**
