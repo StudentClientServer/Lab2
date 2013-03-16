@@ -2,7 +2,6 @@
 
 <!ELEMENT group (student*)>
 <!ATTLIST group
-id CDATA #REQUIRED
 fakulty CDATA #REQUIRED
 number CDATA #REQUIRED
 >
