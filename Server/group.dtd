@@ -7,7 +7,7 @@ fakulty CDATA #REQUIRED
 number CDATA #REQUIRED
 >
 
-<!ELEMENT student (subject*)>
+<!ELEMENT student EMPTY>
 <!ATTLIST student 
 id CDATA #REQUIRED
 firstname CDATA #REQUIRED
