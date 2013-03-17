@@ -146,54 +146,6 @@ public class Student  {
             throw new ServerException("Can not create a student! Something wrong with date of enroll at the University, Date fromat must be dd.MM.yyyy!",e);
         }
     }
-    
-    /* (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + id;
-        result = prime * result
-                + ((enrolled == null) ? 0 : enrolled.hashCode());
-        result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-        result = prime * result
-                + ((groupNumber == null) ? 0 : groupNumber.hashCode());
-        return result;
-    }
-
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Student other = (Student) obj;
-        if (id != other.id)
-            return false;
-        if (enrolled == null) {
-            if (other.enrolled != null)
-                return false;
-        } else if (!enrolled.equals(other.enrolled))
-            return false;
-        if (firstName == null) {
-            if (other.firstName != null)
-                return false;
-        } else if (!firstName.equals(other.firstName))
-            return false;
-        if (groupNumber == null) {
-            if (other.groupNumber != null)
-                return false;
-        } else if (!groupNumber.equals(other.groupNumber))
-            return false;
-        return true;
-    }
 
     public void createNode(Document document, Element group) {
     	Element studentNode = document.createElement("student");

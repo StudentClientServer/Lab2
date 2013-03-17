@@ -29,6 +29,9 @@ public class Test {
 		//checkAddStudent (new Student(9, "Vasia", "Pupkin", "IN-91", format.parse("12.02.2001")));
 		//checkRemoveStudent(9);
 		//checkRemoveGroup("IN-91");
+		//checkUpdateGroup(new Group ("Med", "2"));
+		//checkUpdateGroupNumber(new Group("Med", "2"), "Hir-01");
+		//checkUpdateStudent(new Student(8, "Vasia", "Pupkin", "1", format.parse("12.02.2001")));
 		checkGetters ();		
 	}	
 
@@ -62,4 +65,17 @@ public class Test {
 	private static void checkRemoveGroup(String groupName) throws ServerException {
 		server.removeGroup(groupName);
 	}
+	
+	private static void checkUpdateGroup (Group group) throws ServerException {
+		server.updateGroup(group);
+	}
+	
+	private static void checkUpdateGroupNumber (Group group, String newNumber) throws ServerException {
+		server.updateGroup(group, newNumber);
+	}
+	
+	private static void checkUpdateStudent (Student student) throws ServerException {
+		server.updateStudent(student);
+	}
+	
 }

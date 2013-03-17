@@ -34,8 +34,7 @@ public class Group {
         	setDocument(document);
             group = (Element) node;
             setFakulty(group.getAttribute("fakulty"));
-            setNumber(group.getAttribute("number"));
-            NodeList students = group.getElementsByTagName("student");           
+            setNumber(group.getAttribute("number"));         
         } catch(NumberFormatException e){
             throw new ServerException("Can not create a group! Something wrong with id!",e);
         }
@@ -74,9 +73,7 @@ public class Group {
         groupNode.setAttribute("fakulty",getFakulty());
         groupNode.setAttribute("number", getNumber());
         root.appendChild(groupNode);
-    }
-    
-    
+    }       
     
     public String getFakulty() {
         return fakulty;
@@ -98,37 +95,6 @@ public class Group {
         		return true;
         }
         return false;
-    }
-    
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result;
-        result = prime * result + ((fakulty == null) ? 0 : fakulty.hashCode());
-        result = prime * result + ((number == null) ? 0 : number.hashCode());
-        return result;
-    }
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Group other = (Group) obj;
-        if (fakulty == null) {
-            if (other.fakulty != null)
-                return false;
-        } else if (!fakulty.equals(other.fakulty))
-            return false;
-        if (number == null) {
-            if (other.number != null)
-                return false;
-        } else if (!number.equals(other.number))
-            return false;
-        return true;
     }
 
 	public List<Student> getStudents() throws ServerException {

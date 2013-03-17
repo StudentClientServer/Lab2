@@ -25,6 +25,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Server, using XML as DB.
  */
@@ -62,7 +63,7 @@ public class Server {
      *
      * @param xmlPath the xml path
      * @param dtdPath the dtd path
-     * @throws ServerException 
+     * @throws ServerException the server exception
      */
     public Server (String xmlPath, String dtdPath) throws ServerException {
         setXmlPath(xmlPath);
@@ -114,7 +115,7 @@ public class Server {
      *
      * @param group the group
      * @return the students
-     * @throws ServerException 
+     * @throws ServerException the server exception
      */
     public List<Student> getStudents (Group group) throws ServerException {        
         return group.getStudents();
@@ -157,21 +158,21 @@ public class Server {
     /**
      * Removes the group from DB.
      *
-     * @param groupNnumber the group name
+     * @param groupNumber the group name
      * @throws ServerException the server exception
      */
-    public void removeGroup (String groupNnumber) throws ServerException {
+    public void removeGroup (String groupNumber) throws ServerException {
         try{
             NodeList groups = document.getElementsByTagName("group");
             for(int i = 0; i < groups.getLength(); i++) {
-                if (groups.item(i).getAttributes().getNamedItem("number").getNodeValue().equals(groupNnumber)){
+                if (groups.item(i).getAttributes().getNamedItem("number").getNodeValue().equals(groupNumber)){
                     Element root = document.getDocumentElement();
                     root.removeChild(groups.item(i));
                     saveXML("UTF-8");
                     return;
                 }
             }
-            throw new ServerException("Group with name " + groupNnumber + " does not exist");
+            throw new ServerException("Group with name " + groupNumber + " does not exist");
         } catch(DOMException e) {
             throw new ServerException("Can't remove this group!", e);
         }
@@ -229,10 +230,82 @@ public class Server {
      * Sets the document.
      *
      * @param document the new document
-     * @throws ServerException 
+     * @throws ServerException the server exception
      */
     public void setDocument(Document document) throws ServerException {
     	this.document = document;
+    }
+    
+    /**
+     * Gets the group by number.
+     *
+     * @param number the number
+     * @return the group by number
+     * @throws ServerException when can not find a group with specified number.
+     */
+    public Group getGroupByNumber (String number) throws ServerException {
+    	List<Group> groups = getGroups();
+    	for (Group g : groups) {
+    		if (g.getNumber().equals(number))
+    			return g;
+    	}
+    	throw new ServerException ("Cant not find group with number " + number);
+    }
+    
+    /**
+     * Update group, change faculty.
+     *
+     * @param group the group
+     * @throws ServerException if can not remove or add group.
+     */
+    public void updateGroup (Group group) throws ServerException {
+    	try {
+    		List<Student> students = getGroupByNumber(group.getNumber()).getStudents();
+    		removeGroup(group.getNumber());
+    		addGroup(group);
+    		for(Student s : students) {
+    			addStudent(s);
+    		}
+    	} catch (ServerException e) {
+    		throw new ServerException("Can not update group. Maybe someone removed it.", e);
+    	}
+    }
+    
+    /**
+     * Update group, change group number.
+     *
+     * @param group the group
+     * @param newNumber number you want to set
+     * @throws ServerException if can not remove or add group.
+     */
+    public void updateGroup (Group group, String newNumber) throws ServerException {
+    	try {
+    		List<Student> students = getGroupByNumber(group.getNumber()).getStudents();
+    		removeGroup(group.getNumber());
+    		addGroup(new Group(group.getFakulty(), newNumber));
+    		for(Student s : students) {
+    			s.setGroupNumber(newNumber);
+    			addStudent(s);
+    		}
+    	} catch (ServerException e) {
+    		throw new ServerException("Can not update group. Maybe someone removed it or new number is already exist.", e);
+    	}
+    }
+    
+    /**
+     * Update student.
+     *
+     * @param student the student you want to update.
+     * @throws ServerException if can not remove or add student.
+     */
+    public void updateStudent (Student student) throws ServerException {
+    	try {
+    		getGroupByNumber(student.getGroupNumber()); //check if the specified group exist. If no - throws an exception.
+    		removeStudent(student.getId());
+    		addStudent(student);
+    	} catch(ServerException e) {
+    		throw new ServerException("Can not update student. Maybe someone removed it or specified group is not exist.", e);
+    	}
     }
     
     /**
