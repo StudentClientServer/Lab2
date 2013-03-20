@@ -60,7 +60,7 @@ public class Controller implements ActionListener {
 			    server.updateGroup((Group) params.get(0), (String) params.get(1));
 			}			    			    
 		} catch (ServerException ex) {
-		    view.exceptionHandling(ex);
+		    view.exceptionHandling(new ControllerException(ex));
 		}
 		
 	}
@@ -78,11 +78,9 @@ public class Controller implements ActionListener {
 		    server.setDtdPath(controller.getDtdpath());
 		    server.readDocument();
 		} catch (ServerException ex) {
-		    ex.printStackTrace();
-		    //view.exceptionHandling(ex);
+		    view.exceptionHandling(new ControllerException(ex));
 		} catch (ControllerException e) {
-		    e.printStackTrace();
-		    //view.exceptionHandling(e);
+		    view.exceptionHandling(e);
 		}
 	}
 
