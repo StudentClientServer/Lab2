@@ -22,6 +22,11 @@ public class Group {
     /** The xml element, associated with group. */
     private Element group;
 
+    @Override
+    public String toString() {
+	return "Group [fakulty=" + fakulty + ", number=" + number + "]";
+    }
+
     /** The xml document, that contains this group. */
     private Document document;
 

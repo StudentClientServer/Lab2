@@ -1,0 +1,32 @@
+Wed Mar 20 22:42:35 EET 2013. Add group Group [fakulty=Elit, number=IN-91]
+Wed Mar 20 22:42:35 EET 2013. Get groups
+Wed Mar 20 22:42:35 EET 2013. Add student Student [id=9, firstName=Vasia, lastName=Pupkin, groupNumber=IN-91, enrolled=12.02.2001]
+Wed Mar 20 22:42:35 EET 2013. Get groups
+Wed Mar 20 22:42:35 EET 2013. Remove student with id 9
+Wed Mar 20 22:42:35 EET 2013. Get groups
+Wed Mar 20 22:42:35 EET 2013. Remove group with number IN-91
+Wed Mar 20 22:42:35 EET 2013. Get groups
+Wed Mar 20 22:46:27 EET 2013. Add group Group [fakulty=Elit, number=IN-91]
+Wed Mar 20 22:46:27 EET 2013. Get groups
+Wed Mar 20 22:46:27 EET 2013. Add student Student [id=9, firstName=Vasia, lastName=Pupkin, groupNumber=IN-91, enrolled=12.02.2001]
+Wed Mar 20 22:46:27 EET 2013. Get groups
+Wed Mar 20 22:46:27 EET 2013. Remove student with id 9
+Wed Mar 20 22:46:27 EET 2013. Get groups
+Wed Mar 20 22:46:27 EET 2013. Remove group with number IN-91
+Wed Mar 20 22:46:27 EET 2013. Get groups
+Wed Mar 20 22:46:30 EET 2013. Add group Group [fakulty=Elit, number=IN-91]
+Wed Mar 20 22:46:30 EET 2013. Get groups
+Wed Mar 20 22:46:30 EET 2013. Add student Student [id=9, firstName=Vasia, lastName=Pupkin, groupNumber=IN-91, enrolled=12.02.2001]
+Wed Mar 20 22:46:30 EET 2013. Get groups
+Wed Mar 20 22:46:31 EET 2013. Remove student with id 9
+Wed Mar 20 22:46:31 EET 2013. Get groups
+Wed Mar 20 22:46:31 EET 2013. Remove group with number IN-91
+Wed Mar 20 22:46:31 EET 2013. Get groups
+Wed Mar 20 22:46:32 EET 2013. Add group Group [fakulty=Elit, number=IN-91]
+Wed Mar 20 22:46:32 EET 2013. Get groups
+Wed Mar 20 22:46:32 EET 2013. Add student Student [id=9, firstName=Vasia, lastName=Pupkin, groupNumber=IN-91, enrolled=12.02.2001]
+Wed Mar 20 22:46:32 EET 2013. Get groups
+Wed Mar 20 22:46:32 EET 2013. Remove student with id 9
+Wed Mar 20 22:46:32 EET 2013. Get groups
+Wed Mar 20 22:46:32 EET 2013. Remove group with number IN-91
+Wed Mar 20 22:46:32 EET 2013. Get groups

@@ -1,11 +1,15 @@
 package model;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -76,8 +80,11 @@ public class Server {
 
     /**
      * Instantiates a new server.
+     * 
+     * @throws ServerException
+     *             the server exception
      */
-    public Server() {
+    public Server() throws ServerException {
     }
 
     /**
@@ -112,21 +119,29 @@ public class Server {
 	    dbf.setValidating(true);
 	    DocumentBuilder docBuilder = dbf.newDocumentBuilder();
 	    docBuilder.setErrorHandler(new org.xml.sax.ErrorHandler() {
-		
-                public void fatalError(SAXParseException exception) throws SAXException {
-                    System.out.println("fatalerror");
-                    throw new SAXParseException("Errors in xml-file. Line " + exception.getLineNumber() + ", clolumn " + exception.getColumnNumber() + ". " +exception.getMessage(), null);       	    
-                }
 
-                public void warning(SAXParseException err) throws SAXParseException {
-                    System.out.println("warning");
-                    throw new SAXParseException("Errors in xml-file. Line " + err.getLineNumber() + ", clolumn " + err.getColumnNumber() + ". " +err.getMessage(), null);
-                }
+		public void fatalError(SAXParseException exception)
+			throws SAXException {
+		    throw new SAXParseException("Errors in xml-file. Line "
+			    + exception.getLineNumber() + ", clolumn "
+			    + exception.getColumnNumber() + ". "
+			    + exception.getMessage(), null);
+		}
 
-                public void error(SAXParseException e) throws SAXParseException {
-                    throw new SAXParseException("Errors in xml-file. Line " + e.getLineNumber() + ", clolumn " + e.getColumnNumber() + ". " +e.getMessage(), null);
-                }
-            });
+		public void warning(SAXParseException err)
+			throws SAXParseException {
+		    throw new SAXParseException("Errors in xml-file. Line "
+			    + err.getLineNumber() + ", clolumn "
+			    + err.getColumnNumber() + ". " + err.getMessage(),
+			    null);
+		}
+
+		public void error(SAXParseException e) throws SAXParseException {
+		    throw new SAXParseException("Errors in xml-file. Line "
+			    + e.getLineNumber() + ", clolumn "
+			    + e.getColumnNumber() + ". " + e.getMessage(), null);
+		}
+	    });
 	    setDocument(docBuilder.parse(new File(xmlPath)));
 	} catch (ParserConfigurationException e) {
 	    throw new ServerException("Can not read xml-file", e);
@@ -176,15 +191,24 @@ public class Server {
      *             if a student with specified id does not exist
      */
     public void removeStudent(int id) throws ServerException {
-	List<Group> groups = getGroups();
-	for (Group g : groups) {
-	    if (g.containsStudent(id)) {
-		g.removeStudent(id);
-		saveXML("UTF-8");
-		return;
+	try {
+	    Writer out = new FileWriter("log.txt", true);
+	    out.write(new Date() + ". Remove student with id " + id + "\n");
+	    out.close();
+	} catch (IOException e) {
+	    throw new ServerException("Can't write log");
+	} finally {
+	    List<Group> groups = getGroups();
+	    for (Group g : groups) {
+		if (g.containsStudent(id)) {
+		    g.removeStudent(id);
+		    saveXML("UTF-8");
+		    return;
+		}
 	    }
+	    throw new ServerException("Student with ID " + id
+		    + " does not exist");
 	}
-	throw new ServerException("Student with ID " + id + " does not exist");
     }
 
     /**
@@ -198,20 +222,29 @@ public class Server {
      */
     public void removeGroup(String groupNumber) throws ServerException {
 	try {
-	    NodeList groups = document.getElementsByTagName("group");
-	    for (int i = 0; i < groups.getLength(); i++) {
-		if (groups.item(i).getAttributes().getNamedItem("number")
-			.getNodeValue().equals(groupNumber)) {
-		    Element root = document.getDocumentElement();
-		    root.removeChild(groups.item(i));
-		    saveXML("UTF-8");
-		    return;
+	    Writer out = new FileWriter("log.txt", true);
+	    out.write(new Date() + ". Remove group with number " + groupNumber
+		    + "\n");
+	    out.close();
+	} catch (IOException e) {
+	    throw new ServerException("Can't write log");
+	} finally {
+	    try {
+		NodeList groups = document.getElementsByTagName("group");
+		for (int i = 0; i < groups.getLength(); i++) {
+		    if (groups.item(i).getAttributes().getNamedItem("number")
+			    .getNodeValue().equals(groupNumber)) {
+			Element root = document.getDocumentElement();
+			root.removeChild(groups.item(i));
+			saveXML("UTF-8");
+			return;
+		    }
 		}
+		throw new ServerException("Group with name " + groupNumber
+			+ " does not exist");
+	    } catch (DOMException e) {
+		throw new ServerException("Can't remove this group!", e);
 	    }
-	    throw new ServerException("Group with name " + groupNumber
-		    + " does not exist");
-	} catch (DOMException e) {
-	    throw new ServerException("Can't remove this group!", e);
 	}
     }
 
@@ -225,23 +258,31 @@ public class Server {
      *             not exist
      */
     public void addStudent(Student student) throws ServerException {
-	List<Group> groups = getGroups();
-	for (Group g : groups) {
-	    if (g.containsStudent(student.getId()))
-		throw new ServerException(
-			"Can't add the student! Student with ID "
-				+ student.getId() + " is already exist!");
-	}
-	for (Group g : groups) {
-	    if (g.getNumber().equals(student.getGroupNumber())) {
-		g.addStudent(student);
-		saveXML("UTF-8");
-		return;
+	try {
+	    Writer out = new FileWriter("log.txt", true);
+	    out.write(new Date() + ". Add student " + student + "\n");
+	    out.close();
+	} catch (IOException e) {
+	    throw new ServerException("Can't write log");
+	} finally {
+	    List<Group> groups = getGroups();
+	    for (Group g : groups) {
+		if (g.containsStudent(student.getId()))
+		    throw new ServerException(
+			    "Can't add the student! Student with ID "
+				    + student.getId() + " is already exist!");
 	    }
+	    for (Group g : groups) {
+		if (g.getNumber().equals(student.getGroupNumber())) {
+		    g.addStudent(student);
+		    saveXML("UTF-8");
+		    return;
+		}
+	    }
+	    throw new ServerException(
+		    "Error! Can not add student, because group with name '"
+			    + student.getGroupNumber() + "' does not exist");
 	}
-	throw new ServerException(
-		"Error! Can not add student, because group with name '"
-			+ student.getGroupNumber() + "' does not exist");
     }
 
     /**
@@ -253,15 +294,23 @@ public class Server {
      *             if group number is not unique
      */
     public void addGroup(Group group) throws ServerException {
-	List<Group> groups = getGroups();
-	for (Group g : groups) {
-	    if (g.getNumber().equals(group.getNumber()))
-		throw new ServerException("A group with number "
-			+ g.getNumber() + "is alredy exist");
+	try {
+	    Writer out = new FileWriter("log.txt", true);
+	    out.write(new Date() + ". Add group " + group + "\n");
+	    out.close();
+	} catch (IOException e) {
+	    throw new ServerException("Can't write log");
+	} finally {
+	    List<Group> groups = getGroups();
+	    for (Group g : groups) {
+		if (g.getNumber().equals(group.getNumber()))
+		    throw new ServerException("A group with number "
+			    + g.getNumber() + "is alredy exist");
+	    }
+	    group.setDocument(document);
+	    group.addToDocument();
+	    saveXML("UTF-8");
 	}
-	group.setDocument(document);
-	group.addToDocument();
-	saveXML("UTF-8");
     }
 
     /**
@@ -311,16 +360,25 @@ public class Server {
      */
     public void updateGroup(Group group) throws ServerException {
 	try {
-	    List<Student> students = getGroupByNumber(group.getNumber())
-		    .getStudents();
-	    removeGroup(group.getNumber());
-	    addGroup(group);
-	    for (Student s : students) {
-		addStudent(s);
+	    Writer out = new FileWriter("log.txt", true);
+	    out.write(new Date() + ". Update group, change faculty " + group
+		    + "\n");
+	    out.close();
+	} catch (IOException e) {
+	    throw new ServerException("Can't write log");
+	} finally {
+	    try {
+		List<Student> students = getGroupByNumber(group.getNumber())
+			.getStudents();
+		removeGroup(group.getNumber());
+		addGroup(group);
+		for (Student s : students) {
+		    addStudent(s);
+		}
+	    } catch (ServerException e) {
+		throw new ServerException(
+			"Can not update group. Maybe someone removed it.", e);
 	    }
-	} catch (ServerException e) {
-	    throw new ServerException(
-		    "Can not update group. Maybe someone removed it.", e);
 	}
     }
 
@@ -337,18 +395,27 @@ public class Server {
     public void updateGroup(Group group, String newNumber)
 	    throws ServerException {
 	try {
-	    List<Student> students = getGroupByNumber(group.getNumber())
-		    .getStudents();
-	    removeGroup(group.getNumber());
-	    addGroup(new Group(group.getFakulty(), newNumber));
-	    for (Student s : students) {
-		s.setGroupNumber(newNumber);
-		addStudent(s);
+	    Writer out = new FileWriter("log.txt", true);
+	    out.write(new Date() + ". Update group " + group + " New number: "
+		    + newNumber + "\n");
+	    out.close();
+	} catch (IOException e) {
+	    throw new ServerException("Can't write log");
+	} finally {
+	    try {
+		List<Student> students = getGroupByNumber(group.getNumber())
+			.getStudents();
+		removeGroup(group.getNumber());
+		addGroup(new Group(group.getFakulty(), newNumber));
+		for (Student s : students) {
+		    s.setGroupNumber(newNumber);
+		    addStudent(s);
+		}
+	    } catch (ServerException e) {
+		throw new ServerException(
+			"Can not update group. Maybe someone removed it or new number is already exist.",
+			e);
 	    }
-	} catch (ServerException e) {
-	    throw new ServerException(
-		    "Can not update group. Maybe someone removed it or new number is already exist.",
-		    e);
 	}
     }
 
@@ -362,16 +429,26 @@ public class Server {
      */
     public void updateStudent(Student student) throws ServerException {
 	try {
-	    getGroupByNumber(student.getGroupNumber()); // check if the
-							// specified group
-							// exist. If no - throws
-							// an exception.
-	    removeStudent(student.getId());
-	    addStudent(student);
-	} catch (ServerException e) {
-	    throw new ServerException(
-		    "Can not update student. Maybe someone removed it or specified group is not exist.",
-		    e);
+	    Writer out = new FileWriter("log.txt", true);
+	    ;
+	    out.write(new Date() + ". Update student " + student + "\n");
+	    out.close();
+	} catch (IOException e) {
+	    throw new ServerException("Can't write log");
+	} finally {
+	    try {
+		getGroupByNumber(student.getGroupNumber()); // check if the
+							    // specified group
+							    // exist. If no -
+							    // throws
+							    // an exception.
+		removeStudent(student.getId());
+		addStudent(student);
+	    } catch (ServerException e) {
+		throw new ServerException(
+			"Can not update student. Maybe someone removed it or specified group is not exist.",
+			e);
+	    }
 	}
     }
 

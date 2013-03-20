@@ -31,6 +31,13 @@ public class Student {
     /** The enrolled date. */
     private String enrolled; // зачислен
 
+    @Override
+    public String toString() {
+	return "Student [id=" + id + ", firstName=" + firstName + ", lastName="
+		+ lastName + ", groupNumber=" + groupNumber + ", enrolled="
+		+ enrolled + "]";
+    }
+
     /** The Constant format. */
     private static final DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
 
