@@ -22,7 +22,7 @@ public class Test {
 	 * @throws ServerException 
 	 * @throws ParseException 
 	 */
-	public static void main(String[] args) throws ServerException, ParseException {
+	/*public static void main(String[] args) throws ServerException, ParseException {
 		// TODO Auto-generated method stub		
 		server = new Server("groups.xml", "groups.dtd");
 		//checkAddGroup()new Group("Elit", "IN-91");
@@ -33,7 +33,7 @@ public class Test {
 		//checkUpdateGroupNumber(new Group("Med", "2"), "Hir-01");
 		//checkUpdateStudent(new Student(8, "Vasia", "Pupkin", "1", format.parse("12.02.2001")));
 		checkGetters ();		
-	}	
+	}	*/
 
 	private static void checkGetters () throws ServerException {
 		List<Group> groups = server.getGroups();

@@ -4,6 +4,6 @@ import model.ServerException;
 
 public interface View {
 
-    void exceptionHandling(ServerException ex);
+    void exceptionHandling(Exception ex);
 
 }
