@@ -32,7 +32,7 @@ import org.xml.sax.SAXParseException;
 /**
  * The Class Server, using XML as DB.
  */
-public class Server {
+public class Server implements ServerModel {
 
     /** The document. */
     private Document document = null;
@@ -190,7 +190,7 @@ public class Server {
      * @throws ServerException
      *             if a student with specified id does not exist
      */
-    public void removeStudent(int id) throws ServerException {
+    public void removeStudent(Integer id) throws ServerException {
 	try {
 	    Writer out = new FileWriter("log.txt", true);
 	    out.write(new Date() + ". Remove student with id " + id + "\n");

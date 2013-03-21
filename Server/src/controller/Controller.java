@@ -15,13 +15,13 @@ import model.*;
 import controller.ControllerException;
 
 public class Controller implements ActionListener {
-	private Server server;
+	private ServerModel server;
 	private View view;
 	private String xmlpath;
 	private String dtdpath;
 	
-	public Controller(Server server, View view) {
-		this.server = server;
+	public Controller(ServerModel server2, View view) {
+		this.server = server2;
 		this.view = view;
 	}
 
@@ -71,12 +71,14 @@ public class Controller implements ActionListener {
 	public static void main(String[] args) {
 	    	View view = new ViewFactory().newInstance();
 		try {		    
-		    Server server = new Server();  
+		    ServerModel server = new Server();  
 		    Controller controller = new Controller(server, view);
 		    controller.readServerSources();
 		    server.setXmlPath(controller.getXmlpath());
 		    server.setDtdPath(controller.getDtdpath());
 		    server.readDocument();
+		    view.setController(controller);
+		    view.setModel(server);
 		} catch (ServerException ex) {
 		    view.exceptionHandling(new ControllerException(ex));
 		} catch (ControllerException e) {
