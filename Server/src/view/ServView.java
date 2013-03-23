@@ -20,7 +20,8 @@ public class ServView implements View {
     private DataInputStream in;
     private DataOutputStream out;
     private ActionListener controller;
-    private ServerModel model;    
+    private ServerModel model;
+    private String ExceptMessage = null;
     
     public void setModel(ServerModel model) {
         this.model = model;
@@ -50,6 +51,10 @@ public class ServView implements View {
         }
     }
     
+    public void exceptionHandling(Exception ex) {
+        ExceptMessage = ex.getMessage();
+    }
+    
     private void reading() { 
         try {
             in = new DataInputStream(socket.getInputStream());            
@@ -70,28 +75,29 @@ public class ServView implements View {
             out = new DataOutputStream(socket.getOutputStream());
             if ("UPDATE".equals(action)) {
                 updateMessage(model.getGroups());
+            } else if ("SHOW".equals(action)) {
+                out.writeUTF(showeMessage(model.getStdents()));
             } else {
                 String fakyltet = items.item(0).getChildNodes().item(1).getFirstChild().getNodeValue();
                 String group = items.item(0).getChildNodes().item(2).getFirstChild().getNodeValue();
                 if ("REMOVE".equals(action)) {
                     String studentID = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
                     fireAction(Integer.parseInt(studentID), "RemoveStudent");
-                } else if (!"SHOW".equals(action)) {                    
-                        String studentName = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
-                        String studentLastname = items.item(1).getChildNodes().item(1).getFirstChild().getNodeValue();
-                        String enrolledDate = items.item(1).getChildNodes().item(2).getFirstChild().getNodeValue(); 
-                        fireAction(new Student(studentName, studentLastname, group, enrolledDate), "AddStudent");
-                        if ("CHANGE".equals(action)) {
-                            String studentID = items.item(1).getChildNodes().item(3).getFirstChild().getNodeValue();
-                            fireAction(new Student(studentName, studentLastname, group, enrolledDate, (Integer.parseInt(studentID)), "ChangeStudent");
-                        }                    
-                } else {
-                   out.writeUTF(showeMessage(model.getStdents()));                    
-                }
-                out.writeUTF(resultMessage("Success", ""));
+                } else {                    
+                    String studentName = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
+                    String studentLastname = items.item(1).getChildNodes().item(1).getFirstChild().getNodeValue();
+                    String enrolledDate = items.item(1).getChildNodes().item(2).getFirstChild().getNodeValue(); 
+                    fireAction(new Student(studentName, studentLastname, group, enrolledDate), "AddStudent");
+                    if ("CHANGE".equals(action)) {
+                        String studentID = items.item(1).getChildNodes().item(3).getFirstChild().getNodeValue();
+                        fireAction(new Student(studentName, studentLastname, group, enrolledDate, (Integer.parseInt(studentID)), "ChangeStudent");
+                    }                    
+                } 
+                out.writeUTF(resultMessage());
             }
         } catch (Exception e) {
-            out.writeUTF(resultMessage("Exception", e.getMessage()));            
+            exceptionHandling(e);
+            out.writeUTF(resultMessage();            
         } finally {
             if (!(out==null)) {
                 out.flush();
@@ -143,14 +149,20 @@ public class ServView implements View {
         return builder.toString();
     }
     
-    private String resultMessage(String result, String stackTrace) {
+    private String resultMessage() {
         StringBuilder builder = new StringBuilder();
+        String result;
+        if (ExceptMessage != null) {
+            result = "Success";
+        } else {
+            result = "Exception";
+        }
         builder.append("<envelope><header><action>");
         builder.append(result);
         builder.append("</action></header><body>");
-        if ("Exception".equals(result)) {
+        if (ExceptMessage != null) {
             builder.append("<stackTrace>");
-            builder.append(stackTrace);
+            builder.append(ExceptMessage);
             builder.append("</stackTrace>");
         }
         builder.append("</body></envelope>");
