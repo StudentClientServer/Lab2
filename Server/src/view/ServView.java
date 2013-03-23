@@ -90,7 +90,7 @@ public class ServView implements View {
                     fireAction(new Student(studentName, studentLastname, group, enrolledDate), "AddStudent");
                     if ("CHANGE".equals(action)) {
                         String studentID = items.item(1).getChildNodes().item(3).getFirstChild().getNodeValue();
-                        fireAction(new Student(studentName, studentLastname, group, enrolledDate, (Integer.parseInt(studentID)), "ChangeStudent");
+                        fireAction(new Student(studentName, studentLastname, group, enrolledDate), "UpdateStudent");
                     }                    
                 } 
                 out.writeUTF(resultMessage());
@@ -169,3 +169,4 @@ public class ServView implements View {
         return builder.toString();
     }    
 }
+
