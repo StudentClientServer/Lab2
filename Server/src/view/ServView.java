@@ -5,13 +5,14 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-
+import model.ServerException;
+import model.ServerModel;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.*;
 import org.xml.sax.InputSource;
 import model.Student;
 
-public class ServView {
+public class ServView implements View {
     private Socket socket;
     private Thread thread;f
     private int port = 7070;
@@ -19,10 +20,13 @@ public class ServView {
     private DataInputStream in;
     private DataOutputStream out;
     private ActionListener controller;
-    private ServerModel model;
+    private ServerModel model;    
     
-    public ServerView(ActionListener controller, ServerModel model) {
+    public void setModel(ServerModel model) {
         this.model = model;
+    }
+    
+    public void setController(ActionListener controller) {
         this.controller = controller;
     }
     
@@ -46,8 +50,7 @@ public class ServView {
         }
     }
     
-    private void reading() {
-        System.out.println("Get connection!!!!!"); 
+    private void reading() { 
         try {
             in = new DataInputStream(socket.getInputStream());            
             xmlMessage = in.readUTF();
@@ -77,13 +80,13 @@ public class ServView {
                         String studentName = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
                         String studentLastname = items.item(1).getChildNodes().item(1).getFirstChild().getNodeValue();
                         String enrolledDate = items.item(1).getChildNodes().item(2).getFirstChild().getNodeValue(); 
-                        fireAction(new Student(studentName, studentLastname, enrolledDate), "AddStudent");
+                        fireAction(new Student(studentName, studentLastname, group, enrolledDate), "AddStudent");
                         if ("CHANGE".equals(action)) {
                             String studentID = items.item(1).getChildNodes().item(3).getFirstChild().getNodeValue();
-                            fireAction(new Student(studentName, studentLastname, enrolledDate, (Integer.parseInt(studentID)), "ChangeStudent");
+                            fireAction(new Student(studentName, studentLastname, group, enrolledDate, (Integer.parseInt(studentID)), "ChangeStudent");
                         }                    
                 } else {
-                   out.writeUTF(updateMessage(model.getStdents()));                    
+                   out.writeUTF(showeMessage(model.getStdents()));                    
                 }
                 out.writeUTF(resultMessage("Success", ""));
             }
@@ -101,13 +104,40 @@ public class ServView {
         controller.actionPerformed(event);
     }
     
-    private String updateMessage(List<String> elements) {
+    private String updateMessage(List<Group> elements) {
         StringBuilder builder = new StringBuilder();
         builder.append("<envelope><header><action>UPDATE</action></header><body>");
-        for (String element : elements) {
-            builder.append("<element>");
-            builder.append(element);
-            builder.append("</element>");
+        for (Group group : groups) {
+            builder.append("<fakulty>");
+            builder.append(group.getFakulty());
+            builder.append("</fakulty>");
+            builder.append("<group>");
+            builder.append(group.getNumber());
+            builder.append("</group>");
+        }
+        builder.append("</body></envelope>");
+        return builder.toString();
+    }
+    
+    private String showeMessage(List<Students> elements) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("<envelope><header><action>SHOW</action></header><body>");
+        for (Students student : students) {
+            builder.append("<id>");
+            builder.append(student.getId());
+            builder.append("</id>");
+            builder.append("<firstname>");
+            builder.append(student.getFirstName()());
+            builder.append("</firstname>");
+            builder.append("<lastname>");
+            builder.append(student.getLastName());
+            builder.append("</lastname>");
+            builder.append("<enrolled>");
+            builder.append(student.getEnrolled());
+            builder.append("</enrolled>");
+            builder.append("<groupnumber>");
+            builder.append(student.getGroupNumber());
+            builder.append("</groupnumber>");
         }
         builder.append("</body></envelope>");
         return builder.toString();
