@@ -119,10 +119,10 @@ public class ServView implements View {
         return builder.toString();
     }
     
-    private String showeMessage(List<Students> elements) {
+    private String showeMessage(List<Student> elements) {
         StringBuilder builder = new StringBuilder();
         builder.append("<envelope><header><action>SHOW</action></header><body>");
-        for (Students student : students) {
+        for (Student student : students) {
             builder.append("<id>");
             builder.append(student.getId());
             builder.append("</id>");
