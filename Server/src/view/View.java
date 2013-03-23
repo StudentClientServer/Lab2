@@ -2,16 +2,12 @@ package view;
 
 import java.awt.event.ActionListener;
 
-import controller.Controller;
-import model.ServerException;
 import model.ServerModel;
 
 public interface View {
 
-    void setModel(ServerModel model);
-    ServerModel getModel();
-    void setController(ActionListener controller);
-    ActionListener getController ();
-    void exceptionHandling(Exception ex);
+    public void setModel(ServerModel model);    
+    public void setController(ActionListener controller);    
+    public void exceptionHandling(Exception ex);
 
 }
