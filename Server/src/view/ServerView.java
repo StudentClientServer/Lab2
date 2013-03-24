@@ -24,14 +24,24 @@ public class ServView implements View {
     private ServerModel model;
     private String ExceptMessage = null;
     
+    /**
+    * Set model
+    */
     public void setModel(ServerModel model) {
         this.model = model;
     }
     
+    /**
+    * Set controller
+    */
     public void setController(ActionListener controller) {
         this.controller = controller;
     }
     
+    /**
+    * Starting looking for connection
+    * throw connection exception
+    */
     public void starting() throws IOException {        
         try {
             ServerSocket ss = new ServerSocket(port);             
@@ -59,16 +69,26 @@ public class ServView implements View {
         }
     }
     
+    /**
+    * Getting exceptions from controller
+    */
     public void exceptionHandling(Exception ex) {
         ExceptMessage = ex.getMessage();
     }
     
+    /**
+    * Getting message from client
+    * throw InputStream exception
+    */
     private void reading() throws IOException {        
         in = new DataInputStream(socket.getInputStream());            
         xmlMessage = in.readUTF();
         System.out.println("Have a line "+xmlMessage);
     }
     
+    /**
+    * Parsing client message according to action
+    */
     private void parsing(String xmlMessage) throws SAXException, ParserConfigurationException, IOException {        
         InputSource is = new InputSource();        
         is.setCharacterStream(new StringReader(xmlMessage));
@@ -103,11 +123,17 @@ public class ServView implements View {
         }
     }
     
+    /**
+    * Creating action and send it to controller
+    */
     private void fireAction(Object source, String command) {
         ActionEvent event = new ActionEvent(source, 0, command);
         controller.actionPerformed(event);
     }
     
+    /**
+    * Creating request for update command
+    */
     private String updateMessage(List<Group> elements) {
         StringBuilder builder = new StringBuilder();
         builder.append("<envelope><header><action>UPDATE</action></header><body>");
@@ -123,6 +149,9 @@ public class ServView implements View {
         return builder.toString();
     }
     
+    /**
+    * Creating request for show command
+    */
     private String showeMessage(List<Student> elements) {
         StringBuilder builder = new StringBuilder();
         builder.append("<envelope><header><action>SHOW</action></header><body>");
@@ -147,6 +176,9 @@ public class ServView implements View {
         return builder.toString();
     }
     
+    /**
+    * Creating request according to result
+    */
     private String resultMessage() {
         StringBuilder builder = new StringBuilder();
         String result;
@@ -168,4 +200,3 @@ public class ServView implements View {
         return builder.toString();
     }    
 }
-
