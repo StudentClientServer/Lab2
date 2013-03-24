@@ -11,6 +11,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.*;
 import org.xml.sax.InputSource;
 import model.Student;
+import model.Group;
 
 public class ServView implements View {
     private Socket socket;
@@ -31,7 +32,7 @@ public class ServView implements View {
         this.controller = controller;
     }
     
-    public void starting() {        
+    public void starting() throws IOException {        
         try {
             ServerSocket ss = new ServerSocket(port);             
             while (true) {
@@ -46,8 +47,15 @@ public class ServView implements View {
                 });
                 thread.start();               
             }      
+        } catch(IOException x) {
+            throw new IOException("Connection problem");
         } catch(Exception x) { 
-            x.printStackTrace(); 
+            out = new DataOutputStream(socket.getOutputStream()); 
+            exceptionHandling(e);
+            out.writeUTF(resultMessage();
+            if (!(out==null)) {
+                out.flush();
+            } 
         }
     }
     
@@ -55,53 +63,43 @@ public class ServView implements View {
         ExceptMessage = ex.getMessage();
     }
     
-    private void reading() { 
-        try {
-            in = new DataInputStream(socket.getInputStream());            
-            xmlMessage = in.readUTF();
-            System.out.println("Have a line "+xmlMessage);            
-        } catch (IOException e) {
-            e.printStackTrace();
-        } 
+    private void reading() throws IOException {        
+        in = new DataInputStream(socket.getInputStream());            
+        xmlMessage = in.readUTF();
+        System.out.println("Have a line "+xmlMessage);
     }
     
-    private void parsing(String xmlMessage) throws IOException {
-        try {
-            InputSource is = new InputSource();        
-            is.setCharacterStream(new StringReader(xmlMessage));
-            Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
-            NodeList items = doc.getDocumentElement().getChildNodes();
-            String action = items.item(0).getChildNodes().item(0).getFirstChild().getNodeValue();
-            out = new DataOutputStream(socket.getOutputStream());
-            if ("UPDATE".equals(action)) {
-                updateMessage(model.getGroups());
-            } else if ("SHOW".equals(action)) {
-                out.writeUTF(showeMessage(model.getStdents()));
-            } else {
-                String fakyltet = items.item(0).getChildNodes().item(1).getFirstChild().getNodeValue();
-                String group = items.item(0).getChildNodes().item(2).getFirstChild().getNodeValue();
-                if ("REMOVE".equals(action)) {
-                    String studentID = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
-                    fireAction(Integer.parseInt(studentID), "RemoveStudent");
-                } else {                    
-                    String studentName = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
-                    String studentLastname = items.item(1).getChildNodes().item(1).getFirstChild().getNodeValue();
-                    String enrolledDate = items.item(1).getChildNodes().item(2).getFirstChild().getNodeValue(); 
-                    fireAction(new Student(studentName, studentLastname, group, enrolledDate), "AddStudent");
-                    if ("CHANGE".equals(action)) {
-                        String studentID = items.item(1).getChildNodes().item(3).getFirstChild().getNodeValue();
-                        fireAction(new Student(studentName, studentLastname, group, enrolledDate), "UpdateStudent");
-                    }                    
-                } 
-                out.writeUTF(resultMessage());
-            }
-        } catch (Exception e) {
-            exceptionHandling(e);
-            out.writeUTF(resultMessage();            
-        } finally {
-            if (!(out==null)) {
-                out.flush();
-            }
+    private void parsing(String xmlMessage) throws SAXException, ParserConfigurationException, IOException {        
+        InputSource is = new InputSource();        
+        is.setCharacterStream(new StringReader(xmlMessage));
+        Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
+        NodeList items = doc.getDocumentElement().getChildNodes();
+        String action = items.item(0).getChildNodes().item(0).getFirstChild().getNodeValue();
+        out = new DataOutputStream(socket.getOutputStream());
+        if ("UPDATE".equals(action)) {
+            updateMessage(model.getGroups());
+        } else if ("SHOW".equals(action)) {
+            out.writeUTF(showeMessage(model.getStdents()));
+        } else {
+            String fakyltet = items.item(0).getChildNodes().item(1).getFirstChild().getNodeValue();
+            String group = items.item(0).getChildNodes().item(2).getFirstChild().getNodeValue();
+            if ("REMOVE".equals(action)) {
+                String studentID = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
+                fireAction(Integer.parseInt(studentID), "RemoveStudent");
+            } else {                    
+                String studentName = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
+                String studentLastname = items.item(1).getChildNodes().item(1).getFirstChild().getNodeValue();
+                String enrolledDate = items.item(1).getChildNodes().item(2).getFirstChild().getNodeValue(); 
+                fireAction(new Student(studentName, studentLastname, group, new Date(enrolledDate)), "AddStudent");
+                if ("CHANGE".equals(action)) {
+                    String studentID = items.item(1).getChildNodes().item(3).getFirstChild().getNodeValue();
+                    fireAction(new Student(studentName, studentLastname, group, new Date(enrolledDate)), "UpdateStudent");
+                }                    
+            } 
+            out.writeUTF(resultMessage()); 
+        }    
+        if (!(out==null)) {
+            out.flush();
         }
     }
     
@@ -170,3 +168,4 @@ public class ServView implements View {
         return builder.toString();
     }    
 }
+
