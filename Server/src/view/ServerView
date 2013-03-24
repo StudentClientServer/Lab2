@@ -140,7 +140,7 @@ public class ServerView implements View {
     /**
     * Creating request for update command
     */
-    private String updateMessage(List<Group> elements) {
+    private String updateMessage(List<Group> groups) {
         StringBuilder builder = new StringBuilder();
         builder.append("<envelope><header><action>UPDATE</action></header><body>");
         for (Group group : groups) {
@@ -158,7 +158,7 @@ public class ServerView implements View {
     /**
     * Creating request for show command
     */
-    private String showeMessage(List<Student> elements) {
+    private String showeMessage(List<Student> students) {
         StringBuilder builder = new StringBuilder();
         builder.append("<envelope><header><action>SHOW</action></header><body>");
         for (Student student : students) {
