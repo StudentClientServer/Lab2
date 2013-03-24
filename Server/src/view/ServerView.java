@@ -115,9 +115,9 @@ public class ServView implements View {
                 String studentLastname = items.item(1).getChildNodes().item(1).getFirstChild().getNodeValue();
                 String enrolledDate = items.item(1).getChildNodes().item(2).getFirstChild().getNodeValue(); 
                 Integer studentID = Integer.parseInt(items.item(1).getChildNodes().item(3).getFirstChild().getNodeValue());
-                fireAction(new Student(studentName, studentLastname, group, new Date(enrolledDate), studentID), "AddStudent");
+                fireAction(new Student(studentID, studentName, studentLastname, group, new Date(enrolledDate)), "AddStudent");
                 if ("CHANGE".equals(action)) {                    
-                    fireAction(new Student(studentName, studentLastname, group, new Date(enrolledDate), studentID), "UpdateStudent");
+                    fireAction(new Student(studentID, studentName, studentLastname, group, new Date(enrolledDate)), "UpdateStudent");
                 }                    
             } 
             out.writeUTF(resultMessage()); 
