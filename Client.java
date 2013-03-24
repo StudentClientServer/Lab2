@@ -185,7 +185,7 @@ public class Client {
     * Add new student
     */
     public String addStudent(String fakulty, String group, String studentName,
-            String studentLastname, Date enrolledDate) throws ServerException, IOException, SAXException, ParserConfigurationException {
+            String studentLastname, Date enrolledDate, Integer studentID) throws ServerException, IOException, SAXException, ParserConfigurationException {
         sendMessage(createMessage("ADD", fakulty, group, studentName, studentLastname, enrolledDate, null));
         parsingAnswer(reading());
         if ("Exception".equals(serverAnswer)) {
@@ -223,7 +223,7 @@ public class Client {
     * Remove group by id
     */
     public String removeGroup(String fakulty, String group) throws ServerException, IOException, SAXException, ParserConfigurationException {
-        sendMessage(createMessage("REMOVEGroup", "", group, "", "", "", ""));
+        sendMessage(createMessage("REMOVEGroup", fakulty, group, "", "", "", ""));
         parsingAnswer(reading());
         if ("Exception".equals(serverAnswer)) {
             throw new ServerException(stackTrace);
