@@ -11,6 +11,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.*;
 import org.xml.sax.InputSource;
 import model.Student;
+import org.xml.sax.SAXException;
+import javax.xml.parsers.ParserConfigurationException;
 import model.Group;
 
 public class ServView implements View {
