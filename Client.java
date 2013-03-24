@@ -1,4 +1,4 @@
-package view;
+ppackage view;
 
 import java.net.*;
 import java.util.*;
@@ -18,8 +18,8 @@ public class Client {
     private String serverAnswer;
     private String stackTrace;
     private Socket socket;
-    private List<String> updateList;
-    private List<String> showList;
+    private List<Group> updateList;
+    private List<Student> showList;
    
     /**
     * For local server
