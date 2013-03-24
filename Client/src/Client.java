@@ -129,7 +129,7 @@ public class Client {
             for (int i=0; i<items.item(1).getChildNodes().getLength(); i++) {
                 String fakultet = (items.item(1).getChildNodes().item(i).getFirstChild().getNodeValue());
                 String group = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
-                updateList.add(new Group(fakultet, group))
+                updateList.add(new Group(fakultet, group));
             }
         } else if ("SHOW".equals(action)) {
             showList = new ArrayList<Student>();
@@ -139,7 +139,7 @@ public class Client {
                 String lastName = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
                 String group = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
                 Date enrolledDate = new Date(items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());                
-                showList.add(new Student(Integer.parseInt(id), firstName, lastName, group, enrolledDate))
+                showList.add(new Student(Integer.parseInt(id), firstName, lastName, group, enrolledDate));
             }
         } else {
             serverAnswer = action;
