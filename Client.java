@@ -132,14 +132,14 @@ public class Client {
                 updateList.add(new Group(fakultet, group))
             }
         } else if ("SHOW".equals(action)) {
-            updateList = new ArrayList<Student>();
+            showList = new ArrayList<Student>();
             for (int i=0; i<items.item(1).getChildNodes().getLength(); i++) {
                 String id = (items.item(1).getChildNodes().item(i).getFirstChild().getNodeValue());
                 String firstName = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
                 String lastName = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
                 String group = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
                 String enrolledDate = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());                
-                showList.add(new Student(firstName, lastName, group, enrolledDate, Integer.parseInt(id)))
+                showList.add(new Student(Integer.parseInt(id), firstName, lastName, group, enrolledDate))
             }
         } else {
             serverAnswer = action;
