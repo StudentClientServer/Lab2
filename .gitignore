@@ -2,6 +2,7 @@
 Server/.classpath
 Server/.project
 Server/.settings
+Server/src/test
 .git
 .metadata
 .gitignore

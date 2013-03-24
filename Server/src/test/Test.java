@@ -24,15 +24,15 @@ public class Test {
 	 */
 	public static void main(String[] args) throws ServerException, ParseException {
 		// TODO Auto-generated method stub		
-		server = new Server("groups.xml", "groups.dtd");
+		//server = new Server("groups.xml", "groups.dtd");
 		//checkAddGroup(new Group("Elit", "IN-91"));
 		//checkAddStudent (new Student(9, "Vasia", "Pupkin", "IN-91", format.parse("12.02.2001")));
 		//checkRemoveStudent(9);
-		checkRemoveGroup("IN-91");
+		//checkRemoveGroup("IN-91");
 		//checkUpdateGroup(new Group ("Med", "2"));
 		//checkUpdateGroupNumber(new Group("Med", "2"), "Hir-01");
 		//checkUpdateStudent(new Student(8, "Vasia", "Pupkin", "1", format.parse("12.02.2001")));
-		checkGetters ();
+		//checkGetters ();
 	}	
 
 	private static void checkGetters () throws ServerException {

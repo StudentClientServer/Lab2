@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,10 +31,8 @@ public class Controller implements ActionListener {
 		Scanner input = new Scanner (new File("params.txt"));
 		input.nextLine();
 		dtdpath = input.nextLine();
-		System.out.println(dtdpath);
 		input.nextLine();
 		xmlpath = input.nextLine();
-		System.out.println(xmlpath);
 		input.close();
 	    } catch (FileNotFoundException e) {
 		throw new ControllerException("Can't read the file with connection parameters.");
@@ -79,11 +78,14 @@ public class Controller implements ActionListener {
 		    server.readDocument();
 		    view.setController(controller);
 		    view.setModel(server);
+		    view.starting();
 		} catch (ServerException ex) {
 		    view.exceptionHandling(new ControllerException(ex));
 		} catch (ControllerException e) {
 		    view.exceptionHandling(e);
-		}
+		} catch (IOException e) {
+		    view.exceptionHandling(e);
+                }
 	}
 
 	public String getXmlpath() {
