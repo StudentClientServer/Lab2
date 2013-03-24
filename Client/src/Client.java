@@ -138,7 +138,7 @@ public class Client {
                 String firstName = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
                 String lastName = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
                 String group = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
-                String enrolledDate = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());                
+                Date enrolledDate = new Date(items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());                
                 showList.add(new Student(Integer.parseInt(id), firstName, lastName, group, enrolledDate))
             }
         } else {
