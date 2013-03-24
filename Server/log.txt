@@ -30,3 +30,9 @@ Wed Mar 20 22:46:32 EET 2013. Remove student with id 9
 Wed Mar 20 22:46:32 EET 2013. Get groups
 Wed Mar 20 22:46:32 EET 2013. Remove group with number IN-91
 Wed Mar 20 22:46:32 EET 2013. Get groups
+Sun Mar 24 15:09:07 EET 2013Added group Group [fakulty=Elit, number=IN-91]
+Sun Mar 24 15:09:07 EET 2013Added student Student [id=9, firstName=Vasia, lastName=Pupkin, groupNumber=IN-91, enrolled=12.02.2001]
+Sun Mar 24 15:09:07 EET 2013Removed group with numberIN-91
+Sun Mar 24 15:10:13 EET 2013. Added group Group [fakulty=Elit, number=IN-91]
+Sun Mar 24 15:10:13 EET 2013. Added student Student [id=9, firstName=Vasia, lastName=Pupkin, groupNumber=IN-91, enrolled=12.02.2001]
+Sun Mar 24 15:10:13 EET 2013. Removed group with numberIN-91
