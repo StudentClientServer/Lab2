@@ -3,6 +3,7 @@ package view;
 import java.awt.event.ActionListener;
 
 import model.ServerModel;
+import java.io.IOException;
 
 public interface View {
 
