@@ -64,7 +64,7 @@ public class ServView implements View {
         } catch(Exception e) { 
             out = new DataOutputStream(socket.getOutputStream()); 
             exceptionHandling(e);
-            out.writeUTF(resultMessage();
+            out.writeUTF(resultMessage());
             if (!(out==null)) {
                 out.flush();
             } 
