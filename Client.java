@@ -21,23 +21,40 @@ public class Client {
     private List<String> updateList;
     private List<String> showList;
    
+    /**
+    * For local server
+    * throws connection exception
+    */
     public Client() throws IOException {
         serverPort = 7070;
         address = "127.0.0.1";
         connection();
     }
     
+    /**
+    * For non local server
+    * throws connection exception
+    */
     public Client(String address, int serverPort) throws IOException {
         this.serverPort = serverPort;
         this.address = address;
         connection();
     }
     
+    /**
+    * Connect to server
+    * throws connection exception
+    */
     private void connection() throws IOException {
         InetAddress ipAddress = InetAddress.getByName(address);
         socket = new Socket(ipAddress, serverPort);
     }
     
+    /**
+    * Creating OutputStream
+    * Sending message to server
+    * throws OutputStream exception
+    */
     private void sendMessage(String message) throws IOException {       
         out = new DataOutputStream(socket.getOutputStream());
         out.writeUTF(message);    
@@ -50,6 +67,9 @@ public class Client {
         }
     }
     
+    /**
+    * Creating XMLmessage according to ACTION
+    */
     private String createMessage(String ACTION, String fakulty, String group, String studentName,
             String studentLastname, Date enrolledDate, Integer studentID) {
         StringBuilder message = new StringBuilder();
@@ -84,12 +104,20 @@ public class Client {
         return message.toString();
     }
     
+    /**
+    * Creating InputStream
+    * Getting message from server
+    * throws InputStream exception
+    */
     private String reading() throws IOException {               
         in = new DataInputStream(socket.getInputStream());
         String xmlResult = in.readUTF();        
         return xmlResult;
     }
     
+    /**
+    * Parsing server answer according to ACTION
+    */
     private void parsingAnswer(String xmlResult) throws SAXException, IOException, ParserConfigurationException {        
         InputSource is = new InputSource();
         is.setCharacterStream(new StringReader(xmlResult));
@@ -123,18 +151,27 @@ public class Client {
         }        
     }
     
+    /**
+    * Return list of groups
+    */
     public List<Group> getUpdate() throws IOException, SAXException, ParserConfigurationException {
         sendMessage(createMessage("UPDATE", "", "", "", "", "", null));
         parsingAnswer(reading());
         return updateList;
     }
     
+    /**
+    * Return list of students
+    */
     public List<Student> getShow(String fakulty, String group) throws IOException, SAXException, ParserConfigurationException {
         sendMessage(createMessage("SHOW", fakulty, group, "", "", "", null));
         parsingAnswer(reading());
         return showList;
     }
-
+    
+    /**
+    * Remove student from fakulty group with by id
+    */
     public String removeStudent(String fakulty, String group, Integer studentID) throws ServerException, IOException, SAXException, ParserConfigurationException {
         sendMessage(createMessage("REMOVE", fakulty, group, "", "", "", studentID));
         parsingAnswer(reading());
@@ -144,6 +181,9 @@ public class Client {
         return serverAnswer;
     }
     
+    /**
+    * Add new student
+    */
     public String addStudent(String ACTION, String fakulty, String group, String studentName,
             String studentLastname, Date enrolledDate) throws ServerException, IOException, SAXException, ParserConfigurationException {
         sendMessage(createMessage("ADD", fakulty, group, studentName, studentLastname, enrolledDate, null));
@@ -154,6 +194,9 @@ public class Client {
         return serverAnswer;
     }
     
+    /**
+    * Change student by id
+    */
     public String changeStudent(String ACTION, String fakulty, String group, String studentName,
             String studentLastname, Date enrolledDate, Integer studentID) throws ServerException, IOException, SAXException, ParserConfigurationException {
         sendMessage(createMessage("ADD", fakulty, group, studentName, studentLastname, enrolledDate, studentID));
@@ -164,4 +207,3 @@ public class Client {
         return serverAnswer;
     }
 }
-
