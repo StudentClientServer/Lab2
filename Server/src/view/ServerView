@@ -1,231 +1,208 @@
 package view;
 
 import java.net.*;
-import java.util.*;
+import java.util.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
+import model.ServerException;
+import model.ServerModel;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 import org.xml.sax.InputSource;
+import model.Student;
 import org.xml.sax.SAXException;
+import javax.xml.parsers.ParserConfigurationException;
+import model.Group;
 
-public class Client {
-    private int serverPort;
-    private String address;
-    private DataOutputStream out;
-    private DataInputStream in;
-    private String serverAnswer;
-    private String stackTrace;
+public class ServView implements View {
     private Socket socket;
-    private List<Group> updateList;
-    private List<Student> showList;
-   
+    private Thread thread;f
+    private int port = 7070;
+    private String xmlMessage;
+    private DataInputStream in;
+    private DataOutputStream out;
+    private ActionListener controller;
+    private ServerModel model;
+    private String ExceptMessage = null;
+    
     /**
-    * For local server
-    * throws connection exception
+    * Set model
     */
-    public Client() throws IOException {
-        serverPort = 7070;
-        address = "127.0.0.1";
-        connection();
+    public void setModel(ServerModel model) {
+        this.model = model;
     }
     
     /**
-    * For non local server
-    * throws connection exception
+    * Set controller
     */
-    public Client(String address, int serverPort) throws IOException {
-        this.serverPort = serverPort;
-        this.address = address;
-        connection();
+    public void setController(ActionListener controller) {
+        this.controller = controller;
     }
     
     /**
-    * Connect to server
-    * throws connection exception
+    * Starting looking for connection
+    * throw connection exception
     */
-    private void connection() throws IOException {
-        InetAddress ipAddress = InetAddress.getByName(address);
-        socket = new Socket(ipAddress, serverPort);
-    }
-    
-    /**
-    * Creating OutputStream
-    * Sending message to server
-    * throws OutputStream exception
-    */
-    private void sendMessage(String message) throws IOException {       
-        out = new DataOutputStream(socket.getOutputStream());
-        out.writeUTF(message);    
-        if (!(out==null)) {
-            try {
+    public void starting() throws IOException {        
+        try {
+            ServerSocket ss = new ServerSocket(port);             
+            while (true) {
+                socket = ss.accept();             
+                thread = new Thread(new Thread() {   
+                    public void run() {         
+                    try {
+                        reading();
+                        parsing(xmlMessage);
+                    } catch(Exception exc) {}
+                    }
+                });
+                thread.start();               
+            }      
+        } catch(IOException x) {
+            throw new IOException("Connection problem", x);
+        } catch(Exception e) { 
+            out = new DataOutputStream(socket.getOutputStream()); 
+            exceptionHandling(e);
+            out.writeUTF(resultMessage();
+            if (!(out==null)) {
                 out.flush();
-            } catch (IOException e) {
-                //never been (hope)
-            }
+            } 
         }
     }
     
     /**
-    * Creating XMLmessage according to ACTION
+    * Getting exceptions from controller
     */
-    private String createMessage(String ACTION, String fakulty, String group, String studentName,
-            String studentLastname, Date enrolledDate, Integer studentID) {
-        StringBuilder message = new StringBuilder();
-        message.append("<envelope><header><action>");
-        message.append(ACTION);
-        message.append("</action>");
-        if (!"UPDATE".equals(ACTION)) {
-            message.append("<fakulty>");
-            message.append(fakulty);
-            message.append("</fakulty><group>");
-            message.append(group);
-            message.append("</group>");
-        }
-        message.append("</header><body>");
-        if (!"UPDATE".equals(ACTION) && !"SHOW".equals(ACTION) && !"ADDGroup".equals(ACTION) && !"REMOVEGroup".equals(ACTION)) {
-            if (!"REMOVE".equals(ACTION)) {
-                message.append("<studentName>");
-                message.append(studentName);
-                message.append("</studentName><studentLastname>");
-                message.append(studentLastname);
-                message.append("</studentLastname><enrolledDate>");
-                message.append(enrolledDate.getTime());
-                message.append("</enrolledDate>");
-            }
-            if (!"ADD".equals(ACTION)) {
-                message.append("<studentID>");
-                message.append(studentID);
-                message.append("</studentID>");
-            }
-        }
-        message.append("</body></envelope>");
-        return message.toString();
+    public void exceptionHandling(Exception ex) {
+        ExceptMessage = ex.getMessage();
     }
     
     /**
-    * Creating InputStream
-    * Getting message from server
-    * throws InputStream exception
+    * Getting message from client
+    * throw InputStream exception
     */
-    private String reading() throws IOException {               
-        in = new DataInputStream(socket.getInputStream());
-        String xmlResult = in.readUTF();        
-        return xmlResult;
+    private void reading() throws IOException {        
+        in = new DataInputStream(socket.getInputStream());            
+        xmlMessage = in.readUTF();
+        System.out.println("Have a line "+xmlMessage);
     }
     
     /**
-    * Parsing server answer according to ACTION
+    * Parsing client message according to action
     */
-    private void parsingAnswer(String xmlResult) throws SAXException, IOException, ParserConfigurationException {        
-        InputSource is = new InputSource();
-        is.setCharacterStream(new StringReader(xmlResult));
+    private void parsing(String xmlMessage) throws SAXException, ParserConfigurationException, IOException {        
+        InputSource is = new InputSource();        
+        is.setCharacterStream(new StringReader(xmlMessage));
         Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
         NodeList items = doc.getDocumentElement().getChildNodes();
         String action = items.item(0).getChildNodes().item(0).getFirstChild().getNodeValue();
+        out = new DataOutputStream(socket.getOutputStream());
         if ("UPDATE".equals(action)) {
-            updateList = new ArrayList<Group>();
-            for (int i=0; i<items.item(1).getChildNodes().getLength(); i++) {
-                String fakultet = (items.item(1).getChildNodes().item(i).getFirstChild().getNodeValue());
-                String group = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
-                updateList.add(new Group(fakultet, group))
-            }
+            updateMessage(model.getGroups());
         } else if ("SHOW".equals(action)) {
-            showList = new ArrayList<Student>();
-            for (int i=0; i<items.item(1).getChildNodes().getLength(); i++) {
-                String id = (items.item(1).getChildNodes().item(i).getFirstChild().getNodeValue());
-                String firstName = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
-                String lastName = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
-                String group = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
-                Date enrolledDate = new Date(items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());                
-                showList.add(new Student(Integer.parseInt(id), firstName, lastName, group, enrolledDate))
-            }
+            out.writeUTF(showeMessage(model.getStdents()));
         } else {
-            serverAnswer = action;
-            if ("Exception".equals(action)) {
-                stackTrace = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
-            }
-        }        
-    }
-    
-    /**
-    * Return list of groups
-    */
-    public List<Group> getUpdate() throws IOException, SAXException, ParserConfigurationException {
-        sendMessage(createMessage("UPDATE", "", "", "", "", null, null));
-        parsingAnswer(reading());
-        return updateList;
-    }
-    
-    /**
-    * Return list of students
-    */
-    public List<Student> getShow(String fakulty, String group) throws IOException, SAXException, ParserConfigurationException {
-        sendMessage(createMessage("SHOW", fakulty, group, "", "", null, null));
-        parsingAnswer(reading());
-        return showList;
-    }
-    
-    /**
-    * Remove student from group with by id
-    */
-    public String removeStudent(String fakulty, String group, Integer studentID) throws ServerException, IOException, SAXException, ParserConfigurationException {
-        sendMessage(createMessage("REMOVE", fakulty, group, "", "", null, studentID));
-        parsingAnswer(reading());
-        if ("Exception".equals(serverAnswer)) {
-            throw new ServerException(stackTrace);
+            String fakyltet = items.item(0).getChildNodes().item(1).getFirstChild().getNodeValue();
+            String group = items.item(0).getChildNodes().item(2).getFirstChild().getNodeValue();
+            if ("REMOVEGroup".equals(action)) {
+                fireAction(group, "RemoveGroup");
+            } else if ("ADDGroup".equals(action)) {
+                fireAction(new Group(fakyltet, group), "AddGroup");
+            } else if ("REMOVE".equals(action)) {
+                String studentID = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
+                fireAction(Integer.parseInt(studentID), "RemoveStudent");
+            } else {                    
+                String studentName = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
+                String studentLastname = items.item(1).getChildNodes().item(1).getFirstChild().getNodeValue();
+                String enrolledDate = items.item(1).getChildNodes().item(2).getFirstChild().getNodeValue(); 
+                Integer studentID = Integer.parseInt(items.item(1).getChildNodes().item(3).getFirstChild().getNodeValue());
+                fireAction(new Student(studentID, studentName, studentLastname, group, new Date(enrolledDate)), "AddStudent");
+                if ("CHANGE".equals(action)) {                    
+                    fireAction(new Student(studentID, studentName, studentLastname, group, new Date(enrolledDate)), "UpdateStudent");
+                }                    
+            } 
+            out.writeUTF(resultMessage()); 
+        }    
+        if (!(out==null)) {
+            out.flush();
         }
-        return serverAnswer;
     }
     
     /**
-    * Add new student
+    * Creating action and send it to controller
     */
-    public String addStudent(String fakulty, String group, String studentName,
-            String studentLastname, Date enrolledDate, Integer studentID) throws ServerException, IOException, SAXException, ParserConfigurationException {
-        sendMessage(createMessage("ADD", fakulty, group, studentName, studentLastname, enrolledDate, null));
-        parsingAnswer(reading());
-        if ("Exception".equals(serverAnswer)) {
-            throw new ServerException(stackTrace);
-        }
-        return serverAnswer;
+    private void fireAction(Object source, String command) {
+        ActionEvent event = new ActionEvent(source, 0, command);
+        controller.actionPerformed(event);
     }
     
     /**
-    * Change student by id
+    * Creating request for update command
     */
-    public String changeStudent(String fakulty, String group, String studentName,
-            String studentLastname, Date enrolledDate, Integer studentID) throws ServerException, IOException, SAXException, ParserConfigurationException {
-        sendMessage(createMessage("ADD", fakulty, group, studentName, studentLastname, enrolledDate, studentID));
-        parsingAnswer(reading());
-        if ("Exception".equals(serverAnswer)) {
-            throw new ServerException(stackTrace);
+    private String updateMessage(List<Group> elements) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("<envelope><header><action>UPDATE</action></header><body>");
+        for (Group group : groups) {
+            builder.append("<fakulty>");
+            builder.append(group.getFakulty());
+            builder.append("</fakulty>");
+            builder.append("<group>");
+            builder.append(group.getNumber());
+            builder.append("</group>");
         }
-        return serverAnswer;
+        builder.append("</body></envelope>");
+        return builder.toString();
     }
     
     /**
-    * Add new group
+    * Creating request for show command
     */
-    public String addGroup(String fakulty, String group) throws ServerException, IOException, SAXException, ParserConfigurationException {
-        sendMessage(createMessage("ADDGroup", fakulty, group, "", "", null, null));
-        parsingAnswer(reading());
-        if ("Exception".equals(serverAnswer)) {
-            throw new ServerException(stackTrace);
+    private String showeMessage(List<Student> elements) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("<envelope><header><action>SHOW</action></header><body>");
+        for (Student student : students) {
+            builder.append("<id>");
+            builder.append(student.getId());
+            builder.append("</id>");
+            builder.append("<firstname>");
+            builder.append(student.getFirstName()());
+            builder.append("</firstname>");
+            builder.append("<lastname>");
+            builder.append(student.getLastName());
+            builder.append("</lastname>");
+            builder.append("<enrolled>");
+            builder.append(student.getEnrolled());
+            builder.append("</enrolled>");
+            builder.append("<groupnumber>");
+            builder.append(student.getGroupNumber());
+            builder.append("</groupnumber>");
         }
-        return serverAnswer;
+        builder.append("</body></envelope>");
+        return builder.toString();
     }
     
     /**
-    * Remove group
+    * Creating request according to result
     */
-    public String removeGroup(String fakulty, String group) throws ServerException, IOException, SAXException, ParserConfigurationException {
-        sendMessage(createMessage("REMOVEGroup", fakulty, group, "", "", null, null));
-        parsingAnswer(reading());
-        if ("Exception".equals(serverAnswer)) {
-            throw new ServerException(stackTrace);
+    private String resultMessage() {
+        StringBuilder builder = new StringBuilder();
+        String result;
+        if (ExceptMessage != null) {
+            result = "Success";
+        } else {
+            result = "Exception";
         }
-        return serverAnswer;
-    }
+        builder.append("<envelope><header><action>");
+        builder.append(result);
+        builder.append("</action></header><body>");
+        if (ExceptMessage != null) {
+            builder.append("<stackTrace>");
+            builder.append(ExceptMessage);
+            ExceptMessage = null;
+            builder.append("</stackTrace>");
+        }
+        builder.append("</body></envelope>");
+        return builder.toString();
+    }    
 }
