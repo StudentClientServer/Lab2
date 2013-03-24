@@ -153,7 +153,7 @@ public class Client {
     * Return list of groups
     */
     public List<Group> getUpdate() throws IOException, SAXException, ParserConfigurationException {
-        sendMessage(createMessage("UPDATE", "", "", "", "", "", null));
+        sendMessage(createMessage("UPDATE", "", "", "", "", null, null));
         parsingAnswer(reading());
         return updateList;
     }
@@ -162,7 +162,7 @@ public class Client {
     * Return list of students
     */
     public List<Student> getShow(String fakulty, String group) throws IOException, SAXException, ParserConfigurationException {
-        sendMessage(createMessage("SHOW", fakulty, group, "", "", "", null));
+        sendMessage(createMessage("SHOW", fakulty, group, "", "", null, null));
         parsingAnswer(reading());
         return showList;
     }
@@ -171,7 +171,7 @@ public class Client {
     * Remove student from group with by id
     */
     public String removeStudent(String fakulty, String group, Integer studentID) throws ServerException, IOException, SAXException, ParserConfigurationException {
-        sendMessage(createMessage("REMOVE", fakulty, group, "", "", "", studentID));
+        sendMessage(createMessage("REMOVE", fakulty, group, "", "", null, studentID));
         parsingAnswer(reading());
         if ("Exception".equals(serverAnswer)) {
             throw new ServerException(stackTrace);
@@ -209,7 +209,7 @@ public class Client {
     * Add new group
     */
     public String addGroup(String fakulty, String group) throws ServerException, IOException, SAXException, ParserConfigurationException {
-        sendMessage(createMessage("ADDGroup", fakulty, group, "", "", "", null));
+        sendMessage(createMessage("ADDGroup", fakulty, group, "", "", null, null));
         parsingAnswer(reading());
         if ("Exception".equals(serverAnswer)) {
             throw new ServerException(stackTrace);
@@ -221,7 +221,7 @@ public class Client {
     * Remove group
     */
     public String removeGroup(String fakulty, String group) throws ServerException, IOException, SAXException, ParserConfigurationException {
-        sendMessage(createMessage("REMOVEGroup", fakulty, group, "", "", "", null));
+        sendMessage(createMessage("REMOVEGroup", fakulty, group, "", "", null, null));
         parsingAnswer(reading());
         if ("Exception".equals(serverAnswer)) {
             throw new ServerException(stackTrace);
