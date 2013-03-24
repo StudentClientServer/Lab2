@@ -15,7 +15,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import model.Group;
 
-public class ServView implements View {
+public class ServerView implements View {
     private Socket socket;
     private Thread thread;f
     private int port = 7070;
