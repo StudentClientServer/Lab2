@@ -84,7 +84,7 @@ public class Client {
             message.append("</group>");
         }
         message.append("</header><body>");
-        if (!"UPDATE".equals(ACTION) && !"SHOW".equals(ACTION) && !"SHOW".equals(ACTION) && !"SHOW".equals(ACTION)) {
+        if (!"UPDATE".equals(ACTION) && !"SHOW".equals(ACTION) && !"ADDGroup".equals(ACTION) && !"REMOVEGroup".equals(ACTION)) {
             if (!"REMOVE".equals(ACTION)) {
                 message.append("<studentName>");
                 message.append(studentName);
@@ -138,10 +138,8 @@ public class Client {
                 String firstName = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
                 String lastName = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
                 String group = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
-                String enrolledDate = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
-                Student student = new Student(firstName, lastName, group, enrolledDate);
-                student.setId(Integer.parseInt(id));
-                showList.add(student)
+                String enrolledDate = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());                
+                showList.add(new Student(firstName, lastName, group, enrolledDate, Integer.parseInt(id)))
             }
         } else {
             serverAnswer = action;
@@ -231,4 +229,3 @@ public class Client {
         return serverAnswer;
     }
 }
-
