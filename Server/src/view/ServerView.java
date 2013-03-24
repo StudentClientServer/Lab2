@@ -166,7 +166,7 @@ public class ServerView implements View {
             builder.append(student.getId());
             builder.append("</id>");
             builder.append("<firstname>");
-            builder.append(student.getFirstName()());
+            builder.append(student.getFirstName();
             builder.append("</firstname>");
             builder.append("<lastname>");
             builder.append(student.getLastName());
