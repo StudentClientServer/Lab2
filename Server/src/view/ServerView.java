@@ -90,8 +90,9 @@ public class ServerView implements View {
     
     /**
     * Parsing client message according to action
+     * @throws ServerException 
     */
-    private void parsing(String xmlMessage) throws SAXException, ParserConfigurationException, IOException {        
+    private void parsing(String xmlMessage) throws SAXException, ParserConfigurationException, IOException, ServerException {        
         InputSource is = new InputSource();        
         is.setCharacterStream(new StringReader(xmlMessage));
         Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
@@ -100,13 +101,13 @@ public class ServerView implements View {
         out = new DataOutputStream(socket.getOutputStream());
         if ("UPDATE".equals(action)) {
             updateMessage(model.getGroups());
-        } else if ("SHOW".equals(action)) {
-            out.writeUTF(showeMessage(model.getStdents()));
         } else {
             String fakyltet = items.item(0).getChildNodes().item(1).getFirstChild().getNodeValue();
             String group = items.item(0).getChildNodes().item(2).getFirstChild().getNodeValue();
             if ("REMOVEGroup".equals(action)) {
                 fireAction(group, "RemoveGroup");
+            } else if ("SHOW".equals(action)) {
+                out.writeUTF(showeMessage(model.getStudents(new Group(fakyltet, group))));
             } else if ("ADDGroup".equals(action)) {
                 fireAction(new Group(fakyltet, group), "AddGroup");
             } else if ("REMOVE".equals(action)) {
@@ -166,7 +167,7 @@ public class ServerView implements View {
             builder.append(student.getId());
             builder.append("</id>");
             builder.append("<firstname>");
-            builder.append(student.getFirstName();
+            builder.append(student.getFirstName());
             builder.append("</firstname>");
             builder.append("<lastname>");
             builder.append(student.getLastName());
