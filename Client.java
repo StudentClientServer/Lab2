@@ -206,7 +206,7 @@ public class Client {
     }
     
     /**
-    * Add new student
+    * Add new group
     */
     public String addGroup(String fakulty, String group) throws ServerException, IOException, SAXException, ParserConfigurationException {
         sendMessage(createMessage("ADDGroup", fakulty, group, "", "", "", null));
@@ -218,7 +218,7 @@ public class Client {
     }
     
     /**
-    * Remove group by id
+    * Remove group
     */
     public String removeGroup(String fakulty, String group) throws ServerException, IOException, SAXException, ParserConfigurationException {
         sendMessage(createMessage("REMOVEGroup", fakulty, group, "", "", "", null));
