@@ -1,4 +1,4 @@
-ppackage view;
+package view;
 
 import java.net.*;
 import java.util.*;
@@ -209,7 +209,7 @@ public class Client {
     * Add new student
     */
     public String addGroup(String fakulty, String group) throws ServerException, IOException, SAXException, ParserConfigurationException {
-        sendMessage(createMessage("ADDGroup", fakulty, group, studentName, studentLastname, enrolledDate, null));
+        sendMessage(createMessage("ADDGroup", fakulty, group, "", "", "", null));
         parsingAnswer(reading());
         if ("Exception".equals(serverAnswer)) {
             throw new ServerException(stackTrace);
@@ -221,7 +221,7 @@ public class Client {
     * Remove group by id
     */
     public String removeGroup(String fakulty, String group) throws ServerException, IOException, SAXException, ParserConfigurationException {
-        sendMessage(createMessage("REMOVEGroup", fakulty, group, "", "", "", ""));
+        sendMessage(createMessage("REMOVEGroup", fakulty, group, "", "", "", null));
         parsingAnswer(reading());
         if ("Exception".equals(serverAnswer)) {
             throw new ServerException(stackTrace);
