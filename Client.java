@@ -84,7 +84,7 @@ public class Client {
             message.append("</group>");
         }
         message.append("</header><body>");
-        if (!"UPDATE".equals(ACTION) && !"SHOW".equals(ACTION)) {
+        if (!"UPDATE".equals(ACTION) && !"SHOW".equals(ACTION) && !"SHOW".equals(ACTION) && !"SHOW".equals(ACTION)) {
             if (!"REMOVE".equals(ACTION)) {
                 message.append("<studentName>");
                 message.append(studentName);
@@ -184,7 +184,7 @@ public class Client {
     /**
     * Add new student
     */
-    public String addStudent(String ACTION, String fakulty, String group, String studentName,
+    public String addStudent(String fakulty, String group, String studentName,
             String studentLastname, Date enrolledDate) throws ServerException, IOException, SAXException, ParserConfigurationException {
         sendMessage(createMessage("ADD", fakulty, group, studentName, studentLastname, enrolledDate, null));
         parsingAnswer(reading());
@@ -197,7 +197,7 @@ public class Client {
     /**
     * Change student by id
     */
-    public String changeStudent(String ACTION, String fakulty, String group, String studentName,
+    public String changeStudent(String fakulty, String group, String studentName,
             String studentLastname, Date enrolledDate, Integer studentID) throws ServerException, IOException, SAXException, ParserConfigurationException {
         sendMessage(createMessage("ADD", fakulty, group, studentName, studentLastname, enrolledDate, studentID));
         parsingAnswer(reading());
@@ -210,7 +210,7 @@ public class Client {
     /**
     * Add new student
     */
-    public String addGroup(String ACTION, String fakulty, String group) throws ServerException, IOException, SAXException, ParserConfigurationException {
+    public String addGroup(String fakulty, String group) throws ServerException, IOException, SAXException, ParserConfigurationException {
         sendMessage(createMessage("ADDGroup", fakulty, group, studentName, studentLastname, enrolledDate, null));
         parsingAnswer(reading());
         if ("Exception".equals(serverAnswer)) {
@@ -231,3 +231,4 @@ public class Client {
         return serverAnswer;
     }
 }
+
