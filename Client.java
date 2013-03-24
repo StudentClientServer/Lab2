@@ -170,7 +170,7 @@ public class Client {
     }
     
     /**
-    * Remove student from fakulty group with by id
+    * Remove student from group with by id
     */
     public String removeStudent(String fakulty, String group, Integer studentID) throws ServerException, IOException, SAXException, ParserConfigurationException {
         sendMessage(createMessage("REMOVE", fakulty, group, "", "", "", studentID));
@@ -200,6 +200,30 @@ public class Client {
     public String changeStudent(String ACTION, String fakulty, String group, String studentName,
             String studentLastname, Date enrolledDate, Integer studentID) throws ServerException, IOException, SAXException, ParserConfigurationException {
         sendMessage(createMessage("ADD", fakulty, group, studentName, studentLastname, enrolledDate, studentID));
+        parsingAnswer(reading());
+        if ("Exception".equals(serverAnswer)) {
+            throw new ServerException(stackTrace);
+        }
+        return serverAnswer;
+    }
+    
+    /**
+    * Add new student
+    */
+    public String addGroup(String ACTION, String fakulty, String group) throws ServerException, IOException, SAXException, ParserConfigurationException {
+        sendMessage(createMessage("ADDGroup", fakulty, group, studentName, studentLastname, enrolledDate, null));
+        parsingAnswer(reading());
+        if ("Exception".equals(serverAnswer)) {
+            throw new ServerException(stackTrace);
+        }
+        return serverAnswer;
+    }
+    
+    /**
+    * Remove group by id
+    */
+    public String removeGroup(String fakulty, String group) throws ServerException, IOException, SAXException, ParserConfigurationException {
+        sendMessage(createMessage("REMOVEGroup", "", group, "", "", "", ""));
         parsingAnswer(reading());
         if ("Exception".equals(serverAnswer)) {
             throw new ServerException(stackTrace);
