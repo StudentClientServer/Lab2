@@ -103,17 +103,21 @@ public class ServView implements View {
         } else {
             String fakyltet = items.item(0).getChildNodes().item(1).getFirstChild().getNodeValue();
             String group = items.item(0).getChildNodes().item(2).getFirstChild().getNodeValue();
-            if ("REMOVE".equals(action)) {
+            if ("REMOVEGroup".equals(action)) {
+                fireAction(group, "RemoveGroup");
+            } else if ("ADDGroup".equals(action)) {
+                fireAction(new Group(fakyltet, group), "AddGroup");
+            } else if ("REMOVE".equals(action)) {
                 String studentID = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
                 fireAction(Integer.parseInt(studentID), "RemoveStudent");
             } else {                    
                 String studentName = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
                 String studentLastname = items.item(1).getChildNodes().item(1).getFirstChild().getNodeValue();
                 String enrolledDate = items.item(1).getChildNodes().item(2).getFirstChild().getNodeValue(); 
-                fireAction(new Student(studentName, studentLastname, group, new Date(enrolledDate)), "AddStudent");
-                if ("CHANGE".equals(action)) {
-                    String studentID = items.item(1).getChildNodes().item(3).getFirstChild().getNodeValue();
-                    fireAction(new Student(studentName, studentLastname, group, new Date(enrolledDate)), "UpdateStudent");
+                Integer studentID = Integer.parseInt(items.item(1).getChildNodes().item(3).getFirstChild().getNodeValue());
+                fireAction(new Student(studentName, studentLastname, group, new Date(enrolledDate), studentID), "AddStudent");
+                if ("CHANGE".equals(action)) {                    
+                    fireAction(new Student(studentName, studentLastname, group, new Date(enrolledDate), studentID), "UpdateStudent");
                 }                    
             } 
             out.writeUTF(resultMessage()); 
