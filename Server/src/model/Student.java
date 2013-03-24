@@ -131,9 +131,11 @@ public class Student {
      * 
      * @param enrolled
      *            the new enrolled
+     * @throws ParseException 
      */
-    public void setEnrolled(Date enrolled) {
-	this.enrolled = format.format(enrolled);
+    public void setEnrolled(String enrolled) throws ParseException {
+        format.parse(enrolled);
+        this.enrolled = enrolled;
     }
 
     /**
@@ -154,8 +156,8 @@ public class Student {
 		    .getNodeValue());
 	    setGroupNumber(node.getAttributes().getNamedItem("groupnumber")
 		    .getNodeValue());
-	    setEnrolled(format.parse(node.getAttributes()
-		    .getNamedItem("enrolled").getNodeValue()));
+	    setEnrolled(node.getAttributes()
+		    .getNamedItem("enrolled").getNodeValue());
 	} catch (NumberFormatException e) {
 	    throw new ServerException(
 		    "Can not create a student! Something wrong with id!", e);
@@ -194,14 +196,19 @@ public class Student {
      * @param lastName the last name
      * @param groupNumber the group number
      * @param enrolled the enrolled date
+     * @throws ServerException 
      */
     public Student(int id, String firstName, String lastName,
-	    String groupNumber, Date enrolled) {
+	    String groupNumber, String enrolled) throws ServerException {
 	setId(id);
 	setFirstName(firstName);
 	setLastName(lastName);
 	setGroupNumber(groupNumber);
-	setEnrolled(enrolled);
+	try {
+        setEnrolled(enrolled);
+    } catch (ParseException e) {
+        throw new ServerException("Wrong date format!");
+    }
     }
 
 }

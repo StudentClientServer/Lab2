@@ -187,6 +187,15 @@ public class Server implements ServerModel {
         }
         return groups;
     }
+    
+    public Group getGroup(String number) throws ServerException {
+        List<Group> groups = getGroups();
+        for(Group gr : groups) {
+            if (gr.getNumber().equals(number))
+                return gr;
+        }
+        throw new ServerException("There is no group with number " + number);
+    }
 
     /**
      * Removes the student from DB.

@@ -15,4 +15,5 @@ public interface ServerModel {
     public void setXmlPath(String xmlpath);
     public void setDtdPath(String dtdpath);
     public void readDocument() throws ServerException;
+    public Group getGroup(String number) throws ServerException;
 }

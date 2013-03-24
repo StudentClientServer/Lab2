@@ -48,18 +48,23 @@ public class ServerView implements View {
         try {
             ServerSocket ss = new ServerSocket(port);             
             while (true) {
-                socket = ss.accept();             
+                System.out.println("Waiting for a client...");
+                socket = ss.accept();          
+                System.out.println("Client connected");
                 thread = new Thread(new Thread() {   
                     public void run() {         
                     try {
                         reading();
                         parsing(xmlMessage);
-                    } catch(Exception exc) {}
+                    } catch(Exception exc) {exc.printStackTrace();}
                     }
                 });
                 thread.start();               
-            }      
-        } catch(IOException x) {
+            }  
+       }   catch(IOException x) {
+                x.printStackTrace();
+            }
+        /*} catch(IOException x) {
             throw new IOException("Connection problem", x);
         } catch(Exception e) { 
             out = new DataOutputStream(socket.getOutputStream()); 
@@ -68,13 +73,11 @@ public class ServerView implements View {
             if (!(out==null)) {
                 out.flush();
             } 
-        }
+        }*/
     }
     
     /**
-    * Getting exceptions from controller
-    */
-    public void exceptionHandling(Exception ex) {
+exceptionHandling(Exception ex) {
         ExceptMessage = ex.getMessage();
     }
     
@@ -83,9 +86,10 @@ public class ServerView implements View {
     * throw InputStream exception
     */
     private void reading() throws IOException {        
-        in = new DataInputStream(socket.getInputStream());            
+        DataInputStream in = new DataInputStream(socket.getInputStream());            
         xmlMessage = in.readUTF();
         System.out.println("Have a line "+xmlMessage);
+        //in.close();
     }
     
     /**
@@ -97,17 +101,17 @@ public class ServerView implements View {
         is.setCharacterStream(new StringReader(xmlMessage));
         Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
         NodeList items = doc.getDocumentElement().getChildNodes();
-        String action = items.item(0).getChildNodes().item(0).getFirstChild().getNodeValue();
-        out = new DataOutputStream(socket.getOutputStream());
+        String action = items.item(0).getChildNodes().item(0).getChildNodes().item(0).getNodeValue();
+        out = new DataOutputStream(socket.getOutputStream());        
         if ("UPDATE".equals(action)) {
-            updateMessage(model.getGroups());
+            out.writeUTF(updateMessage(model.getGroups()));
         } else {
             String fakyltet = items.item(0).getChildNodes().item(1).getFirstChild().getNodeValue();
             String group = items.item(0).getChildNodes().item(2).getFirstChild().getNodeValue();
             if ("REMOVEGroup".equals(action)) {
                 fireAction(group, "RemoveGroup");
             } else if ("SHOW".equals(action)) {
-                out.writeUTF(showeMessage(model.getStudents(new Group(fakyltet, group))));
+                out.writeUTF(showeMessage(model.getStudents(model.getGroup(group))));
             } else if ("ADDGroup".equals(action)) {
                 fireAction(new Group(fakyltet, group), "AddGroup");
             } else if ("REMOVE".equals(action)) {
@@ -118,9 +122,9 @@ public class ServerView implements View {
                 String studentLastname = items.item(1).getChildNodes().item(1).getFirstChild().getNodeValue();
                 String enrolledDate = items.item(1).getChildNodes().item(2).getFirstChild().getNodeValue(); 
                 Integer studentID = Integer.parseInt(items.item(1).getChildNodes().item(3).getFirstChild().getNodeValue());
-                fireAction(new Student(studentID, studentName, studentLastname, group, new Date(enrolledDate)), "AddStudent");
+                fireAction(new Student(studentID, studentName, studentLastname, group, enrolledDate), "AddStudent");
                 if ("CHANGE".equals(action)) {                    
-                    fireAction(new Student(studentID, studentName, studentLastname, group, new Date(enrolledDate)), "UpdateStudent");
+                    fireAction(new Student(studentID, studentName, studentLastname, group, enrolledDate), "UpdateStudent");
                 }                    
             } 
             out.writeUTF(resultMessage()); 
@@ -205,5 +209,11 @@ public class ServerView implements View {
         }
         builder.append("</body></envelope>");
         return builder.toString();
+    }
+
+    @Override
+    public void exceptionHandling(Exception ex) {
+        // TODO Auto-generated method stub
+        
     }    
 }
