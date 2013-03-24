@@ -48,8 +48,8 @@ public class ServView implements View {
                 thread.start();               
             }      
         } catch(IOException x) {
-            throw new IOException("Connection problem");
-        } catch(Exception x) { 
+            throw new IOException("Connection problem", x);
+        } catch(Exception e) { 
             out = new DataOutputStream(socket.getOutputStream()); 
             exceptionHandling(e);
             out.writeUTF(resultMessage();
