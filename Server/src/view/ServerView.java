@@ -163,6 +163,7 @@ public class ServView implements View {
         if (ExceptMessage != null) {
             builder.append("<stackTrace>");
             builder.append(ExceptMessage);
+            ExceptMessage = null;
             builder.append("</stackTrace>");
         }
         builder.append("</body></envelope>");
