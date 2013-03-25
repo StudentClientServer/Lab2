@@ -72,3 +72,4 @@ Mon Mar 25 16:02:43 EET 2013. Removed student with id 1619533093
 Mon Mar 25 16:04:47 EET 2013. Added student Student [id=1791642889, firstName=Федя, lastName=Фудбкин, groupNumber=3, enrolled=10.10.2003]
 Mon Mar 25 16:04:52 EET 2013. Removed student with id 1791642889
 Mon Mar 25 16:04:56 EET 2013. Removed student with id 208500390
+Mon Mar 25 19:23:55 EET 2013. Added student Student [id=755357428, firstName=Андрей, lastName=Андревич, groupNumber=3, enrolled=01.01.01]

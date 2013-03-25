@@ -20,7 +20,6 @@ public class ServerView implements View {
     private Thread thread;
     private int port = 7070;
     private String xmlMessage;
-    private DataInputStream in;
     private DataOutputStream out;
     private ActionListener controller;
     private ServerModel model;

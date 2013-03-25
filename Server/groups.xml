@@ -16,6 +16,7 @@
 </group>
 <group fakulty="Gym" number="3">
 <student enrolled="01.02.2001" firstname="Вася" groupnumber="3" id="1413073239" lastname="Васичкин"/>
+<student enrolled="01.01.01" firstname="Андрей" groupnumber="3" id="755357428" lastname="Андревич"/>
 </group>
 
 

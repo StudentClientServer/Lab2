@@ -8,24 +8,45 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-import view.ServerView;
 import view.View;
 
 import model.*;
 
 import controller.ControllerException;
 
+/**
+ * The Class Controller.
+ */
 public class Controller implements ActionListener {
+	
+	/** The server. */
 	private ServerModel server;
+	
+	/** The view. */
 	private View view;
+	
+	/** The xmlpath. */
 	private String xmlpath;
+	
+	/** The dtdpath. */
 	private String dtdpath;
 	
+	/**
+	 * Instantiates a new controller.
+	 *
+	 * @param server2 the server model
+	 * @param view the view
+	 */
 	public Controller(ServerModel server2, View view) {
 		this.server = server2;
 		this.view = view;
 	}
 
+	/**
+	 * Read pathes to xml and dtd files.
+	 *
+	 * @throws ControllerException the controller exception
+	 */
 	private void readServerSources() throws ControllerException {
 	    try {
 		Scanner input = new Scanner (new File("params.txt"));
@@ -65,7 +86,9 @@ public class Controller implements ActionListener {
 	}
 
 	/**
-	 * @param args
+	 * The main method.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 	    	View view = new ViewFactory().newInstance();
@@ -88,18 +111,38 @@ public class Controller implements ActionListener {
                 }
 	}
 
+	/**
+	 * Gets the xmlpath.
+	 *
+	 * @return the xmlpath
+	 */
 	public String getXmlpath() {
 	    return xmlpath;
 	}
 
+	/**
+	 * Sets the xmlpath.
+	 *
+	 * @param xmlpath the new xmlpath
+	 */
 	public void setXmlpath(String xmlpath) {
 	    this.xmlpath = xmlpath;
 	}
 
+	/**
+	 * Gets the dtdpath.
+	 *
+	 * @return the dtdpath
+	 */
 	public String getDtdpath() {
 	    return dtdpath;
 	}
 
+	/**
+	 * Sets the dtdpath.
+	 *
+	 * @param dtdpath the new dtdpath
+	 */
 	public void setDtdpath(String dtdpath) {
 	    this.dtdpath = dtdpath;
 	}
