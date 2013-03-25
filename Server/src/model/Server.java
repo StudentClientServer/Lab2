@@ -211,7 +211,7 @@ public class Server implements ServerModel {
             if (g.containsStudent(id)) {
                 g.removeStudent(id);
                 saveXML("UTF-8");
-                writeToLog("Removed student with id", new Integer(id));
+                writeToLog("Removed student with id ", new Integer(id));
                 return;
             }
         }
@@ -239,7 +239,7 @@ public class Server implements ServerModel {
                     Element root = document.getDocumentElement();
                     root.removeChild(groups.item(i));
                     saveXML("UTF-8");
-                    writeToLog("Removed group with number", groupNumber);
+                    writeToLog("Removed group with number ", groupNumber);
                     return;
                 }
             }

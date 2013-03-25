@@ -14,4 +14,13 @@
 <student enrolled="04.09.2010" firstname="Leonardo" groupnumber="2" id="7" lastname="Dikaprio"/>
 <student enrolled="03.09.2010" firstname="Steeve" groupnumber="2" id="8" lastname="Jobs"/>
 </group>
+<group fakulty="Gym" number="3"/>
+<group fakulty="НЕК" number="4">
+<student enrolled="12.12.12" firstname="ЫВАП" groupnumber="4" id="1388976870" lastname="ГННННН"/>
+<student enrolled="12.12.12" firstname="ЫВАП" groupnumber="4" id="2036106658" lastname="ГННННН"/>
+<student enrolled="12.12.12" firstname="ЫВАП" groupnumber="4" id="539307774" lastname="ГННННН"/>
+<student enrolled="12.12.12" firstname="ЫВАП" groupnumber="4" id="710952268" lastname="ГННННН"/>
+</group>
+<group fakulty="УКЕ" number="5"/>
+<group fakulty="ЙЙЙ" number="6"/>
 </groups>

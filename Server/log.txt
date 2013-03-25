@@ -36,3 +36,11 @@ Sun Mar 24 15:09:07 EET 2013Removed group with numberIN-91
 Sun Mar 24 15:10:13 EET 2013. Added group Group [fakulty=Elit, number=IN-91]
 Sun Mar 24 15:10:13 EET 2013. Added student Student [id=9, firstName=Vasia, lastName=Pupkin, groupNumber=IN-91, enrolled=12.02.2001]
 Sun Mar 24 15:10:13 EET 2013. Removed group with numberIN-91
+Mon Mar 25 00:31:44 EET 2013. Added group Group [fakulty=Gym, number=3]
+Mon Mar 25 00:39:58 EET 2013. Added group Group [fakulty=ÍÅÊ, number=4]
+Mon Mar 25 00:46:32 EET 2013. Added group Group [fakulty=ÓÊÅ, number=5]
+Mon Mar 25 00:53:37 EET 2013. Added group Group [fakulty=ÉÉÉ, number=6]
+Mon Mar 25 02:29:57 EET 2013. Added student Student [id=1388976870, firstName=ÛÂÀÏ, lastName=ÃÍÍÍÍÍ, groupNumber=4, enrolled=12.12.12]
+Mon Mar 25 02:34:24 EET 2013. Added student Student [id=2036106658, firstName=ÛÂÀÏ, lastName=ÃÍÍÍÍÍ, groupNumber=4, enrolled=12.12.12]
+Mon Mar 25 11:04:37 EET 2013. Added student Student [id=539307774, firstName=ÛÂÀÏ, lastName=ÃÍÍÍÍÍ, groupNumber=4, enrolled=12.12.12]
+Mon Mar 25 11:07:32 EET 2013. Added student Student [id=710952268, firstName=ÛÂÀÏ, lastName=ÃÍÍÍÍÍ, groupNumber=4, enrolled=12.12.12]

@@ -41,44 +41,39 @@ public class ServerView implements View {
     }
     
     /**
-    * Starting looking for connection
-    * throw connection exception
-    */
-    public void starting() throws IOException {        
-        try {
-            ServerSocket ss = new ServerSocket(port);             
-            while (true) {
-                System.out.println("Waiting for a client...");
-                socket = ss.accept();          
-                System.out.println("Client connected");
-                thread = new Thread(new Thread() {   
-                    public void run() {         
+     * Starting looking for connection throw connection exception
+     */
+    public void starting() throws IOException {
+        ServerSocket ss = new ServerSocket(port);
+        while (true) {
+            System.out.println("Waiting for a client...");
+            socket = ss.accept();
+            System.out.println("Client connected");
+            thread = new Thread(new Thread() {
+                public void run() {
                     try {
                         reading();
                         parsing(xmlMessage);
-                    } catch(Exception exc) {exc.printStackTrace();}
+                    } catch (Exception exc) {
+                        try {
+                            out = new DataOutputStream(socket.getOutputStream());
+                            exceptionHandling(exc);
+                            out.writeUTF(resultMessage());
+                            if (!(out == null)) {
+                                out.flush();
+                            }
+                        } catch (IOException x) {
+                            x.printStackTrace();
+                        }
                     }
-                });
-                thread.start();               
-            }  
-       }   catch(IOException x) {
-                x.printStackTrace();
-            }
-        /*} catch(IOException x) {
-            throw new IOException("Connection problem", x);
-        } catch(Exception e) { 
-            out = new DataOutputStream(socket.getOutputStream()); 
-            exceptionHandling(e);
-            out.writeUTF(resultMessage());
-            if (!(out==null)) {
-                out.flush();
-            } 
-        }*/
+                }
+            });
+            thread.start();
+        }
     }
-    
-    /**
-exceptionHandling(Exception ex) {
-        ExceptMessage = ex.getMessage();
+
+    public void exceptionHandling(Exception ex) {
+        ExceptMessage = ex.toString();
     }
     
     /**
@@ -89,7 +84,6 @@ exceptionHandling(Exception ex) {
         DataInputStream in = new DataInputStream(socket.getInputStream());            
         xmlMessage = in.readUTF();
         System.out.println("Have a line "+xmlMessage);
-        //in.close();
     }
     
     /**
@@ -193,7 +187,7 @@ exceptionHandling(Exception ex) {
     private String resultMessage() {
         StringBuilder builder = new StringBuilder();
         String result;
-        if (ExceptMessage != null) {
+        if (ExceptMessage == null) {
             result = "Success";
         } else {
             result = "Exception";
@@ -211,9 +205,4 @@ exceptionHandling(Exception ex) {
         return builder.toString();
     }
 
-    @Override
-    public void exceptionHandling(Exception ex) {
-        // TODO Auto-generated method stub
-        
-    }    
 }
