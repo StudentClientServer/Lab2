@@ -110,16 +110,19 @@ public class ServerView implements View {
             } else if ("REMOVE".equals(action)) {
                 String studentID = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
                 fireAction(Integer.parseInt(studentID), "RemoveStudent");
-            } else {                    
+            } else if ("ADD".equals(action)) { 
                 String studentName = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
                 String studentLastname = items.item(1).getChildNodes().item(1).getFirstChild().getNodeValue();
                 String enrolledDate = items.item(1).getChildNodes().item(2).getFirstChild().getNodeValue(); 
                 Integer studentID = Integer.parseInt(items.item(1).getChildNodes().item(3).getFirstChild().getNodeValue());
                 fireAction(new Student(studentID, studentName, studentLastname, group, enrolledDate), "AddStudent");
-                if ("CHANGE".equals(action)) {                    
+            } else if ("CHANGE".equals(action)) {                    
+                    String studentName = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
+                    String studentLastname = items.item(1).getChildNodes().item(1).getFirstChild().getNodeValue();
+                    String enrolledDate = items.item(1).getChildNodes().item(2).getFirstChild().getNodeValue(); 
+                    Integer studentID = Integer.parseInt(items.item(1).getChildNodes().item(3).getFirstChild().getNodeValue());
                     fireAction(new Student(studentID, studentName, studentLastname, group, enrolledDate), "UpdateStudent");
-                }                    
-            } 
+            }                    
             out.writeUTF(resultMessage()); 
         }    
         if (!(out==null)) {

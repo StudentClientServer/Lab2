@@ -204,6 +204,7 @@ public class Server implements ServerModel {
      *             if a student with specified id does not exist
      */
     public void removeStudent(Integer id) throws ServerException {
+        writeToLog("Calling method removeStudent(Integer id) ", null);
         List<Group> groups = getGroups();
         for (Group g : groups) {
             if (g.containsStudent(id)) {
@@ -263,6 +264,7 @@ public class Server implements ServerModel {
      *             not exist
      */
     public void addStudent(Student student) throws ServerException {
+        writeToLog("Calling method addStudent(Student student) ", null);
         List<Group> groups = getGroups();
         for (Group g : groups) {
             if (g.containsStudent(student.getId())) {
@@ -343,6 +345,7 @@ public class Server implements ServerModel {
      *             when can not find a group with specified number.
      */
     public Group getGroupByNumber(String number) throws ServerException {
+        writeToLog("Calling method getGroupByNumber(String number) ", null);
         List<Group> groups = getGroups();
         for (Group g : groups) {
             if (g.getNumber().equals(number))
@@ -421,6 +424,7 @@ public class Server implements ServerModel {
      *             if can not remove or add student.
      */
     public void updateStudent(Student student) throws ServerException {
+        writeToLog("Calling method updateStudent(Student student) ", null);
         try {
             getGroupByNumber(student.getGroupNumber()); // check if the
             // specified group

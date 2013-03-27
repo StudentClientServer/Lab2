@@ -74,3 +74,48 @@ Mon Mar 25 16:04:52 EET 2013. Removed student with id 1791642889
 Mon Mar 25 16:04:56 EET 2013. Removed student with id 208500390
 Mon Mar 25 19:23:55 EET 2013. Added student Student [id=755357428, firstName=Андрей, lastName=Андревич, groupNumber=3, enrolled=01.01.01]
 Mon Mar 25 19:47:43 EET 2013. Added student Student [id=952753955, firstName=Петя, lastName=Петечкин, groupNumber=3, enrolled=12.12.13]
+Tue Mar 26 19:55:25 EET 2013. Removed student with id 7
+Tue Mar 26 21:46:06 EET 2013. Added student Student [id=194131376, firstName=Клава, lastName=Клавдиевна, groupNumber=3, enrolled=22.03.2013]
+Wed Mar 27 01:09:52 EET 2013. In method addStudent(Student student) model.ServerException: Can't add the student! Student with ID 194131376 is already exist!
+Wed Mar 27 01:09:52 EET 2013. Removed student with id 194131376
+Wed Mar 27 01:09:52 EET 2013. Added student Student [id=194131376, firstName=Клава, lastName=Таранова, groupNumber=3, enrolled=22.03.2013]
+Wed Mar 27 01:26:41 EET 2013. In method addStudent(Student student) model.ServerException: Can't add the student! Student with ID 194131376 is already exist!
+Wed Mar 27 01:26:41 EET 2013. Removed student with id 194131376
+Wed Mar 27 01:26:41 EET 2013. Added student Student [id=194131376, firstName=Клава, lastName=Клавдиевна, groupNumber=3, enrolled=22.03.2013]
+Wed Mar 27 01:34:27 EET 2013. In method addStudent(Student student) model.ServerException: Can't add the student! Student with ID 194131376 is already exist!
+Wed Mar 27 01:34:27 EET 2013. Removed student with id 194131376
+Wed Mar 27 01:34:27 EET 2013. Added student Student [id=194131376, firstName=Клава, lastName=Трофимишна, groupNumber=3, enrolled=22.03.2013]
+Wed Mar 27 01:39:22 EET 2013. In method addStudent(Student student) model.ServerException: Can't add the student! Student with ID 194131376 is already exist!
+Wed Mar 27 01:39:22 EET 2013. Removed student with id 194131376
+Wed Mar 27 01:39:22 EET 2013. Added student Student [id=194131376, firstName=Клава, lastName=Кузминишна, groupNumber=3, enrolled=22.03.2013]
+Wed Mar 27 01:39:47 EET 2013. In method addStudent(Student student) model.ServerException: Can't add the student! Student with ID 952753955 is already exist!
+Wed Mar 27 01:39:47 EET 2013. Removed student with id 952753955
+Wed Mar 27 01:39:47 EET 2013. Added student Student [id=952753955, firstName=Петя, lastName=Крузенштерн, groupNumber=3, enrolled=12.12.13]
+Wed Mar 27 01:42:17 EET 2013. In method addStudent(Student student) model.ServerException: Can't add the student! Student with ID 952753955 is already exist!
+Wed Mar 27 01:42:17 EET 2013. Removed student with id 952753955
+Wed Mar 27 01:42:17 EET 2013. Added student Student [id=952753955, firstName=Петя, lastName=Абрамович, groupNumber=3, enrolled=12.12.13]
+Wed Mar 27 01:51:18 EET 2013. In method addStudent(Student student) model.ServerException: Can't add the student! Student with ID 952753955 is already exist!
+Wed Mar 27 01:51:18 EET 2013. Removed student with id 952753955
+Wed Mar 27 01:51:18 EET 2013. Added student Student [id=952753955, firstName=Петя, lastName=Абрамович, groupNumber=3, enrolled=11.11.11]
+Wed Mar 27 01:54:36 EET 2013. Calling method addStudent(Student student) null
+Wed Mar 27 01:54:36 EET 2013. In method addStudent(Student student) model.ServerException: Can't add the student! Student with ID 952753955 is already exist!
+Wed Mar 27 01:54:36 EET 2013. Calling method updateStudent(Student student) null
+Wed Mar 27 01:54:36 EET 2013. Calling method getGroupByNumber(String number) null
+Wed Mar 27 01:54:36 EET 2013. Calling method removeStudent(Integer id) null
+Wed Mar 27 01:54:36 EET 2013. Removed student with id 952753955
+Wed Mar 27 01:54:36 EET 2013. Calling method addStudent(Student student) null
+Wed Mar 27 01:54:36 EET 2013. Added student Student [id=952753955, firstName=Петя, lastName=Абрамович, groupNumber=3, enrolled=12.12.12]
+Wed Mar 27 01:55:06 EET 2013. Calling method addStudent(Student student) null
+Wed Mar 27 01:55:06 EET 2013. In method addStudent(Student student) model.ServerException: Can't add the student! Student with ID 952753955 is already exist!
+Wed Mar 27 01:55:06 EET 2013. Calling method updateStudent(Student student) null
+Wed Mar 27 01:55:06 EET 2013. Calling method getGroupByNumber(String number) null
+Wed Mar 27 01:55:06 EET 2013. Calling method removeStudent(Integer id) null
+Wed Mar 27 01:55:06 EET 2013. Removed student with id 952753955
+Wed Mar 27 01:55:06 EET 2013. Calling method addStudent(Student student) null
+Wed Mar 27 01:55:06 EET 2013. Added student Student [id=952753955, firstName=Петя, lastName=Абрамович, groupNumber=3, enrolled=12.12.11]
+Wed Mar 27 02:07:10 EET 2013. Calling method updateStudent(Student student) null
+Wed Mar 27 02:07:10 EET 2013. Calling method getGroupByNumber(String number) null
+Wed Mar 27 02:07:10 EET 2013. Calling method removeStudent(Integer id) null
+Wed Mar 27 02:07:10 EET 2013. Removed student with id 952753955
+Wed Mar 27 02:07:10 EET 2013. Calling method addStudent(Student student) null
+Wed Mar 27 02:07:10 EET 2013. Added student Student [id=952753955, firstName=Петя, lastName=Абрамович, groupNumber=3, enrolled=12.12.13]

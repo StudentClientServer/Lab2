@@ -11,13 +11,19 @@
 <group fakulty="MehMat" number="2">
 <student enrolled="05.09.2010" firstname="Tony" groupnumber="2" id="5" lastname="Ellias"/>
 <student enrolled="04.09.2010" firstname="James" groupnumber="2" id="6" lastname="Bond"/>
-<student enrolled="04.09.2010" firstname="Leonardo" groupnumber="2" id="7" lastname="Dikaprio"/>
+
 <student enrolled="03.09.2010" firstname="Steeve" groupnumber="2" id="8" lastname="Jobs"/>
 </group>
 <group fakulty="Gym" number="3">
 <student enrolled="01.02.2001" firstname="Вася" groupnumber="3" id="1413073239" lastname="Васичкин"/>
 <student enrolled="01.01.01" firstname="Андрей" groupnumber="3" id="755357428" lastname="Андревич"/>
-<student enrolled="12.12.13" firstname="Петя" groupnumber="3" id="952753955" lastname="Петечкин"/>
+
+
+
+<student enrolled="22.03.2013" firstname="Клава" groupnumber="3" id="194131376" lastname="Кузминишна"/>
+
+
+<student enrolled="12.12.13" firstname="Петя" groupnumber="3" id="952753955" lastname="Абрамович"/>
 </group>
 
 

@@ -1,0 +1,17 @@
+<html><head><title>AppLog</title><meta http-equiv="content-type" content="text/html; charset=utf-8"></head><body><table border=1><tr bgcolor=CYAN><td>date</td><td>level</td><td>class</td><td>method</td><td>message</td><td>thrown message</td><td>stacktrace</td></tr><tr bgColor=Tomato><td>
+Wed Mar 27 00:24:26 EET 2013</td><td>SEVERE</td><td>view.Run</td><td>main</td><td>No Connection!</td><td>null</td><td>java.lang.NullPointerException
+	at view.Client.sendMessage(Client.java:106)
+	at view.Client.getUpdate(Client.java:252)
+	at view.Run.main(Run.java:55)
+</td></tr>
+<tr bgColor=GRAY><td>
+Wed Mar 27 00:24:29 EET 2013</td><td>WARNING</td><td>view.Run</td><td>main</td><td>Couldn't create frame.</td><td></td><td>view.ClientException: 
+	at view.JTableModel.<init>(JTableModel.java:481)
+	at view.Run.main(Run.java:71)
+Caused by: java.lang.NullPointerException
+	at view.JTableModel.getObjectModel(JTableModel.java:519)
+	at view.JTableModel$1.<init>(JTableModel.java:145)
+	at view.JTableModel.<init>(JTableModel.java:140)
+	... 1 more
+</td></tr>
+</table></body></html>
