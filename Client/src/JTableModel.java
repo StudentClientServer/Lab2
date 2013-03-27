@@ -1,4 +1,4 @@
-package view;
+package client;
 
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.NORTH;
@@ -51,729 +51,776 @@ import org.xml.sax.SAXException;
 public class JTableModel extends DefaultTableModel {
 
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The listeners. */
-	private Collection<TableModelListener> listeners = new ArrayList<TableModelListener>();
-	
-	/** The command. */
-	public String command;
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 1L;
+    
+    /** The listeners. */
+    private Collection<TableModelListener> listeners = new ArrayList<TableModelListener>();
+    
+    /** The command. */
+    public String command;
 
-	/** The groups. */
-	private List<Group> groups;
-	
-	/** The data. */
-	private Object[][] data;
-	
-	/** The column names. */
-	private Object[] columnNames;
-	
+    /** The groups. */
+    private List<Group> groups;
+    
+    /** The data. */
+    private Object[][] data;
+    
+    /** The column names. */
+    private Object[] columnNames;
+    
 
-	/** The is group. */
-	private boolean isGroup=true;
-	
-	/** The model1. */
-	private DefaultTableModel model1;
-	
-	/** The frame. */
-	private JFrame frame;
-	
-	/** The tb. */
-	private JTable tb;
-	
-	/** The bottom panel. */
-	private JPanel bottomPanel;
-	
-	/** The timer. */
-	private Timer timer;
-	
-	/** The click. */
-	private int click;
-	
-	/** The jb student add. */
-	private JButton jbStudentAdd;
-	
-	/** The jb student del. */
-	private JButton jbStudentDel;
-	
-	/** The jb group add. */
-	private JButton jbGroupAdd;
-	
-	/** The jb group del. */
-	private JButton jbGroupDel;
-	
-	/** The jb back. */
-	private JButton jbBack;
-	
-	/** The elem gr. */
-	private Object elemGr;
-	
-	/** The student. */
-	private Student student;
-	
-	/** The logger. */
-	private Logger logger;
-	
-	/** The client. */
-	private Client client;
+    /** The is group. */
+    private boolean isGroup=true;
+    
+    /** The model1. */
+    private DefaultTableModel model1;
+    
+    /** The frame. */
+    private JFrame frame;
+    
+    /** The tb. */
+    private JTable tb;
+    
+    /** The bottom panel. */
+    private JPanel bottomPanel;
+    
+    /** The timer. */
+    private Timer timer;
+    
+    /** The click. */
+    private int click;
+    
+    /** The jb student add. */
+    private JButton jbStudentAdd;
+    
+    /** The jb student del. */
+    private JButton jbStudentDel;
+    
+    /** The jb group add. */
+    private JButton jbGroupAdd;
+    
+    /** The jb group del. */
+    private JButton jbGroupDel;
+    
+    /** The jb back. */
+    private JButton jbBack;
+    
+    /** The elem gr. */
+    private Object elemGr;
+    
+    private String currentfakulty;
+    
+    /** The student. */
+    private Student student;
+    
+    /** The logger. */
+    private Logger logger;
+    
+    /** The client. */
+    private Client client;
 
-	/**
-	 * Instantiates a new j table model.
-	 *
-	 * @param groups the groups
-	 * @param client the client
-	 * @throws ClientException the client exception
-	 */
-	public JTableModel(List<Group> groups, Client client) throws ClientException {
+    /**
+     * Instantiates a new j table model.
+     *
+     * @param groups the groups
+     * @param client the client
+     * @throws ClientException the client exception
+     */
+    public JTableModel(List<Group> groups, Client client) throws ClientException {
 
-		final Logger logger = Logger.getLogger(JTableModel.class.getName());
-		this.groups = groups;
-		this.client = client;
-		String IP = "";
-		try {
-			IP = InetAddress.getLocalHost().getHostAddress();
-		} catch (Exception e) {
-			logger.log(Level.WARNING,"Error finding IP",e);
-		}
-		try{
-		frame = new JFrame("Table frame with IP "+IP) {
-			
-			private static final long serialVersionUID = 1L;
+        final Logger logger = Logger.getLogger(JTableModel.class.getName());
+        this.groups = groups;
+        this.client = client;
+        String IP = "";
+        try {
+            IP = InetAddress.getLocalHost().getHostAddress();
+        } catch (Exception e) {
+            logger.log(Level.WARNING,"Error finding IP",e);
+        }
+        try{
+        frame = new JFrame("Table frame with IP "+IP) {
+            
+            private static final long serialVersionUID = 1L;
 
-			{
-				add(new JScrollPane(new JTable(getObjectModel(isGroup,null)) {
+            {
+                add(new JScrollPane(new JTable(getObjectModel(isGroup,null)) {
 
-					private static final long serialVersionUID = 1L;
+                    private static final long serialVersionUID = 1L;
 
-					{
-						setFont(new Font("Arial", Font.PLAIN, 18));
-						 setGridColor(Color.DARK_GRAY);
-						 setAutoCreateRowSorter(true);
-						 setShowHorizontalLines(false);
-						 getSelectionModel().addListSelectionListener(this);
-						 getColumnModel().addColumnModelListener(this);
-						 setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-						 //setVisible(false);
-						 tb = this;
-						 
-						 tb.addKeyListener(new KeyListener() {
-								
-								@Override
-								public void keyTyped(KeyEvent e) {
-									if (e.getKeyCode()==KeyEvent.VK_ENTER){
-									}
-								}
-								
-								@Override
-								public void keyReleased(KeyEvent e) {
-								}
-								
-								@Override
-								public void keyPressed(KeyEvent e) {
-									if(e.getKeyCode()==10){
-										if (tb.getModel().getColumnName(0).equals("fakulty")) {
-											try {
-												try {
-													addGoup();
-												} catch (ServerException| IOException| SAXException | ParserConfigurationException e1) {
-													logger.log(Level.WARNING,"Got exception.",e);
-													JOptionPane.showMessageDialog(frame, "Something wrong with something :(" );
-													fireTableDataChanged();
-													try {
-														tb.setModel(getObjectModel(isGroup,null));
-													} catch (IOException| SAXException| ParserConfigurationException e2) {
-														throw new ClientException(e2.toString());
-													}
-													
-												}
-												fireTableDataChanged();
-											} catch (ClientException e2) {
-												logger.log(Level.INFO, "Запись лога с уровнем INFO (информационная)",e2);
-											}
-										}else{
-											try {
-												addStudent();
-												fireTableDataChanged();
-												try {
-													tb.setModel(getObjectModel(false,elemGr));
-												} catch (IOException| SAXException| ParserConfigurationException e2) {
-													throw new ClientException(e2);
-												}
-											} catch (ClientException|ServerException| IOException| SAXException | ParserConfigurationException e1) {
-												JOptionPane.showMessageDialog(frame, "Something wrong with student :(" );
-												logger.log(Level.INFO, "Something wrong with student :(",e1);
-												try {
-													tb.setModel(getObjectModel(false,elemGr));
-												} catch (IOException| SAXException| ParserConfigurationException | ClientException e2) {
-													JOptionPane.showMessageDialog(frame, "Something wrong with student :(" );
-												}
-											}
-										};
-									}
-									
-								}
-							});
-						 
-							if (tb.getModel().getColumnName(0).equals("fakulty")) {
-								addMouseListener(new MouseAdapter() {
+                    {
+                        setFont(new Font("Arial", Font.PLAIN, 18));
+                         setGridColor(Color.DARK_GRAY);
+                         setAutoCreateRowSorter(true);
+                         setShowHorizontalLines(false);
+                         getSelectionModel().addListSelectionListener(this);
+                         getColumnModel().addColumnModelListener(this);
+                         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                         //setVisible(false);
+                         tb = this;
+                         
+                         tb.addKeyListener(new KeyListener() {
+                                
+                                @Override
+                                public void keyTyped(KeyEvent e) {
+                                    if (e.getKeyCode()==KeyEvent.VK_ENTER){
+                                    }
+                                }
+                                
+                                @Override
+                                public void keyReleased(KeyEvent e) {
+                                }
+                                
+                                @Override
+                                public void keyPressed(KeyEvent e) {
+                                    if(e.getKeyCode()==10){
+                                        if (tb.getModel().getColumnName(0).equals("fakulty")) {
+                                            
+                                                try {
+                                                    try {
+                                                        addGoup();
+                                                    } catch (ServerException| IOException| SAXException | ParserConfigurationException e1) {
+                                                        logger.log(Level.WARNING,"Got exception.",e);
+                                                        JOptionPane.showMessageDialog(frame, "Something wrong with something :(" );
+                                                        fireTableDataChanged();
+                                                        try {
+                                                            tb.setModel(getObjectModel(isGroup,null));
+                                                        } catch (IOException| SAXException| ParserConfigurationException e2) {
+                                                            logger.log(Level.INFO, "Something wrong with data",e2);
+                                                            throw new ClientException(e2.toString());
+                                                        }
+                                                    
+                                                    }
+                                                    fireTableDataChanged();
+                                                } catch (ClientException e2) {
+                                                    logger.log(Level.INFO, "Something wrong with data",e2);
+                                                }
+                                            
+                                        }else{
+                                            if (checkForEqualityStudents()){
+                                                try {
+                                                    updadeStudents();
+                                                } catch (ServerException| IOException| SAXException| ParserConfigurationException| ClientException e1) {
+                                                    JOptionPane.showMessageDialog(frame, "Something wrong with student :(" );
+                                                    logger.log(Level.INFO, "There is no that student anymore :(",e1);
+                                                }
+                                            }else{
+                                                try {
+                                                    addStudent();
+                                                    fireTableDataChanged();
+                                                    try {
+                                                        tb.setModel(getObjectModel(false,elemGr));
+                                                    } catch (IOException| SAXException| ParserConfigurationException e2) {
+                                                        throw new ClientException(e2);
+                                                    }
+                                                } catch (ClientException|ServerException| IOException| SAXException | ParserConfigurationException e1) {
+                                                    JOptionPane.showMessageDialog(frame, "Something wrong with student :(" );
+                                                    logger.log(Level.INFO, "Something wrong with student :(",e1);
+                                                    try {
+                                                        tb.setModel(getObjectModel(false,elemGr));
+                                                    } catch (IOException| SAXException| ParserConfigurationException | ClientException e2) {
+                                                        JOptionPane.showMessageDialog(frame, "Something wrong with student :(" );
+                                                    }
+                                                }
+                                            }
+                                        };
+                                    }
+                                    
+                                }
+                            });
+                         
+                            if (tb.getModel().getColumnName(0).equals("fakulty")) {
+                                addMouseListener(new MouseAdapter() {
 
-									public void mouseClicked(MouseEvent evt) {
-										if (tb.getModel().getColumnName(0).equals("fakulty")) {
-										if (evt.getButton()==MouseEvent.BUTTON1){
-												timer = new Timer(50,new ActionListener() {
-													public void actionPerformed(ActionEvent evt) {
-														timer.stop();
-													}
-												});
-												timer.setRepeats(false);
-												timer.start();
-												click++;
-									            if (click == 2 && timer.isRunning()) {
-									            	int indexRow = tb.rowAtPoint(evt.getPoint());
-													elemGr = tb.getModel().getValueAt(indexRow, 1);
-													
-													isGroup = false;
-													try {
-														tb.setModel(getObjectModel(isGroup,elemGr));
-													} catch (IOException e) {
-														JOptionPane.showMessageDialog(frame, "Something wrong with input :(" );
-														logger.log(Level.SEVERE,"!",e);
-													} catch (SAXException e) {
-														JOptionPane.showMessageDialog(frame, "Something wrong with SAX :(" );
-														logger.log(Level.SEVERE,"!",e);
-													} catch (ParserConfigurationException e) {
-														JOptionPane.showMessageDialog(frame, "Something wrong with Parser :(" );
-														logger.log(Level.SEVERE,"!",e);
-													} catch (ClientException e) {
-														JOptionPane.showMessageDialog(frame, "Something wrong with Client :(" );
-														logger.log(Level.SEVERE,"!",e);
-													}
-													jbGroupAdd.setVisible(false);
-													jbGroupDel.setVisible(false);
-													jbStudentAdd.setVisible(true);
-													jbStudentDel.setVisible(true);
-													jbBack.setVisible(true);
-													jbBack.setLayout(new FlowLayout(FlowLayout.LEFT));
-									                //timer.stop();
-									                click = 0;
-									            } else {
-									                click = 1;
-									            }
-									    }
-									}
-									}
-								});
-								tb = this;
-							}	
-					}
-				}), CENTER);
-				add(new JPanel() {
-					
-					private static final long serialVersionUID = 1L;
-					
-					{							
-							add(new JButton("Add student") {
-								
-								private static final long serialVersionUID = 1L;
-								
-								{
-									jbStudentAdd = this;
-									setLayout(new FlowLayout(FlowLayout.RIGHT));
-									addActionListener(new ActionListener() {
+                                    public void mouseClicked(MouseEvent evt) {
+                                        if (tb.getModel().getColumnName(0).equals("fakulty")) {
+                                        if (evt.getButton()==MouseEvent.BUTTON1){
+                                                timer = new Timer(50,new ActionListener() {
+                                                    public void actionPerformed(ActionEvent evt) {
+                                                        timer.stop();
+                                                    }
+                                                });
+                                                timer.setRepeats(false);
+                                                timer.start();
+                                                click++;
+                                                if (click == 2 && timer.isRunning()) {
+                                                    int indexRow = tb.rowAtPoint(evt.getPoint());
+                                                    elemGr = tb.getModel().getValueAt(indexRow, 1);
+                                                    
+                                                    isGroup = false;
+                                                    try {
+                                                        tb.setModel(getObjectModel(isGroup,elemGr));
+                                                    } catch (IOException e) {
+                                                        JOptionPane.showMessageDialog(frame, "Something wrong with input :(" );
+                                                        logger.log(Level.SEVERE,"!",e);
+                                                    } catch (SAXException e) {
+                                                        JOptionPane.showMessageDialog(frame, "Something wrong with SAX :(" );
+                                                        logger.log(Level.SEVERE,"!",e);
+                                                    } catch (ParserConfigurationException e) {
+                                                        JOptionPane.showMessageDialog(frame, "Something wrong with Parser :(" );
+                                                        logger.log(Level.SEVERE,"!",e);
+                                                    } catch (ClientException e) {
+                                                        JOptionPane.showMessageDialog(frame, "Something wrong with Client :(" );
+                                                        logger.log(Level.SEVERE,"!",e);
+                                                    }
+                                                    jbGroupAdd.setVisible(false);
+                                                    jbGroupDel.setVisible(false);
+                                                    jbStudentAdd.setVisible(true);
+                                                    jbStudentDel.setVisible(true);
+                                                    jbBack.setVisible(true);
+                                                    jbBack.setLayout(new FlowLayout(FlowLayout.LEFT));
+                                                    //timer.stop();
+                                                    click = 0;
+                                                } else {
+                                                    click = 1;
+                                                }
+                                        }
+                                    }
+                                    }
+                                });
+                                tb = this;
+                            }   
+                    }
+                }), CENTER);
+                add(new JPanel() {
+                    
+                    private static final long serialVersionUID = 1L;
+                    
+                    {                           
+                            add(new JButton("Add student") {
+                                
+                                private static final long serialVersionUID = 1L;
+                                
+                                {
+                                    jbStudentAdd = this;
+                                    setLayout(new FlowLayout(FlowLayout.RIGHT));
+                                    addActionListener(new ActionListener() {
 
-										public void actionPerformed(ActionEvent event) {
-											Object[] data = { "", "", "", "" ,"" };
-											model1.addRow(data);
-										}
-									});
-									setVisible(false);
-								}
-							});
-							add(new JButton("Delete student") {
-								/**
-								 * 
-								 */
-								private static final long serialVersionUID = 1L;
+                                        public void actionPerformed(ActionEvent event) {
+                                            Object[] data = { "", "", "", "" ,"" };
+                                            model1.addRow(data);
+                                        }
+                                    });
+                                    setVisible(false);
+                                }
+                            });
+                            add(new JButton("Delete student") {
+                                /**
+                                 * 
+                                 */
+                                private static final long serialVersionUID = 1L;
 
-								{
-									jbStudentDel = this;
-									setLayout(new FlowLayout(FlowLayout.RIGHT));
-									addActionListener(new ActionListener() {
+                                {
+                                    jbStudentDel = this;
+                                    setLayout(new FlowLayout(FlowLayout.RIGHT));
+                                    addActionListener(new ActionListener() {
 
-										public void actionPerformed(ActionEvent event) {
-											int c=0;
-											int selIndex =0;
-											int[] selectedRows = tb.getSelectedRows();
-											for (int i = 0; i < selectedRows.length; i++) {
-												if (c<1){
-													selIndex = selectedRows[i];
-													c++;
-												}
-												if (selIndex>model1.getRowCount()-1){
-													try {
-														deleteStudent();
-													} catch (ServerException| IOException| SAXException| ParserConfigurationException | ClientException e) {
-														JOptionPane.showMessageDialog(frame, "Something wrong :(" );
-													}
-													model1.removeRow(tb.getSelectedRow());
-												}else{
-													try {
-														deleteStudent();
-													} catch (ServerException| IOException| SAXException| ParserConfigurationException | ClientException e) {
-														JOptionPane.showMessageDialog(frame, "ConLost :(" );
-													}
-													model1.removeRow(tb.getSelectedRow());
-												}
-											}
-										}
-									});
-									setVisible(false);
-								}
-							});
-							
-							add(new JButton("Add group") {
-								
-								private static final long serialVersionUID = 1L;
+                                        public void actionPerformed(ActionEvent event) {
+                                            int c=0;
+                                            int selIndex =0;
+                                            int[] selectedRows = tb.getSelectedRows();
+                                            for (int i = 0; i < selectedRows.length; i++) {
+                                                if (c<1){
+                                                    selIndex = selectedRows[i];
+                                                    c++;
+                                                }
+                                                if (selIndex>model1.getRowCount()-1){
+                                                    try {
+                                                        deleteStudent();
+                                                    } catch (ServerException| IOException| SAXException| ParserConfigurationException | ClientException e) {
+                                                        JOptionPane.showMessageDialog(frame, "Something wrong :(" );
+                                                    }
+                                                    model1.removeRow(tb.getSelectedRow());
+                                                }else{
+                                                    try {
+                                                        deleteStudent();
+                                                    } catch (ServerException| IOException| SAXException| ParserConfigurationException | ClientException e) {
+                                                        JOptionPane.showMessageDialog(frame, "ConLost :(" );
+                                                    }
+                                                    model1.removeRow(tb.getSelectedRow());
+                                                }
+                                            }
+                                        }
+                                    });
+                                    setVisible(false);
+                                }
+                            });
+                            
+                            add(new JButton("Add group") {
+                                
+                                private static final long serialVersionUID = 1L;
 
-								{
-									jbGroupAdd = this;
-									setLayout(new FlowLayout(FlowLayout.LEFT));
-									addActionListener(new ActionListener() {
+                                {
+                                    jbGroupAdd = this;
+                                    setLayout(new FlowLayout(FlowLayout.LEFT));
+                                    addActionListener(new ActionListener() {
 
-										public void actionPerformed(ActionEvent event) {
-											Object[] data = { "", "" };
-											model1.addRow(data);
-											System.out.println(model1.getValueAt(0, 0));
-											// addGoup();
-										}
-									});
-									setVisible(true);
-								}
-							});
-							add(new JButton("Delete group") {
-								
-								private static final long serialVersionUID = 1L;
+                                        public void actionPerformed(ActionEvent event) {
+                                            Object[] data = { "", "" };
+                                            model1.addRow(data);
+                                            System.out.println(model1.getValueAt(0, 0));
+                                            // addGoup();
+                                        }
+                                    });
+                                    setVisible(true);
+                                }
+                            });
+                            add(new JButton("Delete group") {
+                                
+                                private static final long serialVersionUID = 1L;
 
-								{
-									jbGroupDel = this;
-									setLayout(new FlowLayout(FlowLayout.LEFT));
-									addActionListener(new ActionListener() {
+                                {
+                                    jbGroupDel = this;
+                                    setLayout(new FlowLayout(FlowLayout.LEFT));
+                                    addActionListener(new ActionListener() {
 
-										public void actionPerformed(ActionEvent event) {
+                                        public void actionPerformed(ActionEvent event) {
 
-											System.out.println(tb.getSelectedRow());
-											try {
-												deleteGoup();
-												model1.removeRow(tb.getSelectedRow());
-											} catch (ServerException| IOException| SAXException| ParserConfigurationException | ClientException e) {
-												logger.log(Level.SEVERE,"Couldn't delete group",e);
-												JOptionPane.showMessageDialog(frame, "Couldn't delete group :(" );
-											}
+                                            System.out.println(tb.getSelectedRow());
+                                            try {
+                                                deleteGoup();
+                                                model1.removeRow(tb.getSelectedRow());
+                                            } catch (ServerException| IOException| SAXException| ParserConfigurationException | ClientException e) {
+                                                logger.log(Level.SEVERE,"Couldn't delete group",e);
+                                                JOptionPane.showMessageDialog(frame, "Couldn't delete group :(" );
+                                            }
 
-										}
-									});
-									setVisible(true);
-								}
-							});
-							
-							add(new JButton("Back") {
-								
-								private static final long serialVersionUID = 1L;
+                                        }
+                                    });
+                                    setVisible(true);
+                                }
+                            });
+                            
+                            add(new JButton("Back") {
+                                
+                                private static final long serialVersionUID = 1L;
 
-								{
-									jbBack = this;
-									setLayout(new FlowLayout(FlowLayout.LEFT));
-									addActionListener(new ActionListener() {
+                                {
+                                    jbBack = this;
+                                    setLayout(new FlowLayout(FlowLayout.LEFT));
+                                    addActionListener(new ActionListener() {
 
-										public void actionPerformed(ActionEvent event) {
-											try {
-												tb.setModel(getObjectModel(true,null));
-											} catch (IOException e) {
-												logger.log(Level.SEVERE,"!",e);
-											} catch (SAXException e) {
-												logger.log(Level.SEVERE,"!",e);
-											} catch (ParserConfigurationException e) {
-												logger.log(Level.SEVERE,"!",e);
-											} catch (ClientException e) {
-												logger.log(Level.SEVERE,"Somethinf wrong",e);
-												JOptionPane.showMessageDialog(frame, "Somethinf wrong :(" );
-											}
-											jbGroupAdd.setVisible(true);
-											jbGroupDel.setVisible(true);
-											jbStudentAdd.setVisible(false);
-											jbStudentDel.setVisible(false);
-											jbBack.setVisible(false);
-										
-											
-										}
-									});
-									setVisible(false);
-								}
-							});
-							
-							setVisible(true);
-					}
-				}, NORTH);
-			
-					add(new JPanel() {
-						/**
-						 * 
-						 */
-						private static final long serialVersionUID = 1L;
+                                        public void actionPerformed(ActionEvent event) {
+                                            try {
+                                                tb.setModel(getObjectModel(true,null));
+                                            } catch (IOException e) {
+                                                logger.log(Level.SEVERE,"!",e);
+                                            } catch (SAXException e) {
+                                                logger.log(Level.SEVERE,"!",e);
+                                            } catch (ParserConfigurationException e) {
+                                                logger.log(Level.SEVERE,"!",e);
+                                            } catch (ClientException e) {
+                                                logger.log(Level.SEVERE,"Somethinf wrong",e);
+                                                JOptionPane.showMessageDialog(frame, "Somethinf wrong :(" );
+                                            }
+                                            jbGroupAdd.setVisible(true);
+                                            jbGroupDel.setVisible(true);
+                                            jbStudentAdd.setVisible(false);
+                                            jbStudentDel.setVisible(false);
+                                            jbBack.setVisible(false);
+                                        
+                                            
+                                        }
+                                    });
+                                    setVisible(false);
+                                }
+                            });
+                            
+                            setVisible(true);
+                    }
+                }, NORTH);
+            
+                    add(new JPanel() {
+                        /**
+                         * 
+                         */
+                        private static final long serialVersionUID = 1L;
 
-						{
-							bottomPanel = this;
-							bottomPanel.setLayout(new FlowLayout(
-									FlowLayout.LEFT));
+                        {
+                            bottomPanel = this;
+                            bottomPanel.setLayout(new FlowLayout(
+                                    FlowLayout.LEFT));
 
-							JLabel selLabel = new JLabel("Selected:");
-							bottomPanel.add(selLabel);
+                            JLabel selLabel = new JLabel("Selected:");
+                            bottomPanel.add(selLabel);
 
-							final JLabel currentSelectionLabel = new JLabel("");
-							currentSelectionLabel.setAutoscrolls(true);
-							bottomPanel.add(currentSelectionLabel);
-							ListSelectionModel selModel = tb.getSelectionModel();
+                            final JLabel currentSelectionLabel = new JLabel("");
+                            currentSelectionLabel.setAutoscrolls(true);
+                            bottomPanel.add(currentSelectionLabel);
+                            ListSelectionModel selModel = tb.getSelectionModel();
 
-							selModel.addListSelectionListener(new ListSelectionListener() {
+                            selModel.addListSelectionListener(new ListSelectionListener() {
 
-								public void valueChanged(ListSelectionEvent e) {
-									String result = "";
-									int[] selectedRows = tb.getSelectedRows();
+                                public void valueChanged(ListSelectionEvent e) {
+                                    String result = "";
+                                    int[] selectedRows = tb.getSelectedRows();
 
-									for (int i = 0; i < selectedRows.length; i++) {
-										int selIndex = selectedRows[i];
-										TableModel model = tb.getModel();
+                                    for (int i = 0; i < selectedRows.length; i++) {
+                                        int selIndex = selectedRows[i];
+                                        TableModel model = tb.getModel();
 
-										Object value = model.getValueAt(
-												selIndex, 0);
-										Object value2 = null;
-										if (tb.getModel().getColumnName(0).equals("fakulty")){
-											value2 = "";
-										}else {
-											value2 = model.getValueAt(
-													selIndex, 1);
-										}
-										result = result + value + " " + value2;
-										if (i != selectedRows.length - 1) {
-											result += ", ";
-										}
-									}
-									currentSelectionLabel.setText(result);
-								}
-							});
-						}
-					}, SOUTH);
-				
-				setSize(640, 480);
-				addWindowListener(new WindowAdapter() {
-					@Override
-					public void windowClosed(WindowEvent e) {
-						close();
-					}
-				});
-				
-				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				setVisible(true);
-			}
-		};
-	} catch (Exception e) {
-		throw new ClientException(ErrorCode.ERROR,
-				"",e);
-	}
+                                        Object value = model.getValueAt(
+                                                selIndex, 0);
+                                        Object value2 = null;
+                                        if (tb.getModel().getColumnName(0).equals("fakulty")){
+                                            value2 = "";
+                                        }else {
+                                            value2 = model.getValueAt(
+                                                    selIndex, 1);
+                                        }
+                                        result = result + value + " " + value2;
+                                        if (i != selectedRows.length - 1) {
+                                            result += ", ";
+                                        }
+                                    }
+                                    currentSelectionLabel.setText(result);
+                                }
+                            });
+                        }
+                    }, SOUTH);
+                
+                setSize(640, 480);
+                addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        close();
+                    }
+                });
+                
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                setVisible(true);
+            }
+        };
+    } catch (Exception e) {
+        throw new ClientException(ErrorCode.ERROR,
+                "",e);
+    }
 }
 
-	
-	/**
-	 * Close.
-	 */
-	private void close() {
-		try {
-			// conn.close();
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(frame, e.getMessage());
-		}
-	}
+    
+    /**
+     * Close.
+     */
+    private void close() {
+        try {
+            client.close();
+        } catch (ClientException e) {
+            JOptionPane.showMessageDialog(frame, "Something wrong with cinnection");
+        }
+    }
 
 
-	
-	
-	
-	/**
-	 * Gets the object model.
-	 *
-	 * @param isGroup the is group
-	 * @param el the el
-	 * @return the object model
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws SAXException the sAX exception
-	 * @throws ParserConfigurationException the parser configuration exception
-	 * @throws ClientException 
-	 */
-	public DefaultTableModel getObjectModel(Boolean isGroup, Object el) throws IOException, SAXException, ParserConfigurationException, ClientException {
-		elemGr = el;
-		String groupNumber = null;
-		String fak = null;
-		int rowCount =0;
-		if (isGroup) {
-			data = new Object[groups.size()][2];
-			columnNames = new Object[2];
-			columnNames[0] = "fakulty";
-			columnNames[1] = "number";
-			for (int i = 0; i < groups.size(); i++) {
-				data[i][0] = groups.get(i).getFakulty();
-				data[i][1] = groups.get(i).getNumber();
-			}
-			model1 = new DefaultTableModel(data, columnNames);
-			isGroup = false;
-			return model1;
-		} else {
-			if (elemGr != null) {
-				for (int i = 0; i < groups.size(); i++) {
-					if (elemGr.equals(groups.get(i).getFakulty()) || elemGr.equals(groups.get(i).getNumber())){
-						groupNumber = groups.get(i).getNumber();
-						fak = groups.get(i).getFakulty();
-					}
-				}
-				
-				ArrayList<Student> st = new ArrayList<Student>();
-				for (int i = 0; i < client.getShow(fak, groupNumber).size(); i++) {
-					if (groupNumber.equals(client.getShow(fak, groupNumber).get(i).getEnrolled())) {
-						
-						rowCount++;
-						st.add(client.getShow(fak, groupNumber).get(i));
-					}
-				}
-				data = new Object[rowCount][4];
-				columnNames = new Object[4];
-				
-				columnNames[0] = "firstname";
-				columnNames[1] = "lastname";
-				columnNames[2] = "enrolled";
-				columnNames[3] = "groupnumber";			
-				for (int i = 0; i < rowCount; i++) {
-			
-					if (groupNumber.equals(st.get(i).getEnrolled())) {
-						data[i][0] = st.get(i).getFirstName();
-						data[i][1] = st.get(i).getLastName();
-						data[i][2] = st.get(i).getGroupNumber();
-						data[i][3] = st.get(i).getEnrolled();
-					}
-				}
-				model1 = new DefaultTableModel(data, columnNames);
-				isGroup = false;
-				return model1;
-			}
-			return model1;
-		}
+    
+    
+    
+    /**
+     * Gets the object model.
+     *
+     * @param isGroup the is group
+     * @param el the el
+     * @return the object model
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws SAXException the sAX exception
+     * @throws ParserConfigurationException the parser configuration exception
+     * @throws ClientException 
+     */
+    public DefaultTableModel getObjectModel(Boolean isGroup, Object el) throws IOException, SAXException, ParserConfigurationException, ClientException {
+        elemGr = el;
+        String groupNumber = null;
+        
+        int rowCount =0;
+        if (isGroup) {
+            data = new Object[groups.size()][2];
+            columnNames = new Object[2];
+            columnNames[0] = "fakulty";
+            columnNames[1] = "number";
+            for (int i = 0; i < groups.size(); i++) {
+                data[i][0] = groups.get(i).getFakulty();
+                data[i][1] = groups.get(i).getNumber();
+            }
+            model1 = new DefaultTableModel(data, columnNames);
+            isGroup = false;
+            return model1;
+        } else {
+            if (elemGr != null) {
+                for (int i = 0; i < groups.size(); i++) {
+                    if (elemGr.equals(groups.get(i).getFakulty()) || elemGr.equals(groups.get(i).getNumber())){
+                        groupNumber = groups.get(i).getNumber();
+                        currentfakulty = groups.get(i).getFakulty();
+                    }
+                }
+                
+                ArrayList<Student> st = new ArrayList<Student>();
+                for (int i = 0; i < client.getShow(currentfakulty, groupNumber).size(); i++) {
+                    if (groupNumber.equals(client.getShow(currentfakulty, groupNumber).get(i).getEnrolled())) {
+                        
+                        rowCount++;
+                        st.add(client.getShow(currentfakulty, groupNumber).get(i));
+                    }
+                }
+                data = new Object[rowCount][4];
+                columnNames = new Object[4];
+                
+                columnNames[0] = "firstname";
+                columnNames[1] = "lastname";
+                columnNames[2] = "enrolled";
+                columnNames[3] = "groupnumber";         
+                for (int i = 0; i < rowCount; i++) {
+            
+                    if (groupNumber.equals(st.get(i).getEnrolled())) {
+                        data[i][0] = st.get(i).getFirstName();
+                        data[i][1] = st.get(i).getLastName();
+                        data[i][2] = st.get(i).getGroupNumber();
+                        data[i][3] = st.get(i).getEnrolled();
+                    }
+                }
+                model1 = new DefaultTableModel(data, columnNames);
+                isGroup = false;
+                return model1;
+            }
+            return model1;
+        }
 
-	}
-	
-	/**
-	 * Adds the goup.
-	 *
-	 * @throws ClientException the client exception
-	 * @throws ServerException the server exception
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws SAXException the sAX exception
-	 * @throws ParserConfigurationException the parser configuration exception
-	 */
-	public void addGoup() throws ClientException, ServerException, IOException, SAXException, ParserConfigurationException{
-		if (groups.size()<tb.getRowCount()){
-			String numGr = tb.getModel().getValueAt(tb.getRowCount()-1, 1).toString();
-			String fakulty = tb.getModel().getValueAt(tb.getRowCount()-1, 0).toString();
-			for (Group g : groups) {
-				if (g.getNumber().equals(numGr))
-					throw new ClientException(null, "A group with number " + g.getNumber()
-							+ "is alredy exist");
-			}
-			client.addGroup(fakulty, numGr);
-			Group newGroup = new Group(fakulty, numGr);
-			groups.add(newGroup);
-		}
-	}
-	
-	/**
-	 * Delete goup.
-	 *
-	 * @throws ServerException the server exception
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws SAXException the sAX exception
-	 * @throws ParserConfigurationException the parser configuration exception
-	 * @throws ClientException 
-	 */
-	public void deleteGoup() throws ServerException, IOException, SAXException,ParserConfigurationException, ClientException {
-		String f = tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString();
-		String g = tb.getModel().getValueAt(tb.getSelectedRow(), 1).toString();
-		client.removeGroup(f, g);
-		groups.remove(tb.getSelectedRow());
-	}
-	
-	
-	/**
-	 * Adds the student.
-	 *
-	 * @return the student
-	 * @throws ClientException the client exception
-	 * @throws ServerException the server exception
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws SAXException the sAX exception
-	 * @throws ParserConfigurationException the parser configuration exception
-	 */
-	public Student addStudent() throws ClientException, ServerException, IOException, SAXException, ParserConfigurationException{
-		String groupNumber = null;
-		String fak = null;
-		for (int i = 0; i < groups.size(); i++) {
-			if (elemGr.equals(groups.get(i).getFakulty()) || elemGr.equals(groups.get(i).getNumber())){
-				groupNumber = groups.get(i).getNumber();
-				fak = groups.get(i).getFakulty();
-			}
-		}
-		try{
-			if (client.getShow(fak, groupNumber).size()<tb.getRowCount() || client.getShow(fak, groupNumber).size()==0){
-				String fName   = tb.getModel().getValueAt(tb.getRowCount()-1, 0).toString();
-				String lName    = tb.getModel().getValueAt(tb.getRowCount()-1, 1).toString();
-				String grnumber = groupNumber;
-				String enr    = tb.getModel().getValueAt(tb.getRowCount()-1, 2).toString();
-				String id = generateID();
-		
-				client.addStudent(grnumber, fName, lName, enr, Integer.valueOf(id));
-			}
-		}catch(Exception e){
-			throw new ClientException(e);
-		}
-		
-		return student;
-	}
-	
-	/**
-	 * Delete student.
-	 *
-	 * @throws ServerException the server exception
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws SAXException the sAX exception
-	 * @throws ParserConfigurationException the parser configuration exception
-	 * @throws ClientException 
-	 */
-	public void deleteStudent() throws ServerException, IOException, SAXException, ParserConfigurationException, ClientException{
-		String groupNumber = null;
-		String fak = null;
-		Student stud = null;
-		for (int i = 0; i < groups.size(); i++) {
-			if (elemGr.equals(groups.get(i).getFakulty()) || elemGr.equals(groups.get(i).getNumber())){
-				groupNumber = groups.get(i).getNumber();
-				fak = groups.get(i).getFakulty();
-			}
-		}
-		for (int i = 0; i < client.getShow(fak, groupNumber).size(); i++) {
-			
-			if (groupNumber.equals(client.getShow(fak, groupNumber).get(i).getEnrolled())) {
-				if(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString().equals(client.getShow(fak, groupNumber).get(i).getFirstName()) && 
-					tb.getModel().getValueAt(tb.getSelectedRow(), 1).toString().equals(client.getShow(fak, groupNumber).get(i).getLastName())){
+    }
+    
+    /**
+     * Adds the goup.
+     *
+     * @throws ClientException the client exception
+     * @throws ServerException the server exception
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws SAXException the sAX exception
+     * @throws ParserConfigurationException the parser configuration exception
+     */
+    public void addGoup() throws ClientException, ServerException, IOException, SAXException, ParserConfigurationException{
+        if (groups.size()<tb.getRowCount()){
+            String numGr = tb.getModel().getValueAt(tb.getRowCount()-1, 1).toString();
+            String fakulty = tb.getModel().getValueAt(tb.getRowCount()-1, 0).toString();
+            for (Group g : groups) {
+                if (g.getNumber().equals(numGr))
+                    throw new ClientException(null, "A group with number " + g.getNumber()
+                            + "is alredy exist");
+            }
+            client.addGroup(fakulty, numGr);
+            Group newGroup = new Group(fakulty, numGr);
+            groups.add(newGroup);
+        }
+    }
+    
+    /**
+     * Delete goup.
+     *
+     * @throws ServerException the server exception
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws SAXException the sAX exception
+     * @throws ParserConfigurationException the parser configuration exception
+     * @throws ClientException 
+     */
+    public void deleteGoup() throws ServerException, IOException, SAXException,ParserConfigurationException, ClientException {
+        String f = tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString();
+        String g = tb.getModel().getValueAt(tb.getSelectedRow(), 1).toString();
+        client.removeGroup(f, g);
+        groups.remove(tb.getSelectedRow());
+    }
+    
+    public Boolean checkForEqualityStudents(){
+        try {
+            if (tb.getModel().getRowCount()== client.getUpdate().size()){
+                return true;
+            }else {
+                return false;
+            }
+        } catch (IOException | SAXException | ParserConfigurationException| ClientException e) {
+            logger.log(Level.SEVERE,"Somethinf wrong",e);
+            JOptionPane.showMessageDialog(frame, "Somethinf wrong :(" );
+        }
+        return null;
+    }
+    
+    public void updadeStudents() throws ServerException, IOException, SAXException,ParserConfigurationException, ClientException{
+        
+        String firstName = tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString();
+        String lastName  = tb.getModel().getValueAt(tb.getSelectedRow(), 1).toString();
+        String enrolled  = tb.getModel().getValueAt(tb.getSelectedRow(), 2).toString();
+        String group     = tb.getModel().getValueAt(tb.getSelectedRow(), 3).toString();
+        
+        for (int i = 0; i < client.getShow(currentfakulty, group).size(); i++) {    
+            if (group.equals(client.getShow(currentfakulty, group).get(i).getEnrolled())) {
+                if(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString().equals(client.getShow(currentfakulty, group).get(i).getFirstName()) && 
+                    tb.getModel().getValueAt(tb.getSelectedRow(), 1).toString().equals(client.getShow(currentfakulty, group).get(i).getLastName())){
 
-					stud = client.getShow(fak, groupNumber).get(i);
-				}
-			}
-		}
-		client.removeStudent(groupNumber, stud.getId());	
-	}
-	
-	/**
-	 * Generate id.
-	 *
-	 * @return the string
-	 */
-	private String generateID() {
-		int ID = 0;
-		 Random rand = new Random();
-	        ID = rand.nextInt(2147483646);
-		return String.valueOf(ID);
-	}
+                    int studentID = client.getShow(currentfakulty, group).get(i).getId();
+                }
+            }
+        }
+        Integer studentID = null;
+        client.changeStudent(currentfakulty, group, firstName, lastName, enrolled, studentID);
+    }
+    
+    /**
+     * Adds the student.
+     *
+     * @return the student
+     * @throws ClientException the client exception
+     * @throws ServerException the server exception
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws SAXException the sAX exception
+     * @throws ParserConfigurationException the parser configuration exception
+     */
+    public Student addStudent() throws ClientException, ServerException, IOException, SAXException, ParserConfigurationException{
+        String groupNumber = null;
+        String fak = null;
+        for (int i = 0; i < groups.size(); i++) {
+            if (elemGr.equals(groups.get(i).getFakulty()) || elemGr.equals(groups.get(i).getNumber())){
+                groupNumber = groups.get(i).getNumber();
+                fak = groups.get(i).getFakulty();
+            }
+        }
+        try{
+            if (client.getShow(fak, groupNumber).size()<tb.getRowCount() || client.getShow(fak, groupNumber).size()==0){
+                String fName   = tb.getModel().getValueAt(tb.getRowCount()-1, 0).toString();
+                String lName    = tb.getModel().getValueAt(tb.getRowCount()-1, 1).toString();
+                String grnumber = groupNumber;
+                String enr    = tb.getModel().getValueAt(tb.getRowCount()-1, 2).toString();
+                String id = generateID();
+        
+                client.addStudent(grnumber, fName, lName, enr, Integer.valueOf(id));
+            }
+        }catch(Exception e){
+            throw new ClientException(e);
+        }
+        
+        return student;
+    }
+    
+    /**
+     * Delete student.
+     *
+     * @throws ServerException the server exception
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws SAXException the sAX exception
+     * @throws ParserConfigurationException the parser configuration exception
+     * @throws ClientException 
+     */
+    public void deleteStudent() throws ServerException, IOException, SAXException, ParserConfigurationException, ClientException{
+        String groupNumber = null;
+        String fak = null;
+        Student stud = null;
+        for (int i = 0; i < groups.size(); i++) {
+            if (elemGr.equals(groups.get(i).getFakulty()) || elemGr.equals(groups.get(i).getNumber())){
+                groupNumber = groups.get(i).getNumber();
+                fak = groups.get(i).getFakulty();
+            }
+        }
+        for (int i = 0; i < client.getShow(fak, groupNumber).size(); i++) {
+            
+            if (groupNumber.equals(client.getShow(fak, groupNumber).get(i).getEnrolled())) {
+                if(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString().equals(client.getShow(fak, groupNumber).get(i).getFirstName()) && 
+                    tb.getModel().getValueAt(tb.getSelectedRow(), 1).toString().equals(client.getShow(fak, groupNumber).get(i).getLastName())){
 
-	/* 
-	 */
-	@Override
-	public int getRowCount() {
-		if(isGroup){
-			return groups.size();
-		}else{
-			return 1;
-		}
-	}
+                    stud = client.getShow(fak, groupNumber).get(i);
+                }
+            }
+        }
+        client.removeStudent(groupNumber, stud.getId());    
+    }
+    
+    /**
+     * Generate id.
+     *
+     * @return the string
+     */
+    private String generateID() {
+        int ID = 0;
+         Random rand = new Random();
+            ID = rand.nextInt(2147483646);
+        return String.valueOf(ID);
+    }
 
-	/* 
-	 */
-	@Override
-	public int getColumnCount() {
-		if(isGroup){
-			return 3;
-		}else{
-			return 5;
-		}
-	}
+    /* 
+     */
+    @Override
+    public int getRowCount() {
+        if(isGroup){
+            return groups.size();
+        }else{
+            return 1;
+        }
+    }
 
-	/* 
-	 */
-	@Override
-	public Object getValueAt(int row, int column) {
-		return data[row][column];
-	}
+    /* 
+     */
+    @Override
+    public int getColumnCount() {
+        if(isGroup){
+            return 3;
+        }else{
+            return 5;
+        }
+    }
 
-	/* 
-	 */
-	@Override
-	public String getColumnName(int column) {
-		return columnNames[column].toString();
-	}
+    /* 
+     */
+    @Override
+    public Object getValueAt(int row, int column) {
+        return data[row][column];
+    }
 
-	/* 
-	 */
-	@Override
-	public Class getColumnClass(int c) {
-		return getValueAt(0, c).getClass();
-	}
+    /* 
+     */
+    @Override
+    public String getColumnName(int column) {
+        return columnNames[column].toString();
+    }
 
-	/* 
-	 */
-	@Override
-	public boolean isCellEditable(int row, int column) {
-		if (column == 0 || column == 1) {
-			return false;
-		} else {
-			return true;
-		}
-	}
+    /* 
+     */
+    @Override
+    public Class getColumnClass(int c) {
+        return getValueAt(0, c).getClass();
+    }
 
-	/* 
-	 */
-	@Override
-	public void addTableModelListener(TableModelListener l) {
-		listeners.add(l);
-	}
+    /* 
+     */
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        if (column == 0 || column == 1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
-	/* 
-	 */
-	@Override
-	public void removeTableModelListener(TableModelListener l) {
-		listeners.remove(l);
-	}
-	
-	/* 
-	 */
-	@Override
-	public void setValueAt(Object value, int row, int col) {
-			try{
-				data[row][col] = value;
-		        
-				fireTableCellUpdated(row, col);
-				
-				TableModelEvent e = new TableModelEvent(this, row); 
-				for (TableModelListener l : listeners) 
-					l.tableChanged(e);
-			}catch (Exception e) { 
-				  JOptionPane.showMessageDialog(null,
-			  e.getMessage()); 
-			}
-	}
+    /* 
+     */
+    @Override
+    public void addTableModelListener(TableModelListener l) {
+        listeners.add(l);
+    }
+
+    /* 
+     */
+    @Override
+    public void removeTableModelListener(TableModelListener l) {
+        listeners.remove(l);
+    }
+    
+    /* 
+     */
+    @Override
+    public void setValueAt(Object value, int row, int col) {
+            try{
+                data[row][col] = value;
+                
+                fireTableCellUpdated(row, col);
+                
+                TableModelEvent e = new TableModelEvent(this, row); 
+                for (TableModelListener l : listeners) 
+                    l.tableChanged(e);
+            }catch (Exception e) { 
+                  JOptionPane.showMessageDialog(null,
+              e.getMessage()); 
+            }
+    }
 
 }
