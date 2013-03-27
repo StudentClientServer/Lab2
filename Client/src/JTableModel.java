@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -113,13 +114,32 @@ public class JTableModel extends DefaultTableModel {
     
     /** The student. */
     private Student student;
-    
-    /** The logger. */
-    private Logger logger;
+
     
     /** The client. */
     private Client client;
 
+    Logger logger = Logger.getLogger(JTableModel.class.getName());
+    
+    private void createLoger(){
+        
+    	try {
+        	
+            HtmlFormatter htmlformatter = new HtmlFormatter();
+            FileHandler htmlfile = new FileHandler("LogApp.html");
+            
+            htmlfile.setFormatter(htmlformatter);
+            logger.addHandler(htmlfile);
+            
+            
+        } catch (SecurityException e) {
+            logger.log(Level.SEVERE,"Couldn't create log file because of security policy", e);
+            JOptionPane.showMessageDialog(frame, "Couldn't create log file because of security policy!" );
+        } catch (IOException e) {
+            logger.log(Level.SEVERE,"Couldn't create log file because of input.",e);
+            JOptionPane.showMessageDialog(frame, "Couldn't create log file because of input!" );
+        }
+    }
     /**
      * Instantiates a new j table model.
      *
@@ -129,7 +149,7 @@ public class JTableModel extends DefaultTableModel {
      */
     public JTableModel(List<Group> groups, Client client) throws ClientException {
 
-        final Logger logger = Logger.getLogger(JTableModel.class.getName());
+        createLoger();
         this.groups = groups;
         this.client = client;
         String IP = "";
@@ -203,6 +223,7 @@ public class JTableModel extends DefaultTableModel {
                                                 } catch (ServerException| IOException| SAXException| ParserConfigurationException| ClientException e1) {
                                                     JOptionPane.showMessageDialog(frame, "Something wrong with student :(" );
                                                     logger.log(Level.INFO, "There is no that student anymore :(",e1);
+                                                    e1.printStackTrace();
                                                 }
                                             }else{
                                                 try {
@@ -358,7 +379,7 @@ public class JTableModel extends DefaultTableModel {
                                         public void actionPerformed(ActionEvent event) {
                                             Object[] data = { "", "" };
                                             model1.addRow(data);
-                                            System.out.println(model1.getValueAt(0, 0));
+
                                             // addGoup();
                                         }
                                     });
@@ -376,7 +397,7 @@ public class JTableModel extends DefaultTableModel {
 
                                         public void actionPerformed(ActionEvent event) {
 
-                                            System.out.println(tb.getSelectedRow());
+                                            //System.out.println(tb.getSelectedRow());
                                             try {
                                                 deleteGoup();
                                                 model1.removeRow(tb.getSelectedRow());
@@ -625,7 +646,7 @@ public class JTableModel extends DefaultTableModel {
     
     public Boolean checkForEqualityStudents(){
         try {
-            if (tb.getModel().getRowCount()== client.getUpdate().size()){
+            if (tb.getModel().getRowCount()-1== client.getUpdate().size()){
                 return true;
             }else {
                 return false;
@@ -643,17 +664,16 @@ public class JTableModel extends DefaultTableModel {
         String lastName  = tb.getModel().getValueAt(tb.getSelectedRow(), 1).toString();
         String enrolled  = tb.getModel().getValueAt(tb.getSelectedRow(), 2).toString();
         String group     = tb.getModel().getValueAt(tb.getSelectedRow(), 3).toString();
-        
-        for (int i = 0; i < client.getShow(currentfakulty, group).size(); i++) {    
-            if (group.equals(client.getShow(currentfakulty, group).get(i).getEnrolled())) {
-                if(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString().equals(client.getShow(currentfakulty, group).get(i).getFirstName()) && 
-                    tb.getModel().getValueAt(tb.getSelectedRow(), 1).toString().equals(client.getShow(currentfakulty, group).get(i).getLastName())){
+        Integer studentID = null;
+        for (int i = 0; i < client.getShow(currentfakulty, group).size(); i++) {   
 
-                    int studentID = client.getShow(currentfakulty, group).get(i).getId();
+            if (group.equals(client.getShow(currentfakulty, group).get(i).getEnrolled())) {
+                if(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString().equals(client.getShow(currentfakulty, group).get(i).getFirstName())){
+
+                    studentID = client.getShow(currentfakulty, group).get(i).getId();
                 }
             }
         }
-        Integer studentID = null;
         client.changeStudent(currentfakulty, group, firstName, lastName, enrolled, studentID);
     }
     
