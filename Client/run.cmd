@@ -1,4 +1,3 @@
-java -jar build\program.jar 
-java -classpath build/program.jar classes src.view.Run
-
+java -jar build/program.jar
+java -classpath build/program.jar;classes client.Run
 pause

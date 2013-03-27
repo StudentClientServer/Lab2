@@ -1,4 +1,4 @@
-package view;
+package client;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -8,7 +8,7 @@ public class ClientException extends Exception {
 
 	/** The error code. */
 	private ErrorCode errorCode;
-
+	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * Instantiates a new client exception.

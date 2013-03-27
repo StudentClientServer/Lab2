@@ -795,9 +795,10 @@ public class JTableModel extends DefaultTableModel {
 
     /* 
      */
-    @Override
-    public Class getColumnClass(int c) {
-        return getValueAt(0, c).getClass();
+    @SuppressWarnings("unchecked")
+	@Override
+    public Class<JTableModel> getColumnClass(int c) {
+        return (Class<JTableModel>) getValueAt(0, c).getClass();
     }
 
     /* 

@@ -1,2 +1,3 @@
-javac -classpath lib/junit.jar -sourcepath src -d classes src/*.java
+javac  -Xlint -d classes -sourcepath src src\client\*.java
+
 pause

@@ -64,7 +64,7 @@ public class Client {
 	public Client() throws IOException {
 		serverPort = 7070;
 		address = "127.0.0.1";
-		//connection();
+		connection();
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class Client {
 	public Client(String address, int serverPort) throws IOException, ClientException {
 		this.serverPort = serverPort;
 		this.address = address;
-		//connection();
+		connection();
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class Client {
 			if (!(out == null)) {
 				try {
 					out.flush();
-					//out.close();
+
 				} catch (IOException e) {
 					// never been (hope)
 				}
@@ -258,7 +258,7 @@ public class Client {
 	     * @throws ClientException 
     	 */
 	    public List<Group> getUpdate() throws IOException, SAXException, ParserConfigurationException, ClientException {
-	    	connection();
+
 	    	sendMessage(createMessage("UPDATE", "", "", "", "", null, null));
 	        try {
 				parsingAnswer(reading());
@@ -266,7 +266,7 @@ public class Client {
 				throw new ClientException(e);
 			}
 	        
-	        socket.close();
+
 	        return updateList;
 	    }
 	    
@@ -283,12 +283,12 @@ public class Client {
     	 */
 	    public List<Student> getShow(String fakulty, String group) throws IOException, SAXException, ParserConfigurationException, ClientException {
 	        
-	        connection();
+	
 	    	sendMessage(createMessage("SHOW", fakulty, group, "", "", null, null));
 	        
 	        parsingAnswer(reading());
 	        
-	        socket.close();
+
 	        return showList;
 	    }
 	    
@@ -305,13 +305,13 @@ public class Client {
 	     * @throws ClientException 
     	 */
 	    public String removeStudent( String group, Integer studentID) throws ServerException, IOException, SAXException, ParserConfigurationException, ClientException {
-	    	connection();
+
 	    	sendMessage(createMessage("REMOVE", null, group, "", "", null, studentID));
 	        parsingAnswer(reading());
 	        if ("Exception".equals(serverAnswer)) {
 	            throw new ServerException(stackTrace);
 	        }
-	        socket.close();
+
 	        return serverAnswer;
 	    }
 	    
@@ -332,13 +332,13 @@ public class Client {
     	 */
 	    public String addStudent( String group, String studentName,
 	            String studentLastname, String enrolledDate, Integer studentID) throws ServerException, IOException, SAXException, ParserConfigurationException, ClientException {
-	    	connection();
+
 	    	sendMessage(createMessage("ADD", null, group, studentName, studentLastname, enrolledDate, studentID));
 	        parsingAnswer(reading());
 	        if ("Exception".equals(serverAnswer)) {
 	            throw new ServerException(stackTrace);
 	        }
-	        socket.close();
+
 	        return serverAnswer;
 	    }
 	    
@@ -360,13 +360,13 @@ public class Client {
     	 */
 	    public String changeStudent(String fakulty, String group, String studentName,
 	            String studentLastname, String enrolledDate, Integer studentID) throws ServerException, IOException, SAXException, ParserConfigurationException, ClientException {
-	    	connection();
+	
 	    	sendMessage(createMessage("CHANGE", null, group, studentName, studentLastname, enrolledDate, studentID));
 	        parsingAnswer(reading());
 	        if ("Exception".equals(serverAnswer)) {
 	            throw new ServerException(stackTrace);
 	        }
-	        socket.close();
+
 	        return serverAnswer;
 	    }
 	    
@@ -383,13 +383,13 @@ public class Client {
 	     * @throws ClientException 
     	 */
 	    public String addGroup(String fakulty, String group) throws ServerException, IOException, SAXException, ParserConfigurationException, ClientException {
-	    	connection();
+
 	    	sendMessage(createMessage("ADDGroup", fakulty, group, "", "", null, null));
 	        parsingAnswer(reading());
 	        if ("Exception".equals(serverAnswer)) {
 	            throw new ServerException(stackTrace);
 	        }
-	        socket.close();
+
 	        return serverAnswer;
 	    }
 	    
@@ -406,13 +406,12 @@ public class Client {
 	     * @throws ClientException 
     	 */
 	    public String removeGroup(String fakulty, String group) throws ServerException, IOException, SAXException, ParserConfigurationException, ClientException {
-	    	connection();
+
 	    	sendMessage(createMessage("REMOVEGroup", fakulty, group, "", "", null, null));
 	        parsingAnswer(reading());
 	        if ("Exception".equals(serverAnswer)) {
 	            throw new ServerException(stackTrace);
 	        }
-	        socket.close();
 	        return serverAnswer;
 	    }
 }

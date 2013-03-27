@@ -1,4 +1,4 @@
-package view;
+package client;
 
 public class ServerException extends Exception {
 
