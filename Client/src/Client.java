@@ -1,4 +1,4 @@
-package view;
+package client;
 
 import java.net.*;
 import java.text.DateFormat;
@@ -73,8 +73,9 @@ public class Client {
 	 * @param address the address
 	 * @param serverPort the server port
 	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws ClientException 
 	 */
-	public Client(String address, int serverPort) throws IOException {
+	public Client(String address, int serverPort) throws IOException, ClientException {
 		this.serverPort = serverPort;
 		this.address = address;
 		//connection();
@@ -84,13 +85,22 @@ public class Client {
 	 * Connection.
 	 *
 	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws ClientException 
 	 */
-	private void connection() throws IOException {
+	private void connection() throws IOException, ClientException {
 		try {
 			InetAddress ipAddress = InetAddress.getByName(address);
 			socket = new Socket(ipAddress, serverPort);
 		} catch (Exception x) {
-			x.printStackTrace();
+			throw new ClientException(x);
+		}
+	}
+	
+	public void close() throws ClientException{
+		try {
+			socket.close();
+		} catch (IOException e) {
+			throw new ClientException(e);
 		}
 	}
 
@@ -156,7 +166,7 @@ public class Client {
 				message.append(enrolledDate);
 				message.append("</enrolledDate>");
 			}
-			if ("ADD".equals(ACTION) || "REMOVE".equals(ACTION)) {
+			if ("ADD".equals(ACTION) || "REMOVE".equals(ACTION)|| "CHANGE".equals(ACTION)) {
 				message.append("<studentID>");
 				message.append(studentID);
 				message.append("</studentID>");
@@ -255,7 +265,7 @@ public class Client {
 			} catch (ClientException e) {
 				throw new ClientException(e);
 			}
-	        System.out.println("@done +getUpdate()");
+	        
 	        socket.close();
 	        return updateList;
 	    }
@@ -275,10 +285,9 @@ public class Client {
 	        
 	        connection();
 	    	sendMessage(createMessage("SHOW", fakulty, group, "", "", null, null));
-	        //System.out.println(createMessage("SHOW", fakulty, group, "", "", null, null));
-	        System.out.println("@done +getShow()1");
+	        
 	        parsingAnswer(reading());
-	        System.out.println("@done +getShow()");
+	        
 	        socket.close();
 	        return showList;
 	    }
@@ -352,7 +361,7 @@ public class Client {
 	    public String changeStudent(String fakulty, String group, String studentName,
 	            String studentLastname, String enrolledDate, Integer studentID) throws ServerException, IOException, SAXException, ParserConfigurationException, ClientException {
 	    	connection();
-	    	sendMessage(createMessage("ADD", null, group, studentName, studentLastname, enrolledDate, studentID));
+	    	sendMessage(createMessage("CHANGE", null, group, studentName, studentLastname, enrolledDate, studentID));
 	        parsingAnswer(reading());
 	        if ("Exception".equals(serverAnswer)) {
 	            throw new ServerException(stackTrace);
