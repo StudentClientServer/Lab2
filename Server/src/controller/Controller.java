@@ -60,6 +60,7 @@ public class Controller implements ActionListener {
 	    }
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
