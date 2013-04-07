@@ -76,7 +76,15 @@ public class Client {
 				} catch (IOException e) {
                     throw new ClientException(e);
 				}
-			}
+			} else {
+                try {
+                    if (!socket.isClosed() && socket!=null) {
+                        socket.close();
+                    }
+                } catch (IOException e) {
+                    throw new ClientException(e);
+                }
+            }
 		}
 	}
 
@@ -133,6 +141,10 @@ public class Client {
                 if (in!=null) {
                     in.close();
                 }
+            } catch (IOException e) {
+                 throw new ClientException(e);
+            }
+            try {
                 if (!socket.isClosed() && socket!=null) {
                     socket.close();
                 }
@@ -140,7 +152,7 @@ public class Client {
                 throw new ClientException(e);
             }
         }
-        return xmlResult;
+    return xmlResult;
 }
 
     /**
