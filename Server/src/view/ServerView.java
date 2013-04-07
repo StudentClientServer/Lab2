@@ -23,8 +23,33 @@ public class ServerView implements View {
     private DataOutputStream out;
     private ActionListener controller;
     private ServerModel model;
-    private String ExceptMessage = null;
-    
+    private String exceptMessage = null;
+
+    /**
+     * Reading port from configuration file (servConfig.ini)
+     * throws ServerException if some problem with reading
+     */
+    public ServerView() throws ServerException {
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader("servConfig.ini"));
+            while (reader.readLine() != null) {
+                if (reader.readLine().equals("Port")) {
+                    port = Integer.parseInt(reader.readLine());
+                }
+            }
+        } catch (IOException e) {
+            throw new ServerException(e);
+        } finally {
+            try {
+                if (reader!=null)
+                    reader.close();
+            } catch (IOException e) {
+                throw new ServerException(e);
+            }
+        }
+    }
+
     /**
     * Set model
     */
@@ -40,14 +65,14 @@ public class ServerView implements View {
     }
     
     /**
-     * Starting looking for connection throw connection exception
+     * Starting looking for connection
+     * read and parse Clients message
+     * throw connection exception
      */
     public void starting() throws IOException {
         ServerSocket ss = new ServerSocket(port);
         while (true) {
-            System.out.println("Waiting for a client...");
             socket = ss.accept();
-            System.out.println("Client connected");
             thread = new Thread(new Thread() {
                 public void run() {
                     try {
@@ -58,11 +83,16 @@ public class ServerView implements View {
                             out = new DataOutputStream(socket.getOutputStream());
                             exceptionHandling(exc);
                             out.writeUTF(resultMessage());
+                        } catch (IOException e) {
+                            model.writeToLog("In method starting() at view, during sending exception message to Client ", e);
+                        } finally {
                             if (!(out == null)) {
-                                out.flush();
+                                try {
+                                    out.flush();
+                                } catch (IOException e) {
+                                    model.writeToLog("In method starting() at view, during closing OutputStream ", e);
+                                }
                             }
-                        } catch (IOException x) {
-                            x.printStackTrace();
                         }
                     }
                 }
@@ -71,8 +101,11 @@ public class ServerView implements View {
         }
     }
 
+    /**
+     * Creating exception message to answer
+     */
     public void exceptionHandling(Exception ex) {
-        ExceptMessage = ex.toString();
+        exceptMessage = ex.toString();
     }
     
     /**
@@ -81,52 +114,62 @@ public class ServerView implements View {
     */
     private void reading() throws IOException {        
         DataInputStream in = new DataInputStream(socket.getInputStream());            
-        xmlMessage = in.readUTF();
-        System.out.println("Have a line "+xmlMessage);
+        try {
+            xmlMessage = in.readUTF();
+        } catch (IOException e) {
+            throw new IOException(e);
+        } finally {
+            in.close();
+        }
     }
     
     /**
     * Parsing client message according to action
      * @throws ServerException 
     */
-    private void parsing(String xmlMessage) throws SAXException, ParserConfigurationException, IOException, ServerException {        
+    private void parsing(String xmlMessage) throws ParserConfigurationException, IOException, SAXException, ServerException {
         InputSource is = new InputSource();        
         is.setCharacterStream(new StringReader(xmlMessage));
         Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
         NodeList items = doc.getDocumentElement().getChildNodes();
         String action = items.item(0).getChildNodes().item(0).getChildNodes().item(0).getNodeValue();
         out = new DataOutputStream(socket.getOutputStream());        
-        if ("UPDATE".equals(action)) {
-            out.writeUTF(updateMessage(model.getGroups()));
-        } else {
-            String fakyltet = items.item(0).getChildNodes().item(1).getFirstChild().getNodeValue();
-            String group = items.item(0).getChildNodes().item(2).getFirstChild().getNodeValue();
-            if ("REMOVEGroup".equals(action)) {
-                fireAction(group, "RemoveGroup");
-            } else if ("SHOW".equals(action)) {
-                out.writeUTF(showeMessage(model.getStudents(model.getGroup(group))));
-            } else if ("ADDGroup".equals(action)) {
-                fireAction(new Group(fakyltet, group), "AddGroup");
-            } else if ("REMOVE".equals(action)) {
-                String studentID = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
-                fireAction(Integer.parseInt(studentID), "RemoveStudent");
-            } else if ("ADD".equals(action)) { 
-                String studentName = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
-                String studentLastname = items.item(1).getChildNodes().item(1).getFirstChild().getNodeValue();
-                String enrolledDate = items.item(1).getChildNodes().item(2).getFirstChild().getNodeValue(); 
-                Integer studentID = Integer.parseInt(items.item(1).getChildNodes().item(3).getFirstChild().getNodeValue());
-                fireAction(new Student(studentID, studentName, studentLastname, group, enrolledDate), "AddStudent");
-            } else if ("CHANGE".equals(action)) {                    
+        try {
+            if ("UPDATE".equals(action)) {
+                out.writeUTF(updateMessage(model.getGroups()));
+            } else {
+                String fakyltet = items.item(0).getChildNodes().item(1).getFirstChild().getNodeValue();
+                String group = items.item(0).getChildNodes().item(2).getFirstChild().getNodeValue();
+                if ("REMOVEGroup".equals(action)) {
+                    fireAction(group, "RemoveGroup");
+                } else if ("SHOW".equals(action)) {
+                    out.writeUTF(showeMessage(model.getStudents(model.getGroup(group))));
+                } else if ("ADDGroup".equals(action)) {
+                    fireAction(new Group(fakyltet, group), "AddGroup");
+                } else if ("REMOVE".equals(action)) {
+                    String studentID = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
+                    fireAction(Integer.parseInt(studentID), "RemoveStudent");
+                } else if ("ADD".equals(action)) {
                     String studentName = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
                     String studentLastname = items.item(1).getChildNodes().item(1).getFirstChild().getNodeValue();
-                    String enrolledDate = items.item(1).getChildNodes().item(2).getFirstChild().getNodeValue(); 
+                    String enrolledDate = items.item(1).getChildNodes().item(2).getFirstChild().getNodeValue();
+                    Integer studentID = Integer.parseInt(items.item(1).getChildNodes().item(3).getFirstChild().getNodeValue());
+                    fireAction(new Student(studentID, studentName, studentLastname, group, enrolledDate), "AddStudent");
+                } else if ("CHANGE".equals(action)) {
+                    String studentName = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
+                    String studentLastname = items.item(1).getChildNodes().item(1).getFirstChild().getNodeValue();
+                    String enrolledDate = items.item(1).getChildNodes().item(2).getFirstChild().getNodeValue();
                     Integer studentID = Integer.parseInt(items.item(1).getChildNodes().item(3).getFirstChild().getNodeValue());
                     fireAction(new Student(studentID, studentName, studentLastname, group, enrolledDate), "UpdateStudent");
-            }                    
-            out.writeUTF(resultMessage()); 
-        }    
-        if (!(out==null)) {
-            out.flush();
+                }
+                out.writeUTF(resultMessage());
+            }
+        } catch (ServerException e) {
+            throw new ServerException(e);
+        } finally {
+            if (!(out==null)) {
+                out.flush();
+            }
         }
     }
     
@@ -189,7 +232,7 @@ public class ServerView implements View {
     private String resultMessage() {
         StringBuilder builder = new StringBuilder();
         String result;
-        if (ExceptMessage == null) {
+        if (exceptMessage == null) {
             result = "Success";
         } else {
             result = "Exception";
@@ -197,14 +240,13 @@ public class ServerView implements View {
         builder.append("<envelope><header><action>");
         builder.append(result);
         builder.append("</action></header><body>");
-        if (ExceptMessage != null) {
+        if (exceptMessage != null) {
             builder.append("<stackTrace>");
-            builder.append(ExceptMessage);
-            ExceptMessage = null;
+            builder.append(exceptMessage);
+            exceptMessage = null;
             builder.append("</stackTrace>");
         }
         builder.append("</body></envelope>");
         return builder.toString();
     }
-
 }
