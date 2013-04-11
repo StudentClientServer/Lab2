@@ -122,9 +122,9 @@ public class Student {
      * Instantiates a new student.
      *
      * @param node the node
-     * @throws Exception the exception
+     * @throws ClientException the ClientException
      */
-    public Student (Node node) throws Exception {
+    public Student (Node node) throws ClientException {
         try{
         	st = (Element)node;
         	System.out.println("st "+ st.getAttribute("id"));

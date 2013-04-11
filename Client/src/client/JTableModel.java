@@ -197,33 +197,25 @@ public class JTableModel extends DefaultTableModel {
                                         if (tb.getModel().getColumnName(0).equals("fakulty")) {
                                             
                                                 try {
-                                                    try {
-                                                        addGoup();
-                                                    } catch (ServerException| IOException| SAXException | ParserConfigurationException e1) {
-                                                        logger.log(Level.WARNING,"Got exception.",e);
-                                                        JOptionPane.showMessageDialog(frame, "Something wrong with something :(" );
-                                                        fireTableDataChanged();
-                                                        try {
-                                                            tb.setModel(getObjectModel(isGroup,null));
-                                                        } catch (IOException| SAXException| ParserConfigurationException e2) {
-                                                            logger.log(Level.INFO, "Something wrong with data",e2);
-                                                            throw new ClientException(e2.toString());
-                                                        }
-                                                    
-                                                    }
+                                                    addGoup();
                                                     fireTableDataChanged();
                                                 } catch (ClientException e2) {
                                                     logger.log(Level.INFO, "Something wrong with data",e2);
+													JOptionPane.showMessageDialog(frame, "Something wrong with client :(" );
+                                                } catch (ServerException e2) {
+                                                    logger.log(Level.INFO, "Something wrong with data",e2);
+													JOptionPane.showMessageDialog(frame, "Something wrong with server :(" );
                                                 }
                                             
                                         }else{
+										System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                                             if (checkForEqualityStudents()){
+											System.out.println("!!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!!!!!!");
                                                 try {
                                                     updadeStudents();
-                                                } catch (ServerException| IOException| SAXException| ParserConfigurationException| ClientException e1) {
+                                                } catch (ClientException e1) {
                                                     JOptionPane.showMessageDialog(frame, "Something wrong with student :(" );
                                                     logger.log(Level.INFO, "There is no that student anymore :(",e1);
-                                                    e1.printStackTrace();
                                                 }
                                             }else{
                                                 try {
@@ -231,15 +223,15 @@ public class JTableModel extends DefaultTableModel {
                                                     fireTableDataChanged();
                                                     try {
                                                         tb.setModel(getObjectModel(false,elemGr));
-                                                    } catch (IOException| SAXException| ParserConfigurationException e2) {
-                                                        throw new ClientException(e2);
+                                                    } catch (ClientException e2) {
+                                                        JOptionPane.showMessageDialog(frame, "Something wrong with student :(" );
                                                     }
-                                                } catch (ClientException|ServerException| IOException| SAXException | ParserConfigurationException e1) {
-                                                    JOptionPane.showMessageDialog(frame, "Something wrong with student :(" );
-                                                    logger.log(Level.INFO, "Something wrong with student :(",e1);
+                                                } catch (ClientException e1) {
+                                                    JOptionPane.showMessageDialog(frame, "Something wrong with date :(" );
+                                                    logger.log(Level.INFO, "Something wrong with date :(",e1);
                                                     try {
                                                         tb.setModel(getObjectModel(false,elemGr));
-                                                    } catch (IOException| SAXException| ParserConfigurationException | ClientException e2) {
+                                                    } catch (ClientException e2) {
                                                         JOptionPane.showMessageDialog(frame, "Something wrong with student :(" );
                                                     }
                                                 }
@@ -271,15 +263,6 @@ public class JTableModel extends DefaultTableModel {
                                                     isGroup = false;
                                                     try {
                                                         tb.setModel(getObjectModel(isGroup,elemGr));
-                                                    } catch (IOException e) {
-                                                        JOptionPane.showMessageDialog(frame, "Something wrong with input :(" );
-                                                        logger.log(Level.SEVERE,"!",e);
-                                                    } catch (SAXException e) {
-                                                        JOptionPane.showMessageDialog(frame, "Something wrong with SAX :(" );
-                                                        logger.log(Level.SEVERE,"!",e);
-                                                    } catch (ParserConfigurationException e) {
-                                                        JOptionPane.showMessageDialog(frame, "Something wrong with Parser :(" );
-                                                        logger.log(Level.SEVERE,"!",e);
                                                     } catch (ClientException e) {
                                                         JOptionPane.showMessageDialog(frame, "Something wrong with Client :(" );
                                                         logger.log(Level.SEVERE,"!",e);
@@ -348,14 +331,14 @@ public class JTableModel extends DefaultTableModel {
                                                 if (selIndex>model1.getRowCount()-1){
                                                     try {
                                                         deleteStudent();
-                                                    } catch (ServerException| IOException| SAXException| ParserConfigurationException | ClientException e) {
+                                                    } catch (ClientException e) {
                                                         JOptionPane.showMessageDialog(frame, "Something wrong :(" );
                                                     }
                                                     model1.removeRow(tb.getSelectedRow());
                                                 }else{
                                                     try {
                                                         deleteStudent();
-                                                    } catch (ServerException| IOException| SAXException| ParserConfigurationException | ClientException e) {
+                                                    } catch (ClientException e) {
                                                         JOptionPane.showMessageDialog(frame, "ConLost :(" );
                                                     }
                                                     model1.removeRow(tb.getSelectedRow());
@@ -401,7 +384,7 @@ public class JTableModel extends DefaultTableModel {
                                             try {
                                                 deleteGoup();
                                                 model1.removeRow(tb.getSelectedRow());
-                                            } catch (ServerException| IOException| SAXException| ParserConfigurationException | ClientException e) {
+                                            } catch (ClientException e) {
                                                 logger.log(Level.SEVERE,"Couldn't delete group",e);
                                                 JOptionPane.showMessageDialog(frame, "Couldn't delete group :(" );
                                             }
@@ -424,12 +407,6 @@ public class JTableModel extends DefaultTableModel {
                                         public void actionPerformed(ActionEvent event) {
                                             try {
                                                 tb.setModel(getObjectModel(true,null));
-                                            } catch (IOException e) {
-                                                logger.log(Level.SEVERE,"!",e);
-                                            } catch (SAXException e) {
-                                                logger.log(Level.SEVERE,"!",e);
-                                            } catch (ParserConfigurationException e) {
-                                                logger.log(Level.SEVERE,"!",e);
                                             } catch (ClientException e) {
                                                 logger.log(Level.SEVERE,"Somethinf wrong",e);
                                                 JOptionPane.showMessageDialog(frame, "Somethinf wrong :(" );
@@ -501,13 +478,6 @@ public class JTableModel extends DefaultTableModel {
                     }, SOUTH);
                 
                 setSize(640, 480);
-                addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosed(WindowEvent e) {
-                        close();
-                    }
-                });
-                
                 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 setVisible(true);
             }
@@ -517,22 +487,6 @@ public class JTableModel extends DefaultTableModel {
                 "",e);
     }
 }
-
-    
-    /**
-     * Close.
-     */
-    private void close() {
-        try {
-            client.close();
-        } catch (ClientException e) {
-            JOptionPane.showMessageDialog(frame, "Something wrong with cinnection");
-        }
-    }
-
-
-    
-    
     
     /**
      * Gets the object model.
@@ -540,12 +494,9 @@ public class JTableModel extends DefaultTableModel {
      * @param isGroup the is group
      * @param el the el
      * @return the object model
-     * @throws IOException Signals that an I/O exception has occurred.
-     * @throws SAXException the sAX exception
-     * @throws ParserConfigurationException the parser configuration exception
      * @throws ClientException 
      */
-    public DefaultTableModel getObjectModel(Boolean isGroup, Object el) throws IOException, SAXException, ParserConfigurationException, ClientException {
+    public DefaultTableModel getObjectModel(Boolean isGroup, Object el) throws ClientException {
         elemGr = el;
         String groupNumber = null;
         
@@ -572,13 +523,21 @@ public class JTableModel extends DefaultTableModel {
                 }
                 
                 ArrayList<Student> st = new ArrayList<Student>();
-                for (int i = 0; i < client.getShow(currentfakulty, groupNumber).size(); i++) {
-                    if (groupNumber.equals(client.getShow(currentfakulty, groupNumber).get(i).getEnrolled())) {
+				try{
+					for (int i = 0; i < client.getShow(currentfakulty, groupNumber).size(); i++) {
+						if (groupNumber.equals(client.getShow(currentfakulty, groupNumber).get(i).getEnrolled())) {
                         
-                        rowCount++;
-                        st.add(client.getShow(currentfakulty, groupNumber).get(i));
-                    }
-                }
+							rowCount++;
+							try{	
+								st.add(client.getShow(currentfakulty, groupNumber).get(i));
+							}catch(ServerException e){
+								throw new ClientException(e);
+							}
+						}
+					}
+				}catch(ServerException e){
+					throw new ClientException(e);
+				}
                 data = new Object[rowCount][4];
                 columnNames = new Object[4];
                 
@@ -610,10 +569,8 @@ public class JTableModel extends DefaultTableModel {
      * @throws ClientException the client exception
      * @throws ServerException the server exception
      * @throws IOException Signals that an I/O exception has occurred.
-     * @throws SAXException the sAX exception
-     * @throws ParserConfigurationException the parser configuration exception
      */
-    public void addGoup() throws ClientException, ServerException, IOException, SAXException, ParserConfigurationException{
+    public void addGoup() throws ServerException,ClientException{
         if (groups.size()<tb.getRowCount()){
             String numGr = tb.getModel().getValueAt(tb.getRowCount()-1, 1).toString();
             String fakulty = tb.getModel().getValueAt(tb.getRowCount()-1, 0).toString();
@@ -622,7 +579,11 @@ public class JTableModel extends DefaultTableModel {
                     throw new ClientException(null, "A group with number " + g.getNumber()
                             + "is alredy exist");
             }
-            client.addGroup(fakulty, numGr);
+			try{	
+				client.addGroup(fakulty, numGr);
+			}catch(ServerException e){
+				throw new ClientException (e);
+			}	
             Group newGroup = new Group(fakulty, numGr);
             groups.add(newGroup);
         }
@@ -631,50 +592,67 @@ public class JTableModel extends DefaultTableModel {
     /**
      * Delete goup.
      *
-     * @throws ServerException the server exception
-     * @throws IOException Signals that an I/O exception has occurred.
-     * @throws SAXException the sAX exception
-     * @throws ParserConfigurationException the parser configuration exception
      * @throws ClientException 
      */
-    public void deleteGoup() throws ServerException, IOException, SAXException,ParserConfigurationException, ClientException {
+    public void deleteGoup() throws ClientException {
         String f = tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString();
         String g = tb.getModel().getValueAt(tb.getSelectedRow(), 1).toString();
-        client.removeGroup(f, g);
+        try {
+			client.removeGroup(f, g);
+		}catch(ServerException e){
+			throw new ClientException (e);
+		}
         groups.remove(tb.getSelectedRow());
     }
     
     public Boolean checkForEqualityStudents(){
-        try {
-            if (tb.getModel().getRowCount()-1== client.getUpdate().size()){
+        
+		try {
+		System.out.println(">>>> "+tb.getModel().getRowCount()+" <<<< >>>>"+client.getUpdate().size());
+            if (tb.getModel().getRowCount()== client.getUpdate().size()){
                 return true;
             }else {
                 return false;
             }
-        } catch (IOException | SAXException | ParserConfigurationException| ClientException e) {
+        }catch (ClientException e) {
             logger.log(Level.SEVERE,"Somethinf wrong",e);
             JOptionPane.showMessageDialog(frame, "Somethinf wrong :(" );
-        }
+        }catch(ServerException e){
+			logger.log(Level.SEVERE,"Somethinf wrong",e);
+            JOptionPane.showMessageDialog(frame, "Somethinf wrong :(" );
+		}
         return null;
     }
     
-    public void updadeStudents() throws ServerException, IOException, SAXException,ParserConfigurationException, ClientException{
+    public void updadeStudents() throws ClientException{
         
         String firstName = tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString();
         String lastName  = tb.getModel().getValueAt(tb.getSelectedRow(), 1).toString();
         String enrolled  = tb.getModel().getValueAt(tb.getSelectedRow(), 2).toString();
         String group     = tb.getModel().getValueAt(tb.getSelectedRow(), 3).toString();
         Integer studentID = null;
-        for (int i = 0; i < client.getShow(currentfakulty, group).size(); i++) {   
+		try{
+			for (int i = 0; i < client.getShow(currentfakulty, group).size(); i++) {   
 
-            if (group.equals(client.getShow(currentfakulty, group).get(i).getEnrolled())) {
-                if(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString().equals(client.getShow(currentfakulty, group).get(i).getFirstName())){
-
-                    studentID = client.getShow(currentfakulty, group).get(i).getId();
-                }
-            }
-        }
-        client.changeStudent(currentfakulty, group, firstName, lastName, enrolled, studentID);
+				if (group.equals(client.getShow(currentfakulty, group).get(i).getEnrolled())) {
+					if(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString().equals(client.getShow(currentfakulty, group).get(i).getFirstName())){
+						try{
+							studentID = client.getShow(currentfakulty, group).get(i).getId();
+						}catch(ServerException e){
+							throw new ClientException (e);
+						}
+					}
+				}
+			}
+		}catch(ServerException e){
+				throw new ClientException (e);
+		}
+		try{
+		System.out.println(currentfakulty+group+firstName+lastName+enrolled+studentID);
+			client.changeStudent(currentfakulty, group, firstName, lastName, enrolled, studentID);
+		}catch(ServerException e){
+			throw new ClientException (e);
+		}
     }
     
     /**
@@ -682,12 +660,8 @@ public class JTableModel extends DefaultTableModel {
      *
      * @return the student
      * @throws ClientException the client exception
-     * @throws ServerException the server exception
-     * @throws IOException Signals that an I/O exception has occurred.
-     * @throws SAXException the sAX exception
-     * @throws ParserConfigurationException the parser configuration exception
      */
-    public Student addStudent() throws ClientException, ServerException, IOException, SAXException, ParserConfigurationException{
+    public Student addStudent() throws ClientException{
         String groupNumber = null;
         String fak = null;
         for (int i = 0; i < groups.size(); i++) {
@@ -704,9 +678,13 @@ public class JTableModel extends DefaultTableModel {
                 String enr    = tb.getModel().getValueAt(tb.getRowCount()-1, 2).toString();
                 String id = generateID();
         
-                client.addStudent(grnumber, fName, lName, enr, Integer.valueOf(id));
+				try{
+					client.addStudent(grnumber, fName, lName, enr, Integer.valueOf(id));
+				}catch(ServerException e){
+					throw new ClientException(e);
+				}
             }
-        }catch(Exception e){
+        }catch(ServerException e){
             throw new ClientException(e);
         }
         
@@ -716,13 +694,9 @@ public class JTableModel extends DefaultTableModel {
     /**
      * Delete student.
      *
-     * @throws ServerException the server exception
-     * @throws IOException Signals that an I/O exception has occurred.
-     * @throws SAXException the sAX exception
-     * @throws ParserConfigurationException the parser configuration exception
      * @throws ClientException 
      */
-    public void deleteStudent() throws ServerException, IOException, SAXException, ParserConfigurationException, ClientException{
+    public void deleteStudent() throws ClientException{
         String groupNumber = null;
         String fak = null;
         Student stud = null;
@@ -732,17 +706,29 @@ public class JTableModel extends DefaultTableModel {
                 fak = groups.get(i).getFakulty();
             }
         }
-        for (int i = 0; i < client.getShow(fak, groupNumber).size(); i++) {
+		try{	
+			for (int i = 0; i < client.getShow(fak, groupNumber).size(); i++) {
             
-            if (groupNumber.equals(client.getShow(fak, groupNumber).get(i).getEnrolled())) {
-                if(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString().equals(client.getShow(fak, groupNumber).get(i).getFirstName()) && 
-                    tb.getModel().getValueAt(tb.getSelectedRow(), 1).toString().equals(client.getShow(fak, groupNumber).get(i).getLastName())){
+				if (groupNumber.equals(client.getShow(fak, groupNumber).get(i).getEnrolled())) {
+					if(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString().equals(client.getShow(fak, groupNumber).get(i).getFirstName()) && 
+						tb.getModel().getValueAt(tb.getSelectedRow(), 1).toString().equals(client.getShow(fak, groupNumber).get(i).getLastName())){
 
-                    stud = client.getShow(fak, groupNumber).get(i);
-                }
-            }
+						try{	
+							stud = client.getShow(fak, groupNumber).get(i);
+						}catch(ServerException e){
+							throw new ClientException(e);
+						}
+					}
+				}
+			}
+		}catch(ServerException e){
+            throw new ClientException(e);
         }
-        client.removeStudent(groupNumber, stud.getId());    
+		try{
+			client.removeStudent(groupNumber, stud.getId());
+		}catch(ServerException e){
+            throw new ClientException(e);
+        }
     }
     
     /**
@@ -752,7 +738,7 @@ public class JTableModel extends DefaultTableModel {
      */
     private String generateID() {
         int ID = 0;
-         Random rand = new Random();
+        Random rand = new Random();
             ID = rand.nextInt(2147483646);
         return String.valueOf(ID);
     }

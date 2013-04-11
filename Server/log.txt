@@ -119,3 +119,80 @@ Wed Mar 27 02:07:10 EET 2013. Calling method removeStudent(Integer id) null
 Wed Mar 27 02:07:10 EET 2013. Removed student with id 952753955
 Wed Mar 27 02:07:10 EET 2013. Calling method addStudent(Student student) null
 Wed Mar 27 02:07:10 EET 2013. Added student Student [id=952753955, firstName=Петя, lastName=Абрамович, groupNumber=3, enrolled=12.12.13]
+Wed Mar 27 16:49:26 EET 2013. Calling method updateStudent(Student student) null
+Wed Mar 27 16:49:26 EET 2013. Calling method getGroupByNumber(String number) null
+Wed Mar 27 16:49:26 EET 2013. Calling method removeStudent(Integer id) null
+Wed Mar 27 16:49:26 EET 2013. Removed student with id 194131376
+Wed Mar 27 16:49:26 EET 2013. Calling method addStudent(Student student) null
+Wed Mar 27 16:49:26 EET 2013. Added student Student [id=194131376, firstName=Клава, lastName=Кузминишна, groupNumber=3, enrolled=22.03.1999]
+Wed Mar 27 17:03:34 EET 2013. Calling method updateStudent(Student student) null
+Wed Mar 27 17:03:34 EET 2013. Calling method getGroupByNumber(String number) null
+Wed Mar 27 17:03:34 EET 2013. Calling method removeStudent(Integer id) null
+Wed Mar 27 17:03:34 EET 2013. Removed student with id 194131376
+Wed Mar 27 17:03:34 EET 2013. Calling method addStudent(Student student) null
+Wed Mar 27 17:03:34 EET 2013. Added student Student [id=194131376, firstName=Клава, lastName=Андроповна, groupNumber=3, enrolled=22.03.1999]
+Fri Apr 12 01:09:21 EEST 2013. Calling method updateStudent(Student student) null
+Fri Apr 12 01:09:21 EEST 2013. Calling method getGroupByNumber(String number) null
+Fri Apr 12 01:09:21 EEST 2013. Calling method removeStudent(Integer id) null
+Fri Apr 12 01:09:21 EEST 2013. Removed student with id 194131376
+Fri Apr 12 01:09:21 EEST 2013. Calling method addStudent(Student student) null
+Fri Apr 12 01:09:21 EEST 2013. Added student Student [id=194131376, firstName=Клава, lastName=Андроповна, groupNumber=3, enrolled=22.03.1999]
+Fri Apr 12 01:09:45 EEST 2013. Calling method updateStudent(Student student) null
+Fri Apr 12 01:09:45 EEST 2013. Calling method getGroupByNumber(String number) null
+Fri Apr 12 01:09:45 EEST 2013. Calling method removeStudent(Integer id) null
+Fri Apr 12 01:09:45 EEST 2013. Removed student with id 194131376
+Fri Apr 12 01:09:45 EEST 2013. Calling method addStudent(Student student) null
+Fri Apr 12 01:09:45 EEST 2013. Added student Student [id=194131376, firstName=Клава, lastName=Андро, groupNumber=3, enrolled=22.03.1999]
+Fri Apr 12 01:10:45 EEST 2013. Calling method updateStudent(Student student) null
+Fri Apr 12 01:10:45 EEST 2013. Calling method getGroupByNumber(String number) null
+Fri Apr 12 01:10:45 EEST 2013. Calling method removeStudent(Integer id) null
+Fri Apr 12 01:10:45 EEST 2013. Removed student with id 194131376
+Fri Apr 12 01:10:45 EEST 2013. Calling method addStudent(Student student) null
+Fri Apr 12 01:10:45 EEST 2013. Added student Student [id=194131376, firstName=Клава, lastName=John, groupNumber=3, enrolled=22.03.1999]
+Fri Apr 12 01:11:10 EEST 2013. Calling method updateStudent(Student student) null
+Fri Apr 12 01:11:10 EEST 2013. Calling method getGroupByNumber(String number) null
+Fri Apr 12 01:11:10 EEST 2013. Calling method removeStudent(Integer id) null
+Fri Apr 12 01:11:10 EEST 2013. Removed student with id 194131376
+Fri Apr 12 01:11:10 EEST 2013. Calling method addStudent(Student student) null
+Fri Apr 12 01:11:10 EEST 2013. Added student Student [id=194131376, firstName=Клава, lastName=John, groupNumber=3, enrolled=22.03.1999]
+Fri Apr 12 01:11:26 EEST 2013. Calling method updateStudent(Student student) null
+Fri Apr 12 01:11:26 EEST 2013. Calling method getGroupByNumber(String number) null
+Fri Apr 12 01:11:26 EEST 2013. Calling method removeStudent(Integer id) null
+Fri Apr 12 01:11:26 EEST 2013. Removed student with id 194131376
+Fri Apr 12 01:11:26 EEST 2013. Calling method addStudent(Student student) null
+Fri Apr 12 01:11:26 EEST 2013. Added student Student [id=194131376, firstName=Клава, lastName=ыыыыы, groupNumber=3, enrolled=22.03.1999]
+Fri Apr 12 01:11:48 EEST 2013. Calling method updateStudent(Student student) null
+Fri Apr 12 01:11:48 EEST 2013. Calling method getGroupByNumber(String number) null
+Fri Apr 12 01:11:48 EEST 2013. Calling method removeStudent(Integer id) null
+Fri Apr 12 01:11:48 EEST 2013. Removed student with id 194131376
+Fri Apr 12 01:11:48 EEST 2013. Calling method addStudent(Student student) null
+Fri Apr 12 01:11:48 EEST 2013. Added student Student [id=194131376, firstName=Клава, lastName=ыыыыы, groupNumber=3, enrolled=22.03.1999]
+Fri Apr 12 01:11:51 EEST 2013. Calling method updateStudent(Student student) null
+Fri Apr 12 01:11:51 EEST 2013. Calling method getGroupByNumber(String number) null
+Fri Apr 12 01:11:51 EEST 2013. Calling method removeStudent(Integer id) null
+Fri Apr 12 01:11:51 EEST 2013. Removed student with id 1413073239
+Fri Apr 12 01:11:51 EEST 2013. Calling method addStudent(Student student) null
+Fri Apr 12 01:11:51 EEST 2013. Added student Student [id=1413073239, firstName=Вася, lastName=Васичкин, groupNumber=3, enrolled=01.02.2001]
+Fri Apr 12 01:12:20 EEST 2013. Calling method updateStudent(Student student) null
+Fri Apr 12 01:12:20 EEST 2013. Calling method getGroupByNumber(String number) null
+Fri Apr 12 01:12:20 EEST 2013. Calling method removeStudent(Integer id) null
+Fri Apr 12 01:12:20 EEST 2013. Removed student with id 194131376
+Fri Apr 12 01:12:20 EEST 2013. Calling method addStudent(Student student) null
+Fri Apr 12 01:12:20 EEST 2013. Added student Student [id=194131376, firstName=Клава, lastName=Mercury, groupNumber=3, enrolled=22.03.1999]
+Fri Apr 12 01:14:06 EEST 2013. Calling method updateStudent(Student student) null
+Fri Apr 12 01:14:06 EEST 2013. Calling method getGroupByNumber(String number) null
+Fri Apr 12 01:14:06 EEST 2013. Calling method removeStudent(Integer id) null
+Fri Apr 12 01:14:06 EEST 2013. Removed student with id 194131376
+Fri Apr 12 01:14:06 EEST 2013. Calling method addStudent(Student student) null
+Fri Apr 12 01:14:06 EEST 2013. Added student Student [id=194131376, firstName=Клава, lastName=Mercury, groupNumber=3, enrolled=22.03.1999]
+Fri Apr 12 01:15:07 EEST 2013. Calling method updateStudent(Student student) null
+Fri Apr 12 01:15:07 EEST 2013. Calling method getGroupByNumber(String number) null
+Fri Apr 12 01:15:07 EEST 2013. Calling method removeStudent(Integer id) null
+Fri Apr 12 01:15:07 EEST 2013. Removed student with id 194131376
+Fri Apr 12 01:15:07 EEST 2013. Calling method addStudent(Student student) null
+Fri Apr 12 01:15:07 EEST 2013. Added student Student [id=194131376, firstName=Клава, lastName=Mercury, groupNumber=3, enrolled=22.03.1999]
+Fri Apr 12 01:15:44 EEST 2013. Calling method removeStudent(Integer id) null
+Fri Apr 12 01:15:44 EEST 2013. Removed student with id 194131376
+Fri Apr 12 01:28:31 EEST 2013. Calling method addStudent(Student student) null
+Fri Apr 12 01:28:31 EEST 2013. Added student Student [id=377040143, firstName=Fred, lastName=Merc, groupNumber=3, enrolled=11.01.2000]
+Fri Apr 12 01:31:26 EEST 2013. Removed group with number 2

@@ -7,7 +7,6 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class HtmlFormatter.
  *
@@ -18,10 +17,7 @@ public class HtmlFormatter extends Formatter {
 	/**
 	 * Instantiates a new html formatter.
 	 */
-	public HtmlFormatter()
-	{
-		
-	}
+	public HtmlFormatter(){}
 	
 	/**
 	 * Header of html
@@ -50,13 +46,10 @@ public class HtmlFormatter extends Formatter {
 	@Override
 	public String getTail(Handler h)
 	{
-		
 		return "</table></body></html>";
 	}
 	
 	/**
-	 * 
-	 *
 	 * @param record the record
 	 * @return the string
 	 */
@@ -67,22 +60,15 @@ public class HtmlFormatter extends Formatter {
 		Date d = new Date();
 		Level level = record.getLevel();
 
-		if (level==Level.SEVERE)
-		{
+		if (level==Level.SEVERE){
 			result.append("<tr bgColor=Tomato><td>");
-		}
-		else if (level==Level.WARNING)
-		{
+		}else if (level==Level.WARNING){
 			result.append("<tr bgColor=GRAY><td>");
-		}
-		else
-		{
+		}else{
 			result.append("<tr bgColor=WHITE><td>");
 		}
 		
 		result.append("\n");
-		
-		
 		result.append(d);
 		result.append("</td><td>");
 		result.append(record.getLevel().toString());
@@ -94,14 +80,9 @@ public class HtmlFormatter extends Formatter {
 		result.append(record.getMessage());
 		result.append("</td><td>");
 		
-		
-		
 		Throwable thrown = record.getThrown();
 		
-		
-		
-		if (thrown!=null)
-		{
+		if (thrown!=null){
 			result.append(record.getThrown().getMessage());
 			result.append("</td><td>");
 		
@@ -112,9 +93,7 @@ public class HtmlFormatter extends Formatter {
 		
 			result.append(stackTrace);
 			result.append("</td>");
-		}
-		else
-		{
+		}else{
 			result.append("</td><td>null");
 			result.append("</td>");
 		}

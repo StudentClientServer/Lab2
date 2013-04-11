@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
 Created-By: Sergey
-Main-Class: view.Run
+Main-Class: client.Run

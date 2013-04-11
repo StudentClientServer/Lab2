@@ -49,19 +49,10 @@ public class Run {
             client = new Client();
             groups = client.getUpdate();
             new JTableModel(groups, client);
-        }catch(NullPointerException e){
-            logger.log(Level.SEVERE,"No Connection!",e);
-            JOptionPane.showMessageDialog(frame, "No Connection!" );
-        }catch (IOException e) {
-            logger.log(Level.SEVERE,"IOException.",e);
-            JOptionPane.showMessageDialog(frame, "Client input wrong!" );
-        } catch (SAXException e) {
-            logger.log(Level.SEVERE,"SAXException.",e);
-            JOptionPane.showMessageDialog(frame, "Client input wrong!" );
-        } catch (ParserConfigurationException e) {
-            logger.log(Level.SEVERE,"ParserConfigurationException.",e);
-            JOptionPane.showMessageDialog(frame, "Client input wrong!" );
         }catch (ClientException e){
+            logger.log(Level.SEVERE,"Connection timed out.",e);
+            JOptionPane.showMessageDialog(frame, "Connection timed out!" );
+        }catch (ServerException e){
             logger.log(Level.SEVERE,"Connection timed out.",e);
             JOptionPane.showMessageDialog(frame, "Connection timed out!" );
         }

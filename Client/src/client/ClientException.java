@@ -51,4 +51,13 @@ public class ClientException extends Exception {
 	public ClientException(Exception e) {
 		super(e);
 	}
+	
+	/**
+	 * Instantiates a new client exception.
+	 *
+	 * @param e the e
+	 */
+	public ClientException(String str, Exception e) {
+		super(str,e);
+	}
 }
