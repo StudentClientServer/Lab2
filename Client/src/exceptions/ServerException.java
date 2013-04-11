@@ -1,4 +1,4 @@
-package client;
+package exceptions;
 
 public class ServerException extends Exception {
 
@@ -10,7 +10,7 @@ public class ServerException extends Exception {
      *
      * @param cause the cause
      */
-    ServerException(Throwable cause) {
+    public ServerException(Throwable cause) {
         super(cause);
     }
 
@@ -19,7 +19,7 @@ public class ServerException extends Exception {
      *
      * @param message the message
      */
-    ServerException(String message) {
+    public ServerException(String message) {
         super(message);
     }
 
@@ -29,7 +29,7 @@ public class ServerException extends Exception {
      * @param message the message
      * @param cause the cause
      */
-    ServerException(String message, Throwable cause) {
+    public ServerException(String message, Throwable cause) {
         super(message, cause);
     }
 
@@ -38,5 +38,12 @@ public class ServerException extends Exception {
      */
     public ServerException() {
         super();
+    }
+	
+	/**
+     * Instantiates a new model exception.
+     */
+    public ServerException(Exception e) {
+        super(e);
     }
 }

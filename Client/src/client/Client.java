@@ -15,6 +15,9 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import exceptions.*;
+import model.*;
+
 
 public class Client {
 	private int serverPort;
@@ -218,7 +221,7 @@ public class Client {
     /**
      * Remove student from group with by id
      */
-    public String removeStudent( String group, Integer studentID) throws ServerException, ClientException {
+    public String removeStudent( String group, Integer studentID) throws ServerException, ClientException{
         sendMessage(createMessage("REMOVE", null, group, "", "", null, studentID));
         parsingAnswer(reading());
         if ("Exception".equals(serverAnswer)) {
@@ -244,7 +247,7 @@ public class Client {
      * Change student by id
      */
     public String changeStudent(String fakulty, String group, String studentName,
-            String studentLastname, String enrolledDate, Integer studentID) throws ServerException, ClientException {
+            String studentLastname, String enrolledDate, Integer studentID) throws ServerException, ClientException{
         sendMessage(createMessage("CHANGE", null, group, studentName, studentLastname, enrolledDate, studentID));
         parsingAnswer(reading());
         if ("Exception".equals(serverAnswer)) {
@@ -268,7 +271,7 @@ public class Client {
     /**
      * Remove group
      */
-    public String removeGroup(String fakulty, String group) throws ServerException,ClientException {
+    public String removeGroup(String fakulty, String group) throws ServerException, ClientException{
         sendMessage(createMessage("REMOVEGroup", fakulty, group, "", "", null, null));
         parsingAnswer(reading());
         if ("Exception".equals(serverAnswer)) {

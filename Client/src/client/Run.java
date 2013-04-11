@@ -13,8 +13,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import client.Client;
-import client.Group;
-import client.JTableModel;
+import model.*;
+import exceptions.*;
 
 
 /**

@@ -1,4 +1,4 @@
-package client;
+package model;
 
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.NORTH;
@@ -41,10 +41,10 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import javax.xml.parsers.ParserConfigurationException;
 
-import org.xml.sax.SAXException;
-
+import model.*;
+import exceptions.*;
+import client.*;
 
 /**
  * The Class JTableModel.

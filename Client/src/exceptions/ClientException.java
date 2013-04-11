@@ -1,6 +1,6 @@
-package client;
+package exceptions;
 
-// TODO: Auto-generated Javadoc
+import model.ErrorCode;
 /**
  * The Class ClientException.
  */
