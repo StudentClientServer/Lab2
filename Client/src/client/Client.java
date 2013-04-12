@@ -18,7 +18,7 @@ import org.xml.sax.SAXException;
 import exceptions.*;
 import model.*;
 
-
+///////////////////////////////
 public class Client {
 	private int serverPort;
 	private String address;
