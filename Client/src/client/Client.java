@@ -1,5 +1,5 @@
 package client;
-
+////
 import java.net.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -18,7 +18,6 @@ import org.xml.sax.SAXException;
 import exceptions.*;
 import model.*;
 
-////////////////////
 public class Client {
 	private int serverPort;
 	private String address;
