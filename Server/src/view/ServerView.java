@@ -24,6 +24,7 @@ public class ServerView implements View {
     private ActionListener controller;
     private ServerModel model;
     private String exceptMessage = null;
+    private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(Server.class);
 
     /**
      * Reading port from configuration file (servConfig.ini)
@@ -84,13 +85,13 @@ public class ServerView implements View {
                             exceptionHandling(exc);
                             out.writeUTF(resultMessage());
                         } catch (IOException e) {
-                            model.writeToLog("In method starting() at view, during sending exception message to Client ", e);
+                            log.error("Exception", e);
                         } finally {
                             if (!(out == null)) {
                                 try {
                                     out.flush();
                                 } catch (IOException e) {
-                                    model.writeToLog("In method starting() at view, during closing OutputStream ", e);
+                                    log.error("Exception", e);
                                 }
                             }
                         }
