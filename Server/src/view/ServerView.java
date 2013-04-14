@@ -31,6 +31,7 @@ public class ServerView implements View {
      * throws ServerException if some problem with reading
      */
     public ServerView() throws ServerException {
+        log.info("Method call");
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new FileReader("servConfig.ini"));
@@ -55,6 +56,7 @@ public class ServerView implements View {
     * Set model
     */
     public void setModel(ServerModel model) {
+        log.info("Method call");
         this.model = model;
     }
     
@@ -62,6 +64,7 @@ public class ServerView implements View {
     * Set controller
     */
     public void setController(ActionListener controller) {
+        log.info("Method call");
         this.controller = controller;
     }
     
@@ -71,6 +74,7 @@ public class ServerView implements View {
      * throw connection exception
      */
     public void starting() throws IOException {
+        log.info("Method call");
         ServerSocket ss = new ServerSocket(port);
         while (true) {
             socket = ss.accept();
@@ -88,13 +92,13 @@ public class ServerView implements View {
                             exceptionHandling(exc);
                             out.writeUTF(resultMessage());
                         } catch (IOException e) {
-                            log.error("Exception", e);
+                           // log.error("Exception", e);
                         } finally {
                             if (!(out == null)) {
                                 try {
                                     out.flush();
                                 } catch (IOException e) {
-                                    log.error("Exception", e);
+                                    //log.error("Exception", e);
                                 }
                             }
                         }
@@ -109,6 +113,7 @@ public class ServerView implements View {
      * Creating exception message to answer
      */
     public void exceptionHandling(Exception ex) {
+        log.info("Method call");
         exceptMessage = ex.toString();
     }
     
@@ -117,6 +122,7 @@ public class ServerView implements View {
     * throw InputStream exception
     */
     private void reading(Socket tempSocket) throws IOException {
+        log.info("Method call");
         DataInputStream in = new DataInputStream(tempSocket.getInputStream());
         try {
             xmlMessage = in.readUTF();
@@ -132,7 +138,8 @@ public class ServerView implements View {
      * @throws ServerException 
     */
     private void parsing(String xmlMessage, Socket tempSocket) throws ParserConfigurationException, IOException, SAXException, ServerException {
-        InputSource is = new InputSource();        
+        log.info("Method call");
+        InputSource is = new InputSource();
         is.setCharacterStream(new StringReader(xmlMessage));
         Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
         NodeList items = doc.getDocumentElement().getChildNodes();
@@ -181,6 +188,7 @@ public class ServerView implements View {
     * Creating action and send it to controller
     */
     private void fireAction(Object source, String command) {
+        log.info("Method call");
         ActionEvent event = new ActionEvent(source, 0, command);
         controller.actionPerformed(event);
     }
@@ -189,6 +197,7 @@ public class ServerView implements View {
     * Creating request for update command
     */
     private String updateMessage(List<Group> groups) {
+        log.info("Method call");
         StringBuilder builder = new StringBuilder();
         builder.append("<envelope><header><action>UPDATE</action></header><body>");
         for (Group group : groups) {
@@ -207,6 +216,7 @@ public class ServerView implements View {
     * Creating request for show command
     */
     private String showeMessage(List<Student> students) {
+        log.info("Method call");
         StringBuilder builder = new StringBuilder();
         builder.append("<envelope><header><action>SHOW</action></header><body>");
         for (Student student : students) {
@@ -234,6 +244,7 @@ public class ServerView implements View {
     * Creating request according to result
     */
     private String resultMessage() {
+        log.info("Method call");
         StringBuilder builder = new StringBuilder();
         String result;
         if (exceptMessage == null) {
