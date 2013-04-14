@@ -1,5 +1,5 @@
-package client;
-////
+package Client;
+
 import java.net.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -15,8 +15,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import exceptions.*;
-import model.*;
 
 public class Client {
 	private int serverPort;
@@ -48,20 +46,20 @@ public class Client {
                 }
             }
         } catch (IOException e) {
-            throw new ClientException("Something wrong with config file!",e);
+            throw new ClientException(e);
         } finally {
             try {
                 if (reader!=null)
                 reader.close();
             } catch (IOException e) {
-                throw new ClientException("Something wrong with config file!",e);
+                throw new ClientException(e);
             }
         }
 	}
 
 	/**
 	 * Send message to server
-	 * open socket here and close it in method reading() after server answer
+	 * open socket and outputStream here and close it in method reading() after server answer
 	 */
 	private void sendMessage(String message) throws ClientException {
 		try {
@@ -71,23 +69,7 @@ public class Client {
 			out.writeUTF(message);
 		} catch (IOException e) {
 			throw new ClientException(e);
-		} //finally {
-			/*if (!(out == null)) {
-				try {
-					out.close();
-				} catch (IOException e) {
-                    throw new ClientException(e);
-				}
-			} else {
-                try {
-                    if (!socket.isClosed() && socket!=null) {
-                        socket.close();
-                    }
-                } catch (IOException e) {
-                    throw new ClientException(e);
-                }
-            }
-		}*/
+		}
 	}
 
 	/**
@@ -130,28 +112,35 @@ public class Client {
 
 	/**
 	 * Reading answer from server
-     * close socket
+     * close socket, output and Input streams
 	 */
-	private String reading() throws ServerException {
+	private String reading() throws ClientException {
 		try {
             in = new DataInputStream(socket.getInputStream());
 			xmlResult = in.readUTF();
         } catch (IOException e) {
-            throw new ServerException(e);
+            throw new ClientException(e);
         } finally {
             try {
                 if (in!=null) {
                     in.close();
                 }
             } catch (IOException e) {
-                 throw new ServerException(e);
+                 throw new ClientException(e);
+            }
+            try {
+                if (out != null) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                throw new ClientException(e);
             }
             try {
                 if (!socket.isClosed() && socket!=null) {
                     socket.close();
                 }
             } catch (IOException e) {
-                throw new ServerException(e);
+                throw new ClientException(e);
             }
         }
     return xmlResult;
@@ -160,11 +149,10 @@ public class Client {
     /**
      * Parsing server answer according to ACTION
     */
-    private void parsingAnswer(String xmlResult) throws ServerException {
+    private void parsingAnswer(String xmlResult) throws SAXException, IOException, ParserConfigurationException {
         InputSource is = new InputSource();
         is.setCharacterStream(new StringReader(xmlResult));
-        try{
-		Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
+        Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
         NodeList items = doc.getDocumentElement().getChildNodes();
         String action = items.item(0).getChildNodes().item(0).getFirstChild().getNodeValue();
         if ("UPDATE".equals(action)) {
@@ -190,19 +178,12 @@ public class Client {
                 stackTrace = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
             }
         }
-		}catch(ParserConfigurationException e){
-			throw new ServerException(e);
-		}catch(SAXException e){
-			throw new ServerException(e);
-		}catch(IOException e){
-			throw new ServerException(e);
-		}
     }
 
     /**
      * Return list of groups
      */
-    public List<Group> getUpdate() throws ServerException,ClientException {
+    public List<Group> getUpdate() throws IOException, SAXException, ParserConfigurationException, ClientException {
         sendMessage(createMessage("UPDATE", "", "", "", "", null, null));
         parsingAnswer(reading());
         return updateList;
@@ -211,7 +192,7 @@ public class Client {
     /**
      * Return list of students
      */
-    public List<Student> getShow(String fakulty, String group) throws ServerException,ClientException {
+    public List<Student> getShow(String fakulty, String group) throws IOException, SAXException, ParserConfigurationException, ClientException {
         sendMessage(createMessage("SHOW", fakulty, group, "", "", null, null));
         parsingAnswer(reading());
         return showList;
@@ -220,7 +201,7 @@ public class Client {
     /**
      * Remove student from group with by id
      */
-    public String removeStudent( String group, Integer studentID) throws ServerException, ClientException{
+    public String removeStudent( String group, Integer studentID) throws ServerException, IOException, SAXException, ParserConfigurationException, ClientException {
         sendMessage(createMessage("REMOVE", null, group, "", "", null, studentID));
         parsingAnswer(reading());
         if ("Exception".equals(serverAnswer)) {
@@ -233,7 +214,7 @@ public class Client {
      * Add new student
      */
     public String addStudent( String group, String studentName,
-            String studentLastname, String enrolledDate, Integer studentID) throws ServerException, ClientException {
+            String studentLastname, String enrolledDate, Integer studentID) throws ServerException, IOException, SAXException, ParserConfigurationException, ClientException {
         sendMessage(createMessage("ADD", null, group, studentName, studentLastname, enrolledDate, studentID));
         parsingAnswer(reading());
         if ("Exception".equals(serverAnswer)) {
@@ -246,7 +227,7 @@ public class Client {
      * Change student by id
      */
     public String changeStudent(String fakulty, String group, String studentName,
-            String studentLastname, String enrolledDate, Integer studentID) throws ServerException, ClientException{
+            String studentLastname, String enrolledDate, Integer studentID) throws ServerException, IOException, SAXException, ParserConfigurationException, ClientException {
         sendMessage(createMessage("CHANGE", null, group, studentName, studentLastname, enrolledDate, studentID));
         parsingAnswer(reading());
         if ("Exception".equals(serverAnswer)) {
@@ -258,7 +239,7 @@ public class Client {
     /**
      * Add new group
      */
-    public String addGroup(String fakulty, String group) throws ServerException, ClientException {
+    public String addGroup(String fakulty, String group) throws ServerException, IOException, SAXException, ParserConfigurationException, ClientException {
         sendMessage(createMessage("ADDGroup", fakulty, group, "", "", null, null));
         parsingAnswer(reading());
         if ("Exception".equals(serverAnswer)) {
@@ -270,7 +251,7 @@ public class Client {
     /**
      * Remove group
      */
-    public String removeGroup(String fakulty, String group) throws ServerException, ClientException{
+    public String removeGroup(String fakulty, String group) throws ServerException, IOException, SAXException, ParserConfigurationException, ClientException {
         sendMessage(createMessage("REMOVEGroup", fakulty, group, "", "", null, null));
         parsingAnswer(reading());
         if ("Exception".equals(serverAnswer)) {
