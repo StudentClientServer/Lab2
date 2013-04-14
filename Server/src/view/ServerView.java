@@ -15,6 +15,10 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import model.Group;
 
+import org.apache.log4j.Logger;
+
+import controller.Controller;
+
 public class ServerView implements View {
     private Socket socket;
     private Thread thread;
@@ -24,7 +28,8 @@ public class ServerView implements View {
     private ActionListener controller;
     private ServerModel model;
     private String exceptMessage = null;
-    private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(Server.class);
+    private DataInputStream in;
+    private static final Logger log = Logger.getLogger(ServerView.class);
 
     /**
      * Reading port from configuration file (servConfig.ini)
@@ -41,33 +46,37 @@ public class ServerView implements View {
                 }
             }
         } catch (IOException e) {
-            throw new ServerException(e);
+            ServerException ex = new ServerException(e);
+            log.error("Exception", ex);
+            throw ex;
         } finally {
             try {
                 if (reader!=null)
                     reader.close();
             } catch (IOException e) {
-                throw new ServerException(e);
+                ServerException ex = new ServerException(e);
+                log.error("Exception", ex);
+                throw ex;
             }
         }
     }
 
     /**
-    * Set model
-    */
+     * Set model
+     */
     public void setModel(ServerModel model) {
         log.info("Method call");
         this.model = model;
     }
-    
+
     /**
-    * Set controller
-    */
+     * Set controller
+     */
     public void setController(ActionListener controller) {
         log.info("Method call");
         this.controller = controller;
     }
-    
+
     /**
      * Starting looking for connection
      * read and parse Clients message
@@ -77,28 +86,28 @@ public class ServerView implements View {
         log.info("Method call");
         ServerSocket ss = new ServerSocket(port);
         while (true) {
+            System.out.println("Waiting for client");
             socket = ss.accept();
+            System.out.println("Someone connected!");
             thread = new Thread(new Thread() {
                 public void run() {
-                    Socket tempSocket = null;
                     try {
-                        tempSocket = new Socket();
-                        tempSocket = socket;
-                        reading(tempSocket);
-                        parsing(xmlMessage, tempSocket);
+                        reading();
+                        parsing(xmlMessage);
                     } catch (Exception exc) {
                         try {
-                            out = new DataOutputStream(tempSocket.getOutputStream());
+                            log.error("Exception", exc);
+                            out = new DataOutputStream(socket.getOutputStream());
                             exceptionHandling(exc);
                             out.writeUTF(resultMessage());
                         } catch (IOException e) {
-                           // log.error("Exception", e);
+                            log.error("Exception", e);
                         } finally {
                             if (!(out == null)) {
                                 try {
                                     out.flush();
                                 } catch (IOException e) {
-                                    //log.error("Exception", e);
+                                    log.error("Exception", e);
                                 }
                             }
                         }
@@ -113,38 +122,37 @@ public class ServerView implements View {
      * Creating exception message to answer
      */
     public void exceptionHandling(Exception ex) {
-        log.info("Method call");
+        log.info("Method call. Arguments: " + ex);
         exceptMessage = ex.toString();
     }
-    
+
     /**
-    * Getting message from client
-    * throw InputStream exception
-    */
-    private void reading(Socket tempSocket) throws IOException {
+     * Getting message from client
+     * throw InputStream exception
+     */
+    private void reading() throws IOException {
         log.info("Method call");
-        DataInputStream in = new DataInputStream(tempSocket.getInputStream());
+        in = new DataInputStream(socket.getInputStream());
         try {
             xmlMessage = in.readUTF();
         } catch (IOException e) {
+            log.error("Exception", e);
             throw new IOException(e);
-        } finally {
-            in.close();
         }
     }
-    
+
     /**
-    * Parsing client message according to action
-     * @throws ServerException 
-    */
-    private void parsing(String xmlMessage, Socket tempSocket) throws ParserConfigurationException, IOException, SAXException, ServerException {
-        log.info("Method call");
+     * Parsing client message according to action
+     * @throws ServerException
+     */
+    private void parsing(String xmlMessage) throws ParserConfigurationException, IOException, SAXException, ServerException {
+        log.info("Method call. Arguments: " + xmlMessage);
         InputSource is = new InputSource();
         is.setCharacterStream(new StringReader(xmlMessage));
         Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
         NodeList items = doc.getDocumentElement().getChildNodes();
         String action = items.item(0).getChildNodes().item(0).getChildNodes().item(0).getNodeValue();
-        out = new DataOutputStream(tempSocket.getOutputStream());
+        out = new DataOutputStream(socket.getOutputStream());
         try {
             if ("UPDATE".equals(action)) {
                 out.writeUTF(updateMessage(model.getGroups()));
@@ -176,26 +184,30 @@ public class ServerView implements View {
                 out.writeUTF(resultMessage());
             }
         } catch (ServerException e) {
+            log.error("Exception",e);
             throw new ServerException(e);
         } finally {
-            if (!(out==null)) {
-                out.flush();
+            if (out!=null) {
+                out.close();
+            }
+            if (in!=null){
+                in.close();
             }
         }
     }
-    
+
     /**
-    * Creating action and send it to controller
-    */
+     * Creating action and send it to controller
+     */
     private void fireAction(Object source, String command) {
-        log.info("Method call");
+        log.info("Method call " + command + " " + source);
         ActionEvent event = new ActionEvent(source, 0, command);
         controller.actionPerformed(event);
     }
-    
+
     /**
-    * Creating request for update command
-    */
+     * Creating request for update command
+     */
     private String updateMessage(List<Group> groups) {
         log.info("Method call");
         StringBuilder builder = new StringBuilder();
@@ -211,10 +223,10 @@ public class ServerView implements View {
         builder.append("</body></envelope>");
         return builder.toString();
     }
-    
+
     /**
-    * Creating request for show command
-    */
+     * Creating request for show command
+     */
     private String showeMessage(List<Student> students) {
         log.info("Method call");
         StringBuilder builder = new StringBuilder();
@@ -239,10 +251,10 @@ public class ServerView implements View {
         builder.append("</body></envelope>");
         return builder.toString();
     }
-    
+
     /**
-    * Creating request according to result
-    */
+     * Creating request according to result
+     */
     private String resultMessage() {
         log.info("Method call");
         StringBuilder builder = new StringBuilder();
