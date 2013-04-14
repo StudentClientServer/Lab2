@@ -76,12 +76,15 @@ public class ServerView implements View {
             socket = ss.accept();
             thread = new Thread(new Thread() {
                 public void run() {
+                    Socket tempSocket = null;
                     try {
-                        reading();
-                        parsing(xmlMessage);
+                        tempSocket = new Socket();
+                        tempSocket = socket;
+                        reading(tempSocket);
+                        parsing(xmlMessage, tempSocket);
                     } catch (Exception exc) {
                         try {
-                            out = new DataOutputStream(socket.getOutputStream());
+                            out = new DataOutputStream(tempSocket.getOutputStream());
                             exceptionHandling(exc);
                             out.writeUTF(resultMessage());
                         } catch (IOException e) {
@@ -113,8 +116,8 @@ public class ServerView implements View {
     * Getting message from client
     * throw InputStream exception
     */
-    private void reading() throws IOException {        
-        DataInputStream in = new DataInputStream(socket.getInputStream());            
+    private void reading(Socket tempSocket) throws IOException {
+        DataInputStream in = new DataInputStream(tempSocket.getInputStream());
         try {
             xmlMessage = in.readUTF();
         } catch (IOException e) {
@@ -128,13 +131,13 @@ public class ServerView implements View {
     * Parsing client message according to action
      * @throws ServerException 
     */
-    private void parsing(String xmlMessage) throws ParserConfigurationException, IOException, SAXException, ServerException {
+    private void parsing(String xmlMessage, Socket tempSocket) throws ParserConfigurationException, IOException, SAXException, ServerException {
         InputSource is = new InputSource();        
         is.setCharacterStream(new StringReader(xmlMessage));
         Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
         NodeList items = doc.getDocumentElement().getChildNodes();
         String action = items.item(0).getChildNodes().item(0).getChildNodes().item(0).getNodeValue();
-        out = new DataOutputStream(socket.getOutputStream());        
+        out = new DataOutputStream(tempSocket.getOutputStream());
         try {
             if ("UPDATE".equals(action)) {
                 out.writeUTF(updateMessage(model.getGroups()));
