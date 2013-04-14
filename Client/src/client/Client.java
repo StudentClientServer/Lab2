@@ -114,7 +114,7 @@ public class Client {
 	 * Reading answer from server
      * close socket, output and Input streams
 	 */
-	private String reading() throws ClientException {
+	private String reading() throws ClientException, ServerException {
 		try {
             in = new DataInputStream(socket.getInputStream());
 			xmlResult = in.readUTF();
@@ -126,7 +126,7 @@ public class Client {
                     in.close();
                 }
             } catch (IOException e) {
-                 throw new ClientException(e);
+                 throw new ServerException(e);
             }
             try {
                 if (out != null) {
@@ -149,41 +149,45 @@ public class Client {
     /**
      * Parsing server answer according to ACTION
     */
-    private void parsingAnswer(String xmlResult) throws SAXException, IOException, ParserConfigurationException {
-        InputSource is = new InputSource();
-        is.setCharacterStream(new StringReader(xmlResult));
-        Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
-        NodeList items = doc.getDocumentElement().getChildNodes();
-        String action = items.item(0).getChildNodes().item(0).getFirstChild().getNodeValue();
-        if ("UPDATE".equals(action)) {
-            updateList = new ArrayList<Group>();
-            for (int i=0; i<items.item(1).getChildNodes().getLength(); i++) {
-                String fakultet = (items.item(1).getChildNodes().item(i).getFirstChild().getNodeValue());
-                String group = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
-                updateList.add(new Group(fakultet, group));
+    private void parsingAnswer(String xmlResult) throws ServerException {
+        try {
+            InputSource is = new InputSource();
+            is.setCharacterStream(new StringReader(xmlResult));
+            Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
+            NodeList items = doc.getDocumentElement().getChildNodes();
+            String action = items.item(0).getChildNodes().item(0).getFirstChild().getNodeValue();
+            if ("UPDATE".equals(action)) {
+                updateList = new ArrayList<Group>();
+                for (int i=0; i<items.item(1).getChildNodes().getLength(); i++) {
+                    String fakultet = (items.item(1).getChildNodes().item(i).getFirstChild().getNodeValue());
+                    String group = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
+                    updateList.add(new Group(fakultet, group));
+                }
+            } else if ("SHOW".equals(action)) {
+                showList = new ArrayList<Student>();
+                for (int i=0; i<items.item(1).getChildNodes().getLength(); i++) {
+                    String id = (items.item(1).getChildNodes().item(i).getFirstChild().getNodeValue());
+                    String firstName = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
+                    String lastName = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
+                    String group = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
+                    String enrolledDate = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
+                    showList.add(new Student(Integer.parseInt(id),firstName, lastName, group, enrolledDate));
+                }
+            } else {
+                serverAnswer = action;
+                if ("Exception".equals(action)) {
+                    stackTrace = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
+                }
             }
-        } else if ("SHOW".equals(action)) {
-            showList = new ArrayList<Student>();
-            for (int i=0; i<items.item(1).getChildNodes().getLength(); i++) {
-                String id = (items.item(1).getChildNodes().item(i).getFirstChild().getNodeValue());
-                String firstName = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
-                String lastName = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
-                String group = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
-                String enrolledDate = (items.item(1).getChildNodes().item(++i).getFirstChild().getNodeValue());
-                showList.add(new Student(Integer.parseInt(id),firstName, lastName, group, enrolledDate));
-            }
-        } else {
-            serverAnswer = action;
-            if ("Exception".equals(action)) {
-                stackTrace = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
-            }
+        } catch (Exception e) {
+            throw new ServerException(e);
         }
     }
 
     /**
      * Return list of groups
      */
-    public List<Group> getUpdate() throws IOException, SAXException, ParserConfigurationException, ClientException {
+    public List<Group> getUpdate() throws ServerException, ClientException {
         sendMessage(createMessage("UPDATE", "", "", "", "", null, null));
         parsingAnswer(reading());
         return updateList;
@@ -192,7 +196,7 @@ public class Client {
     /**
      * Return list of students
      */
-    public List<Student> getShow(String fakulty, String group) throws IOException, SAXException, ParserConfigurationException, ClientException {
+    public List<Student> getShow(String fakulty, String group) throws ServerException, ClientException {
         sendMessage(createMessage("SHOW", fakulty, group, "", "", null, null));
         parsingAnswer(reading());
         return showList;
@@ -201,7 +205,7 @@ public class Client {
     /**
      * Remove student from group with by id
      */
-    public String removeStudent( String group, Integer studentID) throws ServerException, IOException, SAXException, ParserConfigurationException, ClientException {
+    public String removeStudent( String group, Integer studentID) throws ServerException, ClientException {
         sendMessage(createMessage("REMOVE", null, group, "", "", null, studentID));
         parsingAnswer(reading());
         if ("Exception".equals(serverAnswer)) {
@@ -214,7 +218,7 @@ public class Client {
      * Add new student
      */
     public String addStudent( String group, String studentName,
-            String studentLastname, String enrolledDate, Integer studentID) throws ServerException, IOException, SAXException, ParserConfigurationException, ClientException {
+            String studentLastname, String enrolledDate, Integer studentID)  throws ServerException, ClientException {
         sendMessage(createMessage("ADD", null, group, studentName, studentLastname, enrolledDate, studentID));
         parsingAnswer(reading());
         if ("Exception".equals(serverAnswer)) {
@@ -227,7 +231,7 @@ public class Client {
      * Change student by id
      */
     public String changeStudent(String fakulty, String group, String studentName,
-            String studentLastname, String enrolledDate, Integer studentID) throws ServerException, IOException, SAXException, ParserConfigurationException, ClientException {
+            String studentLastname, String enrolledDate, Integer studentID)  throws ServerException, ClientException {
         sendMessage(createMessage("CHANGE", null, group, studentName, studentLastname, enrolledDate, studentID));
         parsingAnswer(reading());
         if ("Exception".equals(serverAnswer)) {
@@ -239,7 +243,7 @@ public class Client {
     /**
      * Add new group
      */
-    public String addGroup(String fakulty, String group) throws ServerException, IOException, SAXException, ParserConfigurationException, ClientException {
+    public String addGroup(String fakulty, String group) throws ServerException, ClientException {
         sendMessage(createMessage("ADDGroup", fakulty, group, "", "", null, null));
         parsingAnswer(reading());
         if ("Exception".equals(serverAnswer)) {
@@ -251,7 +255,7 @@ public class Client {
     /**
      * Remove group
      */
-    public String removeGroup(String fakulty, String group) throws ServerException, IOException, SAXException, ParserConfigurationException, ClientException {
+    public String removeGroup(String fakulty, String group) throws ServerException, ClientException {
         sendMessage(createMessage("REMOVEGroup", fakulty, group, "", "", null, null));
         parsingAnswer(reading());
         if ("Exception".equals(serverAnswer)) {
