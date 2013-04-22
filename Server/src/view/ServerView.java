@@ -86,9 +86,9 @@ public class ServerView implements View {
         log.info("Method call");
         ServerSocket ss = new ServerSocket(port);
         while (true) {
-            System.out.println("Waiting for client");
+            log.info("Waiting for client");
             socket = ss.accept();
-            System.out.println("Someone connected!");
+            log.info("Someone connected!");
             thread = new Thread(new Thread() {
                 public void run() {
                     try {
