@@ -22,7 +22,7 @@ import controller.Controller;
 public class ServerView implements View {
     private Socket socket;
     private Thread thread;
-    private int port = 7070;
+    private int port = 7070; //default port
     private String xmlMessage;
     private DataOutputStream out;
     private ActionListener controller;
