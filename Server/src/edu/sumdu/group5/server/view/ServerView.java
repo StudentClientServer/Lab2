@@ -1,34 +1,33 @@
-package view;
+package edu.sumdu.group5.server.view;
 
 import java.net.*;
 import java.util.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import model.ServerException;
-import model.ServerModel;
+import edu.sumdu.group5.server.model.ServerException;
+import edu.sumdu.group5.server.model.ServerModel;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.*;
 import org.xml.sax.InputSource;
-import model.Student;
+import edu.sumdu.group5.server.model.Student;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
-import model.Group;
+import edu.sumdu.group5.server.model.Group;
 
 import org.apache.log4j.Logger;
 
-import controller.Controller;
+import edu.sumdu.group5.server.controller.Controller;
 
 public class ServerView implements View {
     private Socket socket;
     private Thread thread;
-    private int port = 7070; //default port
+    private int port = 7070;
     private String xmlMessage;
     private DataOutputStream out;
     private ActionListener controller;
     private ServerModel model;
     private String exceptMessage = null;
-    private DataInputStream in;
     private static final Logger log = Logger.getLogger(ServerView.class);
 
     /**
@@ -62,21 +61,21 @@ public class ServerView implements View {
     }
 
     /**
-     * Set model
-     */
+    * Set model
+    */
     public void setModel(ServerModel model) {
         log.info("Method call");
         this.model = model;
     }
-
+    
     /**
-     * Set controller
-     */
+    * Set controller
+    */
     public void setController(ActionListener controller) {
         log.info("Method call");
         this.controller = controller;
     }
-
+    
     /**
      * Starting looking for connection
      * read and parse Clients message
@@ -86,9 +85,9 @@ public class ServerView implements View {
         log.info("Method call");
         ServerSocket ss = new ServerSocket(port);
         while (true) {
-            log.info("Waiting for client");
+            System.out.println("Waiting for client");
             socket = ss.accept();
-            log.info("Someone connected!");
+            System.out.println("Someone connected!");
             thread = new Thread(new Thread() {
                 public void run() {
                     try {
@@ -125,34 +124,36 @@ public class ServerView implements View {
         log.info("Method call. Arguments: " + ex);
         exceptMessage = ex.toString();
     }
-
+    
     /**
-     * Getting message from client
-     * throw InputStream exception
-     */
-    private void reading() throws IOException {
+    * Getting message from client
+    * throw InputStream exception
+    */
+    private void reading() throws IOException { 
         log.info("Method call");
-        in = new DataInputStream(socket.getInputStream());
+        DataInputStream in = new DataInputStream(socket.getInputStream());            
         try {
             xmlMessage = in.readUTF();
         } catch (IOException e) {
             log.error("Exception", e);
             throw new IOException(e);
+        } finally {
+            //in.close();
         }
     }
-
+    
     /**
-     * Parsing client message according to action
-     * @throws ServerException
-     */
+    * Parsing client message according to action
+     * @throws ServerException 
+    */
     private void parsing(String xmlMessage) throws ParserConfigurationException, IOException, SAXException, ServerException {
         log.info("Method call. Arguments: " + xmlMessage);
-        InputSource is = new InputSource();
+        InputSource is = new InputSource();        
         is.setCharacterStream(new StringReader(xmlMessage));
         Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
         NodeList items = doc.getDocumentElement().getChildNodes();
         String action = items.item(0).getChildNodes().item(0).getChildNodes().item(0).getNodeValue();
-        out = new DataOutputStream(socket.getOutputStream());
+        out = new DataOutputStream(socket.getOutputStream());        
         try {
             if ("UPDATE".equals(action)) {
                 out.writeUTF(updateMessage(model.getGroups()));
@@ -187,27 +188,24 @@ public class ServerView implements View {
             log.error("Exception",e);
             throw new ServerException(e);
         } finally {
-            if (out!=null) {
-                out.close();
-            }
-            if (in!=null){
-                in.close();
+            if (!(out==null)) {
+                out.flush();
             }
         }
     }
-
+    
     /**
-     * Creating action and send it to controller
-     */
+    * Creating action and send it to controller
+    */
     private void fireAction(Object source, String command) {
         log.info("Method call " + command + " " + source);
         ActionEvent event = new ActionEvent(source, 0, command);
         controller.actionPerformed(event);
     }
-
+    
     /**
-     * Creating request for update command
-     */
+    * Creating request for update command
+    */
     private String updateMessage(List<Group> groups) {
         log.info("Method call");
         StringBuilder builder = new StringBuilder();
@@ -223,10 +221,10 @@ public class ServerView implements View {
         builder.append("</body></envelope>");
         return builder.toString();
     }
-
+    
     /**
-     * Creating request for show command
-     */
+    * Creating request for show command
+    */
     private String showeMessage(List<Student> students) {
         log.info("Method call");
         StringBuilder builder = new StringBuilder();
@@ -251,10 +249,10 @@ public class ServerView implements View {
         builder.append("</body></envelope>");
         return builder.toString();
     }
-
+    
     /**
-     * Creating request according to result
-     */
+    * Creating request according to result
+    */
     private String resultMessage() {
         log.info("Method call");
         StringBuilder builder = new StringBuilder();

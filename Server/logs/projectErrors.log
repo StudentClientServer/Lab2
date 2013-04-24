@@ -1,0 +1,171 @@
+14.04.2013 15:43:45,427 ERROR main ServerView:<init>:49 - Exception
+model.ServerException: java.io.FileNotFoundException: servConfig.ini (Не удается найти указанный файл)
+	at view.ServerView.<init>(ServerView.java:48)
+	at view.ServerViewFactory.newInstance(ServerViewFactory.java:17)
+	at controller.Controller.main(Controller.java:141)
+Caused by: java.io.FileNotFoundException: servConfig.ini (Не удается найти указанный файл)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at java.io.FileReader.<init>(Unknown Source)
+	at view.ServerView.<init>(ServerView.java:41)
+	... 2 more
+14.04.2013 15:43:45,432 ERROR main Controller:main:155 - Exception
+controller.ControllerException: model.ServerException: java.io.FileNotFoundException: servConfig.ini (Не удается найти указанный файл)
+	at controller.Controller.main(Controller.java:154)
+Caused by: model.ServerException: java.io.FileNotFoundException: servConfig.ini (Не удается найти указанный файл)
+	at view.ServerView.<init>(ServerView.java:48)
+	at view.ServerViewFactory.newInstance(ServerViewFactory.java:17)
+	at controller.Controller.main(Controller.java:141)
+Caused by: java.io.FileNotFoundException: servConfig.ini (Не удается найти указанный файл)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at java.io.FileReader.<init>(Unknown Source)
+	at view.ServerView.<init>(ServerView.java:41)
+	... 2 more
+14.04.2013 15:43:54,188 ERROR main ServerView:<init>:49 - Exception
+model.ServerException: java.io.FileNotFoundException: servConfig.ini (Не удается найти указанный файл)
+	at view.ServerView.<init>(ServerView.java:48)
+	at view.ServerViewFactory.newInstance(ServerViewFactory.java:17)
+	at controller.Controller.main(Controller.java:141)
+Caused by: java.io.FileNotFoundException: servConfig.ini (Не удается найти указанный файл)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at java.io.FileReader.<init>(Unknown Source)
+	at view.ServerView.<init>(ServerView.java:41)
+	... 2 more
+14.04.2013 15:43:54,192 ERROR main Controller:main:155 - Exception
+controller.ControllerException: model.ServerException: java.io.FileNotFoundException: servConfig.ini (Не удается найти указанный файл)
+	at controller.Controller.main(Controller.java:154)
+Caused by: model.ServerException: java.io.FileNotFoundException: servConfig.ini (Не удается найти указанный файл)
+	at view.ServerView.<init>(ServerView.java:48)
+	at view.ServerViewFactory.newInstance(ServerViewFactory.java:17)
+	at controller.Controller.main(Controller.java:141)
+Caused by: java.io.FileNotFoundException: servConfig.ini (Не удается найти указанный файл)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at java.io.FileReader.<init>(Unknown Source)
+	at view.ServerView.<init>(ServerView.java:41)
+	... 2 more
+14.04.2013 15:54:34,693 ERROR Thread-3 ServerView:run:96 - Exception
+java.net.SocketException: Socket is closed
+	at java.net.Socket.getOutputStream(Unknown Source)
+	at view.ServerView.parsing(ServerView.java:154)
+	at view.ServerView.access$200(ServerView.java:22)
+	at view.ServerView$1.run(ServerView.java:93)
+	at java.lang.Thread.run(Unknown Source)
+14.04.2013 15:54:34,720 ERROR Thread-3 ServerView:run:101 - Exception
+java.net.SocketException: Socket is closed
+	at java.net.Socket.getOutputStream(Unknown Source)
+	at view.ServerView$1.run(ServerView.java:97)
+	at java.lang.Thread.run(Unknown Source)
+14.04.2013 15:54:56,231 ERROR Thread-3 ServerView:run:96 - Exception
+java.net.SocketException: Socket is closed
+	at java.net.Socket.getOutputStream(Unknown Source)
+	at view.ServerView.parsing(ServerView.java:154)
+	at view.ServerView.access$200(ServerView.java:22)
+	at view.ServerView$1.run(ServerView.java:93)
+	at java.lang.Thread.run(Unknown Source)
+14.04.2013 15:54:56,237 ERROR Thread-3 ServerView:run:101 - Exception
+java.net.SocketException: Socket is closed
+	at java.net.Socket.getOutputStream(Unknown Source)
+	at view.ServerView$1.run(ServerView.java:97)
+	at java.lang.Thread.run(Unknown Source)
+14.04.2013 15:56:43,803 ERROR main Controller:main:165 - Exception
+controller.ControllerException: java.net.BindException: Address already in use: JVM_Bind
+	at controller.Controller.main(Controller.java:164)
+Caused by: java.net.BindException: Address already in use: JVM_Bind
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.net.ServerSocket.bind(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at view.ServerView.starting(ServerView.java:86)
+	at controller.Controller.main(Controller.java:152)
+14.04.2013 15:59:57,065 ERROR Thread-5 ServerView:run:96 - Exception
+java.net.SocketException: Socket is closed
+	at java.net.Socket.getOutputStream(Unknown Source)
+	at view.ServerView.parsing(ServerView.java:154)
+	at view.ServerView.access$200(ServerView.java:22)
+	at view.ServerView$1.run(ServerView.java:93)
+	at java.lang.Thread.run(Unknown Source)
+14.04.2013 15:59:57,065 ERROR Thread-5 ServerView:run:101 - Exception
+java.net.SocketException: Socket is closed
+	at java.net.Socket.getOutputStream(Unknown Source)
+	at view.ServerView$1.run(ServerView.java:97)
+	at java.lang.Thread.run(Unknown Source)
+14.04.2013 16:04:31,113 ERROR main Controller:main:165 - Exception
+controller.ControllerException: java.net.BindException: Address already in use: JVM_Bind
+	at controller.Controller.main(Controller.java:164)
+Caused by: java.net.BindException: Address already in use: JVM_Bind
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.net.ServerSocket.bind(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at view.ServerView.starting(ServerView.java:46)
+	at controller.Controller.main(Controller.java:152)
+14.04.2013 16:04:40,240 ERROR main Controller:main:165 - Exception
+controller.ControllerException: java.net.BindException: Address already in use: JVM_Bind
+	at controller.Controller.main(Controller.java:164)
+Caused by: java.net.BindException: Address already in use: JVM_Bind
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.net.ServerSocket.bind(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at view.ServerView.starting(ServerView.java:46)
+	at controller.Controller.main(Controller.java:152)
+14.04.2013 16:08:09,499 ERROR Thread-3 ServerView:run:92 - Exception
+java.net.SocketException: Socket is closed
+	at java.net.Socket.getOutputStream(Unknown Source)
+	at view.ServerView$1.run(ServerView.java:88)
+	at java.lang.Thread.run(Unknown Source)
+14.04.2013 16:10:16,610 ERROR main Controller:main:165 - Exception
+controller.ControllerException: java.net.BindException: Address already in use: JVM_Bind
+	at controller.Controller.main(Controller.java:164)
+Caused by: java.net.BindException: Address already in use: JVM_Bind
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.net.ServerSocket.bind(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at view.ServerView.starting(ServerView.java:86)
+	at controller.Controller.main(Controller.java:152)
+14.04.2013 16:10:36,509 ERROR Thread-3 ServerView:run:98 - Exception
+java.net.SocketException: Socket is closed
+	at java.net.Socket.getOutputStream(Unknown Source)
+	at view.ServerView.parsing(ServerView.java:156)
+	at view.ServerView.access$2(ServerView.java:149)
+	at view.ServerView$1.run(ServerView.java:95)
+	at java.lang.Thread.run(Unknown Source)
+14.04.2013 16:10:36,512 ERROR Thread-3 ServerView:run:103 - Exception
+java.net.SocketException: Socket is closed
+	at java.net.Socket.getOutputStream(Unknown Source)
+	at view.ServerView$1.run(ServerView.java:99)
+	at java.lang.Thread.run(Unknown Source)
+14.04.2013 16:17:20,709 ERROR main Controller:main:165 - Exception
+controller.ControllerException: java.net.BindException: Address already in use: JVM_Bind
+	at controller.Controller.main(Controller.java:164)
+Caused by: java.net.BindException: Address already in use: JVM_Bind
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.net.ServerSocket.bind(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at view.ServerView.starting(ServerView.java:86)
+	at controller.Controller.main(Controller.java:152)
+14.04.2013 16:38:00,148 ERROR main Controller:main:165 - Exception
+controller.ControllerException: java.net.BindException: Address already in use: JVM_Bind
+	at controller.Controller.main(Controller.java:164)
+Caused by: java.net.BindException: Address already in use: JVM_Bind
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.net.ServerSocket.bind(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at view.ServerView.starting(ServerView.java:86)
+	at controller.Controller.main(Controller.java:152)

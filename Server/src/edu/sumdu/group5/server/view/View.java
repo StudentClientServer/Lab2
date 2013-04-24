@@ -1,8 +1,8 @@
-package view;
+package edu.sumdu.group5.server.view;
 
 import java.awt.event.ActionListener;
 
-import model.ServerModel;
+import edu.sumdu.group5.server.model.ServerModel;
 import java.io.IOException;
 
 public interface View {

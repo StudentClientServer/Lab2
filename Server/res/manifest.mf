@@ -1,3 +1,4 @@
-Manifest-Version: 1.0
+Manifest-Version: 1.2
 Created-By: Artem_Kleinschmidt
 Main-Class: controller.Controller
+Class-Path: .;log4j/log4j-1.2.17.jar

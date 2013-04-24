@@ -1,8 +1,8 @@
-package controller;
+package edu.sumdu.group5.server.model;
 
 
-public class ControllerException extends Exception {
-   
+public class ServerException extends Exception {
+
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
@@ -11,7 +11,7 @@ public class ControllerException extends Exception {
      *
      * @param cause the cause
      */
-    ControllerException(Throwable cause) {
+    public ServerException(Throwable cause) {
         super(cause);
     }
 
@@ -20,7 +20,7 @@ public class ControllerException extends Exception {
      *
      * @param message the message
      */
-    ControllerException(String message) {
+    public ServerException(String message) {
         super(message);
     }
 
@@ -30,14 +30,18 @@ public class ControllerException extends Exception {
      * @param message the message
      * @param cause the cause
      */
-    ControllerException(String message, Throwable cause) {
+    public ServerException(String message, Throwable cause) {
         super(message, cause);
     }
 
     /**
      * Instantiates a new model exception.
      */
-    public ControllerException() {
+    public ServerException() {
         super();
+    }
+
+    public ServerException(Exception e) {
+        super(e);
     }
 }
