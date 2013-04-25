@@ -1,3 +1,2 @@
-javac  -Xlint -d classes -sourcepath src src\exceptions\*.java src\client\*.java src\model\*.java 
-
+javac -classpath lib/junit.jar -sourcepath src -d classes src/*.java
 pause

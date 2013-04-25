@@ -18,6 +18,7 @@
 
 <student enrolled="12.12.13" firstname="Петя" groupnumber="3" id="952753955" lastname="Абрамович"/>
 <student enrolled="10.03.1576" firstname="Иван" groupnumber="3" id="2734" lastname="Рюрикович"/>
+<student enrolled="11.12.1432" firstname="johny" groupnumber="3" id="1975120316" lastname="Walker"/>
 </group>
 
 
@@ -26,5 +27,7 @@
 
 
 <group fakulty="yur" number="7"/>
-<group fakulty="History" number="hs-99"/>
+<group fakulty="History" number="hs-99">
+<student enrolled="12.11.1222" firstname="AAAA" groupnumber="hs-99" id="1233660949" lastname="ССССС"/>
+</group>
 </groups>
