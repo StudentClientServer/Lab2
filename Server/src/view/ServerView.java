@@ -94,18 +94,16 @@ public class ServerView implements View {
     public void starting() throws IOException {
         if (log.isDebugEnabled())
             log.debug("Method call");
-        ServerSocket ss = new ServerSocket(port);
-        while (true) {
-            socket = ss.accept();;
+        final ServerSocket ss = new ServerSocket(port);
+        while (true) {            
+            socket = ss.accept();
             thread = new Thread(new Thread() {
                 public void run() {
                     try {
                         connection = true;
                         while(connection) {
                             reading();
-                            if (connection) {
-                                parsing(xmlMessage);
-                            }
+                            parsing(xmlMessage);
                         }
                     } catch (Exception exc) {
                         try {
@@ -149,9 +147,6 @@ public class ServerView implements View {
         DataInputStream in = new DataInputStream(socket.getInputStream());
         try {
             xmlMessage = in.readUTF();
-        } catch (SocketException e) {
-            in.close();
-            connection = false;
         } catch (IOException e) {
             log.error("Exception", e);
             throw new IOException(e);
@@ -188,6 +183,8 @@ public class ServerView implements View {
 
             if ("UPDATE".equals(action)) {
                 out.writeUTF(updateMessage(model.getGroups()));
+            } else if ("EXIT".equals(action)) {
+                connection = false;
             } else {
                 String fakyltet = xPath.evaluate("//fakulty", xHeader);
                 String group = xPath.evaluate("//group", xHeader);
@@ -199,14 +196,16 @@ public class ServerView implements View {
 
                 if ("REMOVEGroup".equals(action)) {
                     fireAction(group, "RemoveGroup");
-                } else if ("SHOW".equals(action)) {
+                } else if ("SHOW".equals(action)) {                
                     out.writeUTF(showeMessage(model.getStudents(model
-                            .getGroup(group))));
+                            .getGroup(group))));                                                
                 } else if ("ADDGroup".equals(action)) {
                     fireAction(new Group(fakyltet, group), "AddGroup");
+                    out.writeUTF(resultMessage());
                 } else if ("REMOVE".equals(action)) {
                     String studentID = xPath.evaluate("studentID", currNode);
                     fireAction(Integer.parseInt(studentID), "RemoveStudent");
+                    out.writeUTF(resultMessage());
                 } else if ("ADD".equals(action)) {
                     String studentName = xPath
                             .evaluate("studentName", currNode);
@@ -218,6 +217,7 @@ public class ServerView implements View {
                             "studentID", currNode));
                     fireAction(new Student(studentID, studentName,
                             studentLastname, group, enrolledDate), "AddStudent");
+                            out.writeUTF(resultMessage());
                 } else if ("CHANGE".equals(action)) {
                     String studentName = xPath
                             .evaluate("studentName", currNode);
@@ -230,8 +230,8 @@ public class ServerView implements View {
                     fireAction(new Student(studentID, studentName,
                             studentLastname, group, enrolledDate),
                             "UpdateStudent");
+                            out.writeUTF(resultMessage());
                 }
-                out.writeUTF(resultMessage());
             }
         } catch (ServerException e) {
             log.error("Exception", e);
