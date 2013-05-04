@@ -28,7 +28,6 @@ import edu.sumdu.group5.server.controller.Controller;
 public class ServerView implements View {
     private Socket socket;
     private Thread thread;
-    private int port = 7070;
     private String xmlMessage;
     private DataOutputStream out;
     private ActionListener controller;
