@@ -1,19 +1,29 @@
-package view;
+package edu.sumdu.group5.server.view;
 
 import java.net.*;
 import java.util.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import model.ServerException;
-import model.ServerModel;
+
+import edu.sumdu.group5.server.model.ServerException;
+import edu.sumdu.group5.server.model.ServerModel;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.*;
 import org.xml.sax.InputSource;
-import model.Student;
+import edu.sumdu.group5.server.model.Student;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
-import model.Group;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
+
+import edu.sumdu.group5.server.model.Group;
+
+import org.apache.log4j.Logger;
+
+import edu.sumdu.group5.server.controller.Controller;
 
 public class ServerView implements View {
     private Socket socket;
@@ -23,46 +33,96 @@ public class ServerView implements View {
     private DataOutputStream out;
     private ActionListener controller;
     private ServerModel model;
-    private String ExceptMessage = null;
-    
+    private String exceptMessage = null;
+    private static final Logger log = Logger.getLogger(ServerView.class);
+    private boolean connection;
+
     /**
-    * Set model
-    */
+     * Reading port from configuration file (servConfig.ini) throws
+     * ServerException if some problem with reading
+     */
+    public ServerView() throws ServerException {
+        if (log.isDebugEnabled())
+            log.debug("Method call");
+        Properties prop = new Properties();
+        InputStream input = null;
+        try {         
+            input = new FileInputStream("servConfig.properties");
+            prop.load(input);
+            port = Integer.parseInt(prop.getProperty("port"));
+        } catch (IOException e) {
+            ServerException ex = new ServerException(e);
+            log.error("Exception", ex);
+            throw ex;
+        } catch(NumberFormatException e) {
+            ServerException ex = new ServerException("Specified port is not correct, using port 7070",e);
+            log.error("Exception", ex);            
+        } finally {
+            try {
+                if (input != null)
+                    input.close();
+            } catch (IOException e) {
+                ServerException ex = new ServerException(e);
+                log.error("Exception", ex);
+                throw ex;
+            }
+        }
+    }
+
+    /**
+     * Set model
+     */
     public void setModel(ServerModel model) {
+        if (log.isDebugEnabled())
+            log.debug("Method call");
         this.model = model;
     }
-    
+
     /**
-    * Set controller
-    */
+     * Set controller
+     */
     public void setController(ActionListener controller) {
+        if (log.isDebugEnabled())
+            log.debug("Method call");
         this.controller = controller;
     }
-    
+
     /**
-     * Starting looking for connection throw connection exception
+     * Starting looking for connection read and parse Clients message throw
+     * connection exception
      */
     public void starting() throws IOException {
+        if (log.isDebugEnabled())
+            log.debug("Method call");
         ServerSocket ss = new ServerSocket(port);
         while (true) {
-            System.out.println("Waiting for a client...");
-            socket = ss.accept();
-            System.out.println("Client connected");
+            socket = ss.accept();;
             thread = new Thread(new Thread() {
                 public void run() {
                     try {
-                        reading();
-                        parsing(xmlMessage);
+                        connection = true;
+                        while(connection) {
+                            reading();
+                            if (connection) {
+                                parsing(xmlMessage);
+                            }
+                        }
                     } catch (Exception exc) {
                         try {
+                            log.error("Exception", exc);
                             out = new DataOutputStream(socket.getOutputStream());
                             exceptionHandling(exc);
                             out.writeUTF(resultMessage());
+                        } catch (IOException e) {
+                            log.error("Exception", e);
+                        } finally {
                             if (!(out == null)) {
-                                out.flush();
+                                try {
+                                    out.flush();
+                                } catch (IOException e) {
+                                    log.error("Exception", e);
+                                }
                             }
-                        } catch (IOException x) {
-                            x.printStackTrace();
                         }
                     }
                 }
@@ -71,98 +131,164 @@ public class ServerView implements View {
         }
     }
 
+    /**
+     * Creating exception message to answer
+     */
     public void exceptionHandling(Exception ex) {
-        ExceptMessage = ex.toString();
+        if (log.isDebugEnabled())
+            log.debug("Method call. Arguments: " + ex);
+        exceptMessage = ex.toString();
     }
-    
+
     /**
-    * Getting message from client
-    * throw InputStream exception
-    */
-    private void reading() throws IOException {        
-        DataInputStream in = new DataInputStream(socket.getInputStream());            
-        xmlMessage = in.readUTF();
-        System.out.println("Have a line "+xmlMessage);
-    }
-    
-    /**
-    * Parsing client message according to action
-     * @throws ServerException 
-    */
-    private void parsing(String xmlMessage) throws SAXException, ParserConfigurationException, IOException, ServerException {        
-        InputSource is = new InputSource();        
-        is.setCharacterStream(new StringReader(xmlMessage));
-        Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
-        NodeList items = doc.getDocumentElement().getChildNodes();
-        String action = items.item(0).getChildNodes().item(0).getChildNodes().item(0).getNodeValue();
-        out = new DataOutputStream(socket.getOutputStream());        
-        if ("UPDATE".equals(action)) {
-            out.writeUTF(updateMessage(model.getGroups()));
-        } else {
-            String fakyltet = items.item(0).getChildNodes().item(1).getFirstChild().getNodeValue();
-            String group = items.item(0).getChildNodes().item(2).getFirstChild().getNodeValue();
-            if ("REMOVEGroup".equals(action)) {
-                fireAction(group, "RemoveGroup");
-            } else if ("SHOW".equals(action)) {
-                out.writeUTF(showeMessage(model.getStudents(model.getGroup(group))));
-            } else if ("ADDGroup".equals(action)) {
-                fireAction(new Group(fakyltet, group), "AddGroup");
-            } else if ("REMOVE".equals(action)) {
-                String studentID = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
-                fireAction(Integer.parseInt(studentID), "RemoveStudent");
-            } else if ("ADD".equals(action)) { 
-                String studentName = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
-                String studentLastname = items.item(1).getChildNodes().item(1).getFirstChild().getNodeValue();
-                String enrolledDate = items.item(1).getChildNodes().item(2).getFirstChild().getNodeValue(); 
-                Integer studentID = Integer.parseInt(items.item(1).getChildNodes().item(3).getFirstChild().getNodeValue());
-                fireAction(new Student(studentID, studentName, studentLastname, group, enrolledDate), "AddStudent");
-            } else if ("CHANGE".equals(action)) {                    
-                    String studentName = items.item(1).getChildNodes().item(0).getFirstChild().getNodeValue();
-                    String studentLastname = items.item(1).getChildNodes().item(1).getFirstChild().getNodeValue();
-                    String enrolledDate = items.item(1).getChildNodes().item(2).getFirstChild().getNodeValue(); 
-                    Integer studentID = Integer.parseInt(items.item(1).getChildNodes().item(3).getFirstChild().getNodeValue());
-                    fireAction(new Student(studentID, studentName, studentLastname, group, enrolledDate), "UpdateStudent");
-            }                    
-            out.writeUTF(resultMessage()); 
-        }    
-        if (!(out==null)) {
-            out.flush();
+     * Getting message from client throw InputStream exception
+     */
+    private void reading() throws IOException {
+        if (log.isDebugEnabled())
+            log.debug("Method call");
+        DataInputStream in = new DataInputStream(socket.getInputStream());
+        try {
+            xmlMessage = in.readUTF();
+        } catch (SocketException e) {
+            in.close();
+            connection = false;
+        } catch (IOException e) {
+            log.error("Exception", e);
+            throw new IOException(e);
         }
     }
-    
+
     /**
-    * Creating action and send it to controller
-    */
+     * Parsing client message according to action
+     * 
+     * @throws ServerException
+     */
+    private void parsing(String xmlMessage)
+            throws ParserConfigurationException, IOException, SAXException,
+            ServerException {
+        if (log.isDebugEnabled())
+            log.debug("Method call. Arguments: " + xmlMessage);
+        try {
+            InputSource is = new InputSource();
+            is.setCharacterStream(new StringReader(xmlMessage));
+            Document doc = DocumentBuilderFactory.newInstance()
+                    .newDocumentBuilder().parse(is);
+
+            XPathFactory factory = XPathFactory.newInstance();
+            XPath xPath = factory.newXPath();
+            XPathExpression expr2 = xPath.compile("//envelope/*");
+
+            Object result = expr2.evaluate(doc, XPathConstants.NODESET);
+            NodeList xDoc = (NodeList) result;
+            Element xHeader = (Element) xDoc.item(0);
+            Element xBody = (Element) xDoc.item(1);
+            String action = xPath.evaluate("//action", xHeader);
+
+            out = new DataOutputStream(socket.getOutputStream());
+
+            if ("UPDATE".equals(action)) {
+                out.writeUTF(updateMessage(model.getGroups()));
+            } else {
+                String fakyltet = xPath.evaluate("//fakulty", xHeader);
+                String group = xPath.evaluate("//group", xHeader);
+                String str = "//envelope/body";
+                XPathExpression expr = xPath.compile(str);
+                NodeList xStudents = (NodeList) expr.evaluate(doc,
+                        XPathConstants.NODESET);
+                Node currNode = xStudents.item(0);
+
+                if ("REMOVEGroup".equals(action)) {
+                    fireAction(group, "RemoveGroup");
+                } else if ("SHOW".equals(action)) {
+                    out.writeUTF(showeMessage(model.getStudents(model
+                            .getGroup(group))));
+                } else if ("ADDGroup".equals(action)) {
+                    fireAction(new Group(fakyltet, group), "AddGroup");
+                } else if ("REMOVE".equals(action)) {
+                    String studentID = xPath.evaluate("studentID", currNode);
+                    fireAction(Integer.parseInt(studentID), "RemoveStudent");
+                } else if ("ADD".equals(action)) {
+                    String studentName = xPath
+                            .evaluate("studentName", currNode);
+                    String studentLastname = xPath.evaluate("studentLastname",
+                            currNode);
+                    String enrolledDate = xPath.evaluate("enrolledDate",
+                            currNode);
+                    Integer studentID = Integer.parseInt(xPath.evaluate(
+                            "studentID", currNode));
+                    fireAction(new Student(studentID, studentName,
+                            studentLastname, group, enrolledDate), "AddStudent");
+                } else if ("CHANGE".equals(action)) {
+                    String studentName = xPath
+                            .evaluate("studentName", currNode);
+                    String studentLastname = xPath.evaluate("studentLastname",
+                            currNode);
+                    String enrolledDate = xPath.evaluate("enrolledDate",
+                            currNode);
+                    Integer studentID = Integer.parseInt(xPath.evaluate(
+                            "studentID", currNode));
+                    fireAction(new Student(studentID, studentName,
+                            studentLastname, group, enrolledDate),
+                            "UpdateStudent");
+                }
+                out.writeUTF(resultMessage());
+            }
+        } catch (ServerException e) {
+            log.error("Exception", e);
+            throw new ServerException(e);
+        } catch (Exception e) {
+            log.error("Exception", e);
+            throw new ServerException(e);
+        } finally {
+            if (!(out == null)) {
+                out.flush();
+            }
+        }
+    }
+
+    /**
+     * Creating action and send it to controller
+     */
     private void fireAction(Object source, String command) {
+        if (log.isDebugEnabled())
+            log.debug("Method call " + command + " " + source);
         ActionEvent event = new ActionEvent(source, 0, command);
         controller.actionPerformed(event);
     }
-    
+
     /**
-    * Creating request for update command
-    */
+     * Creating request for update command
+     */
     private String updateMessage(List<Group> groups) {
+        if (log.isDebugEnabled())
+            log.debug("Method call");
         StringBuilder builder = new StringBuilder();
-        builder.append("<envelope><header><action>UPDATE</action></header><body>");
+        builder.append("<envelope><header><action>UPDATE</action></header><body><groups>");
         for (Group group : groups) {
+            builder.append("<group>");
+            builder.append("<name>");
+            builder.append(group.getNumber());
+            builder.append("</name>");
             builder.append("<fakulty>");
             builder.append(group.getFakulty());
             builder.append("</fakulty>");
-            builder.append("<group>");
-            builder.append(group.getNumber());
             builder.append("</group>");
         }
+        builder.append("</groups>");
         builder.append("</body></envelope>");
         return builder.toString();
     }
-    
+
     /**
-    * Creating request for show command
-    */
+     * Creating request for show command
+     */
     private String showeMessage(List<Student> students) {
+        if (log.isDebugEnabled())
+            log.debug("Method call");
         StringBuilder builder = new StringBuilder();
-        builder.append("<envelope><header><action>SHOW</action></header><body>");
+        builder.append("<envelope><header><action>SHOW</action></header><body><students>");
         for (Student student : students) {
+            builder.append("<student>");
             builder.append("<id>");
             builder.append(student.getId());
             builder.append("</id>");
@@ -178,18 +304,22 @@ public class ServerView implements View {
             builder.append("<groupnumber>");
             builder.append(student.getGroupNumber());
             builder.append("</groupnumber>");
+            builder.append("</student>");
         }
+        builder.append("</students>");
         builder.append("</body></envelope>");
         return builder.toString();
     }
-    
+
     /**
-    * Creating request according to result
-    */
+     * Creating request according to result
+     */
     private String resultMessage() {
+        if (log.isDebugEnabled())
+            log.debug("Method call");
         StringBuilder builder = new StringBuilder();
         String result;
-        if (ExceptMessage == null) {
+        if (exceptMessage == null) {
             result = "Success";
         } else {
             result = "Exception";
@@ -197,14 +327,13 @@ public class ServerView implements View {
         builder.append("<envelope><header><action>");
         builder.append(result);
         builder.append("</action></header><body>");
-        if (ExceptMessage != null) {
+        if (exceptMessage != null) {
             builder.append("<stackTrace>");
-            builder.append(ExceptMessage);
-            ExceptMessage = null;
+            builder.append(exceptMessage);
+            exceptMessage = null;
             builder.append("</stackTrace>");
         }
         builder.append("</body></envelope>");
         return builder.toString();
     }
-
 }
