@@ -35,6 +35,7 @@ public class ServerView implements View {
     private String exceptMessage = null;
     private static final Logger log = Logger.getLogger(ServerView.class);
     private boolean connection;
+    private int port;
 
     /**
      * Reading port from configuration file (servConfig.ini) throws
