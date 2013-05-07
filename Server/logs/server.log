@@ -1,0 +1,622 @@
+07.05.2013 12:39:11,231 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: asd
+
+07.05.2013 12:39:11,231 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=ewq, number=asd
+]
+07.05.2013 12:39:13,333 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: asd
+
+07.05.2013 12:39:13,333 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=ewq, number=asd
+]
+07.05.2013 12:39:15,461 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:39:15,461 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:39:15,487 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:39:15,488 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:39:15,516 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:39:15,516 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:39:15,544 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:39:15,544 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:39:15,617 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:39:15,617 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:39:15,645 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:39:15,646 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:39:15,673 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:39:15,673 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:39:15,700 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:39:15,700 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:39:15,728 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:39:15,728 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:39:15,756 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:39:15,756 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:39:15,783 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:39:15,783 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:39:15,811 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:39:15,812 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:39:15,837 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:39:15,838 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:39:15,930 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:39:15,930 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:39:15,957 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:39:15,958 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:39:15,985 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:39:15,985 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:39:16,012 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:39:16,013 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:39:16,040 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:39:16,040 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:39:16,067 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:39:16,067 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:39:16,093 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:39:16,093 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:39:16,121 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:39:16,121 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:39:16,150 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:39:16,151 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:39:17,885 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: asd
+
+07.05.2013 12:39:17,885 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=ewq, number=asd
+]
+07.05.2013 12:39:20,109 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: asd
+
+07.05.2013 12:39:20,109 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=ewq, number=asd
+]
+07.05.2013 12:39:23,413 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: asd
+
+07.05.2013 12:39:23,413 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=ewq, number=asd
+]
+07.05.2013 12:39:26,029 DEBUG Thread-2 Server:removeGroup:289 - Method call. Arguments: asd
+
+07.05.2013 12:39:26,029 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: asd
+
+07.05.2013 12:39:27,445 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: asd
+
+07.05.2013 12:39:27,446 ERROR Thread-2 Server:getGroup:409 - Exception
+edu.sumdu.group5.server.model.ServerException: Group with number asd
+ does not exist.
+	at edu.sumdu.group5.server.model.Server.getGroup(Server.java:407)
+	at edu.sumdu.group5.server.view.ServerViewThread.parsing(ServerViewThread.java:158)
+	at edu.sumdu.group5.server.view.ServerViewThread.run(ServerViewThread.java:65)
+07.05.2013 12:40:08,300 DEBUG Timer-0 Server:upLoadData:851 - Method call
+07.05.2013 12:40:08,300 DEBUG Timer-0 Server:checkStudents:912 - Method call. Arguments: Group [fakulty=Gym, number=3] Group [fakulty=Gym, number=3]
+07.05.2013 12:40:08,300 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=1413073239, firstName=Вася, lastName=Васюков, groupNumber=3, enrolled=01.02.2001] Group [fakulty=Gym, number=3]
+07.05.2013 12:40:08,300 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=755357428, firstName=Андрей, lastName=Андревич, groupNumber=3, enrolled=01.01.01] Group [fakulty=Gym, number=3]
+07.05.2013 12:40:08,300 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=194131376, firstName=Клава, lastName=Кузминишна, groupNumber=3, enrolled=22.03.2013] Group [fakulty=Gym, number=3]
+07.05.2013 12:40:08,301 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=952753955, firstName=Петя, lastName=Абрамович, groupNumber=3, enrolled=12.12.13] Group [fakulty=Gym, number=3]
+07.05.2013 12:40:08,301 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=2734, firstName=Иван, lastName=Рюрикович, groupNumber=3, enrolled=10.03.1576] Group [fakulty=Gym, number=3]
+07.05.2013 12:40:08,301 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=1975120316, firstName=johny, lastName=Walker, groupNumber=3, enrolled=11.12.1432] Group [fakulty=Gym, number=3]
+07.05.2013 12:40:08,301 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=1535101342, firstName=Семен, lastName=Петров, groupNumber=3, enrolled=11.12.2002] Group [fakulty=Gym, number=3]
+07.05.2013 12:40:08,301 DEBUG Timer-0 Server:removeGroupFromDB:752 - Method call. Arguments: Group [fakulty=ewq, number=asd
+]
+07.05.2013 12:40:08,301 DEBUG Timer-0 Server:getGroupNodeByNumber:685 - Method call
+07.05.2013 12:40:08,301 DEBUG Timer-0 Server:checkGroupForNew:887 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:08,301 DEBUG Timer-0 Server:saveXML:501 - Method call
+07.05.2013 12:40:08,305 DEBUG Timer-0 Server:setGroupsLocalCopy:154 - Method call
+07.05.2013 12:40:19,477 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:19,478 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:19,513 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:19,513 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:19,546 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:19,546 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:19,601 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:19,601 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:19,637 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:19,637 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:19,675 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:19,675 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:19,706 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:19,707 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:19,738 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:19,738 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:19,771 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:19,771 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:19,802 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:19,803 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:19,833 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:19,834 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:19,864 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:19,864 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:19,896 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:19,896 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:19,929 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:19,930 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:19,961 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:19,961 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:19,993 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:19,993 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:20,024 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:20,024 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:20,055 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:20,055 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:20,087 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:20,087 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:20,120 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:20,120 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:20,151 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:20,151 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:20,183 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:20,183 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:24,862 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:24,862 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:24,897 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:24,897 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:24,930 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:24,930 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:24,963 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:24,963 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:24,997 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:24,997 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:25,028 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:25,029 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:25,061 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:25,061 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:25,093 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:25,093 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:25,125 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:25,125 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:25,157 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:25,157 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:25,188 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:25,188 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:25,219 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:25,220 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:25,250 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:25,250 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:25,282 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:25,282 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:25,313 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:25,314 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:25,346 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:25,346 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:25,380 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:25,380 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:25,413 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:25,413 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:25,453 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:25,453 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:25,493 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:25,494 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:25,532 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:25,533 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:25,563 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:25,563 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,017 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,017 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,056 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,056 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,092 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,092 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,126 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,126 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,188 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,188 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,229 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,229 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,261 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,261 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,293 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,293 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,329 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,329 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,368 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,368 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,404 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,404 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,438 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,438 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,470 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,470 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,502 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,502 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,604 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,604 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,640 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,640 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,672 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,672 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,705 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,705 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,738 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,738 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,770 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,770 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,805 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,805 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,836 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,836 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,868 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,868 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:31,905 DEBUG Thread-3 Server:updateStudent:472 - Method call. Arguments: Student [id=1535101342, firstName=Семен, lastName=Петров, groupNumber=3, enrolled=11.12.2002]
+07.05.2013 12:40:31,905 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:31,905 DEBUG Thread-3 Server:removeStudent:264 - Method call. Arguments: 1535101342
+07.05.2013 12:40:31,905 DEBUG Thread-3 Server:addStudent:310 - Method call. Arguments: Student [id=1535101342, firstName=Семен, lastName=Петров, groupNumber=3, enrolled=11.12.2002]
+07.05.2013 12:40:40,069 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:40,069 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:40,101 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:40,102 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:40,134 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:40,135 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:40,187 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:40,187 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:40,225 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:40,226 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:40,273 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:40,273 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:40,317 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:40,317 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:40,361 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:40,361 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:40,406 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:40,406 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:40,449 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:40,449 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:40,485 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:40,486 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:40,517 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:40,517 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:40,549 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:40,549 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:40,579 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:40,579 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:40,612 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:40,612 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:40,646 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:40,646 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:40,681 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:40,681 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:40,729 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:40,730 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:40,761 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:40,761 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:40,792 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:40,792 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:40,822 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:40,823 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:40:40,853 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:40:40,853 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:41:08,300 DEBUG Timer-0 Server:upLoadData:851 - Method call
+07.05.2013 12:41:08,300 DEBUG Timer-0 Server:checkStudents:912 - Method call. Arguments: Group [fakulty=Gym, number=3] Group [fakulty=Gym, number=3]
+07.05.2013 12:41:08,300 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=1413073239, firstName=Вася, lastName=Васюков, groupNumber=3, enrolled=01.02.2001] Group [fakulty=Gym, number=3]
+07.05.2013 12:41:08,300 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=755357428, firstName=Андрей, lastName=Андревич, groupNumber=3, enrolled=01.01.01] Group [fakulty=Gym, number=3]
+07.05.2013 12:41:08,300 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=194131376, firstName=Клава, lastName=Кузминишна, groupNumber=3, enrolled=22.03.2013] Group [fakulty=Gym, number=3]
+07.05.2013 12:41:08,300 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=952753955, firstName=Петя, lastName=Абрамович, groupNumber=3, enrolled=12.12.13] Group [fakulty=Gym, number=3]
+07.05.2013 12:41:08,300 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=2734, firstName=Иван, lastName=Рюрикович, groupNumber=3, enrolled=10.03.1576] Group [fakulty=Gym, number=3]
+07.05.2013 12:41:08,300 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=1975120316, firstName=johny, lastName=Walker, groupNumber=3, enrolled=11.12.1432] Group [fakulty=Gym, number=3]
+07.05.2013 12:41:08,300 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=1535101342, firstName=Семен, lastName=Петров, groupNumber=3, enrolled=11.12.2002] Group [fakulty=Gym, number=3]
+07.05.2013 12:41:08,301 DEBUG Timer-0 Server:checkGroupForNew:887 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:41:08,301 DEBUG Timer-0 Server:saveXML:501 - Method call
+07.05.2013 12:41:08,304 DEBUG Timer-0 Server:setGroupsLocalCopy:154 - Method call
+07.05.2013 12:42:08,301 DEBUG Timer-0 Server:upLoadData:851 - Method call
+07.05.2013 12:42:08,301 DEBUG Timer-0 Server:checkStudents:912 - Method call. Arguments: Group [fakulty=Gym, number=3] Group [fakulty=Gym, number=3]
+07.05.2013 12:42:08,301 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=1413073239, firstName=Вася, lastName=Васюков, groupNumber=3, enrolled=01.02.2001] Group [fakulty=Gym, number=3]
+07.05.2013 12:42:08,301 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=755357428, firstName=Андрей, lastName=Андревич, groupNumber=3, enrolled=01.01.01] Group [fakulty=Gym, number=3]
+07.05.2013 12:42:08,301 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=194131376, firstName=Клава, lastName=Кузминишна, groupNumber=3, enrolled=22.03.2013] Group [fakulty=Gym, number=3]
+07.05.2013 12:42:08,301 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=952753955, firstName=Петя, lastName=Абрамович, groupNumber=3, enrolled=12.12.13] Group [fakulty=Gym, number=3]
+07.05.2013 12:42:08,301 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=2734, firstName=Иван, lastName=Рюрикович, groupNumber=3, enrolled=10.03.1576] Group [fakulty=Gym, number=3]
+07.05.2013 12:42:08,301 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=1975120316, firstName=johny, lastName=Walker, groupNumber=3, enrolled=11.12.1432] Group [fakulty=Gym, number=3]
+07.05.2013 12:42:08,302 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=1535101342, firstName=Семен, lastName=Петров, groupNumber=3, enrolled=11.12.2002] Group [fakulty=Gym, number=3]
+07.05.2013 12:42:08,302 DEBUG Timer-0 Server:checkGroupForNew:887 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:42:08,302 DEBUG Timer-0 Server:saveXML:501 - Method call
+07.05.2013 12:42:08,305 DEBUG Timer-0 Server:setGroupsLocalCopy:154 - Method call
+07.05.2013 12:43:08,302 DEBUG Timer-0 Server:upLoadData:851 - Method call
+07.05.2013 12:43:08,302 DEBUG Timer-0 Server:checkStudents:912 - Method call. Arguments: Group [fakulty=Gym, number=3] Group [fakulty=Gym, number=3]
+07.05.2013 12:43:08,302 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=1413073239, firstName=Вася, lastName=Васюков, groupNumber=3, enrolled=01.02.2001] Group [fakulty=Gym, number=3]
+07.05.2013 12:43:08,302 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=755357428, firstName=Андрей, lastName=Андревич, groupNumber=3, enrolled=01.01.01] Group [fakulty=Gym, number=3]
+07.05.2013 12:43:08,302 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=194131376, firstName=Клава, lastName=Кузминишна, groupNumber=3, enrolled=22.03.2013] Group [fakulty=Gym, number=3]
+07.05.2013 12:43:08,302 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=952753955, firstName=Петя, lastName=Абрамович, groupNumber=3, enrolled=12.12.13] Group [fakulty=Gym, number=3]
+07.05.2013 12:43:08,302 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=2734, firstName=Иван, lastName=Рюрикович, groupNumber=3, enrolled=10.03.1576] Group [fakulty=Gym, number=3]
+07.05.2013 12:43:08,303 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=1975120316, firstName=johny, lastName=Walker, groupNumber=3, enrolled=11.12.1432] Group [fakulty=Gym, number=3]
+07.05.2013 12:43:08,303 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=1535101342, firstName=Семен, lastName=Петров, groupNumber=3, enrolled=11.12.2002] Group [fakulty=Gym, number=3]
+07.05.2013 12:43:08,303 DEBUG Timer-0 Server:checkGroupForNew:887 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:43:08,303 DEBUG Timer-0 Server:saveXML:501 - Method call
+07.05.2013 12:43:08,306 DEBUG Timer-0 Server:setGroupsLocalCopy:154 - Method call
+07.05.2013 12:46:17,441 DEBUG main Server:<init>:108 - Construktor call
+07.05.2013 12:46:17,443 DEBUG main Server:setXmlPath:130 - Method call
+07.05.2013 12:46:17,443 DEBUG main Server:setDtdPath:78 - Method call
+07.05.2013 12:46:17,447 DEBUG main Server:readDocument:180 - Method call
+07.05.2013 12:46:17,490 DEBUG main Server:setDocument:387 - Method call
+07.05.2013 12:46:17,490 DEBUG main Server:readGroups:538 - Method call
+07.05.2013 12:46:17,496 DEBUG main Server:readStudents:565 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:46:17,499 DEBUG main Server:setGroups:168 - Method call
+07.05.2013 12:46:17,500 DEBUG main Server:setGroupsLocalCopy:154 - Method call
+07.05.2013 12:46:49,532 DEBUG main Server:<init>:108 - Construktor call
+07.05.2013 12:46:49,533 DEBUG main Server:setXmlPath:130 - Method call
+07.05.2013 12:46:49,534 DEBUG main Server:setDtdPath:78 - Method call
+07.05.2013 12:46:49,538 DEBUG main Server:readDocument:180 - Method call
+07.05.2013 12:46:49,580 DEBUG main Server:setDocument:387 - Method call
+07.05.2013 12:46:49,581 DEBUG main Server:readGroups:538 - Method call
+07.05.2013 12:46:49,587 DEBUG main Server:readStudents:565 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:46:49,590 DEBUG main Server:setGroups:168 - Method call
+07.05.2013 12:46:49,591 DEBUG main Server:setGroupsLocalCopy:154 - Method call
+07.05.2013 12:48:23,300 DEBUG main Server:<init>:108 - Construktor call
+07.05.2013 12:48:23,301 DEBUG main Server:setXmlPath:130 - Method call
+07.05.2013 12:48:23,301 DEBUG main Server:setDtdPath:78 - Method call
+07.05.2013 12:48:23,306 DEBUG main Server:readDocument:180 - Method call
+07.05.2013 12:48:23,348 DEBUG main Server:setDocument:387 - Method call
+07.05.2013 12:48:23,348 DEBUG main Server:readGroups:538 - Method call
+07.05.2013 12:48:23,354 DEBUG main Server:readStudents:565 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:23,358 DEBUG main Server:setGroups:168 - Method call
+07.05.2013 12:48:23,358 DEBUG main Server:setGroupsLocalCopy:154 - Method call
+07.05.2013 12:48:42,241 DEBUG Thread-2 Server:getGroups:250 - Method call
+07.05.2013 12:48:48,449 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:48,450 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:48,561 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:48,561 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:48,647 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:48,647 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:48,760 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:48,760 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:48,849 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:48,850 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:48,967 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:48,967 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:49,098 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:49,099 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:49,162 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:49,162 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:49,216 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:49,216 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:49,295 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:49,295 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:49,352 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:49,352 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:49,401 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:49,401 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:49,464 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:49,464 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:49,518 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:49,518 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:49,593 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:49,593 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:49,643 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:49,643 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:49,690 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:49,690 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:49,753 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:49,754 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:49,822 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:49,822 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:49,873 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:49,873 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:49,918 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:49,919 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:49,963 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:49,963 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:53,986 DEBUG Thread-3 Server:getGroups:250 - Method call
+07.05.2013 12:48:56,992 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:56,992 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:57,099 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:57,099 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:57,185 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:57,186 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:57,294 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:57,295 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:57,384 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:57,384 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:57,564 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:57,565 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:57,625 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:57,626 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:57,684 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:57,684 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:57,737 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:57,737 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:57,829 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:57,829 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:57,878 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:57,879 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:57,928 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:57,929 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:57,991 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:57,991 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:58,043 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:58,043 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:58,112 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:58,113 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:58,162 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:58,162 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:58,208 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:58,208 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:58,273 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:58,273 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:58,338 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:58,338 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:58,392 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:58,392 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:58,438 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:58,438 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:48:58,482 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:48:58,482 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:06,479 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:06,479 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:06,527 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:06,527 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:06,604 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:06,604 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:06,655 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:06,655 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:06,705 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:06,705 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:06,761 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:06,761 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:06,841 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:06,841 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:06,914 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:06,914 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:06,969 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:06,969 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:07,022 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:07,022 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:07,073 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:07,074 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:07,117 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:07,118 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:07,159 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:07,159 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:07,201 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:07,201 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:07,243 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:07,243 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:07,291 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:07,291 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:07,337 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:07,337 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:07,379 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:07,380 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:07,420 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:07,421 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:07,461 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:07,461 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:07,504 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:07,504 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:07,545 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:07,545 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:07,586 DEBUG Thread-2 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:07,587 DEBUG Thread-2 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:23,361 DEBUG Timer-0 Server:upLoadData:851 - Method call
+07.05.2013 12:49:23,361 DEBUG Timer-0 Server:checkStudents:912 - Method call. Arguments: Group [fakulty=Gym, number=3] Group [fakulty=Gym, number=3]
+07.05.2013 12:49:23,361 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=1413073239, firstName=Вася, lastName=Васюков, groupNumber=3, enrolled=01.02.2001] Group [fakulty=Gym, number=3]
+07.05.2013 12:49:23,361 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=755357428, firstName=Андрей, lastName=Андревич, groupNumber=3, enrolled=01.01.01] Group [fakulty=Gym, number=3]
+07.05.2013 12:49:23,361 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=194131376, firstName=Клава, lastName=Кузминишна, groupNumber=3, enrolled=22.03.2013] Group [fakulty=Gym, number=3]
+07.05.2013 12:49:23,362 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=952753955, firstName=Петя, lastName=Абрамович, groupNumber=3, enrolled=12.12.13] Group [fakulty=Gym, number=3]
+07.05.2013 12:49:23,362 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=2734, firstName=Иван, lastName=Рюрикович, groupNumber=3, enrolled=10.03.1576] Group [fakulty=Gym, number=3]
+07.05.2013 12:49:23,362 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=1975120316, firstName=johny, lastName=Walker, groupNumber=3, enrolled=11.12.1432] Group [fakulty=Gym, number=3]
+07.05.2013 12:49:23,362 DEBUG Timer-0 Server:checkStudentForNew:948 - Method call. Arguments: Student [id=1535101342, firstName=Семен, lastName=Петров, groupNumber=3, enrolled=11.12.2002] Group [fakulty=Gym, number=3]
+07.05.2013 12:49:23,362 DEBUG Timer-0 Server:checkGroupForNew:887 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:23,362 DEBUG Timer-0 Server:saveXML:501 - Method call
+07.05.2013 12:49:23,387 DEBUG Timer-0 Server:setGroupsLocalCopy:154 - Method call
+07.05.2013 12:49:23,568 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:23,568 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:23,616 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:23,616 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:23,665 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:23,666 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:23,718 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:23,718 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:23,772 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:23,772 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:23,832 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:23,832 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:23,908 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:23,908 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:23,965 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:23,966 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:24,029 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:24,029 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:24,091 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:24,091 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:24,145 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:24,145 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:24,190 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:24,190 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:24,232 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:24,232 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:24,276 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:24,276 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:24,326 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:24,326 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:24,382 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:24,382 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:24,429 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:24,429 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:24,474 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:24,474 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:24,514 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:24,515 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:24,554 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:24,554 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:24,598 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:24,598 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:24,640 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:24,640 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:46,315 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:46,315 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:46,370 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:46,370 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:46,427 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:46,427 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:46,480 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:46,480 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:46,546 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:46,546 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:46,598 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:46,598 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:46,645 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:46,645 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:46,693 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:46,693 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:46,746 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:46,746 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:46,804 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:46,804 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:46,848 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:46,849 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:46,908 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:46,908 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:46,955 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:46,956 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:47,006 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:47,006 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:47,060 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:47,060 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:47,116 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:47,116 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:47,161 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:47,162 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:47,217 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:47,217 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:47,258 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:47,258 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:47,297 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:47,297 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:47,336 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:47,336 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:47,374 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:47,374 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:47,417 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:47,417 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:47,469 DEBUG Thread-3 Server:updateStudent:472 - Method call. Arguments: Student [id=1535101342, firstName=Семен, lastName=Сидоров, groupNumber=3, enrolled=11.12.2002]
+07.05.2013 12:49:47,469 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:47,469 DEBUG Thread-3 Server:removeStudent:264 - Method call. Arguments: 1535101342
+07.05.2013 12:49:47,470 DEBUG Thread-3 Server:addStudent:310 - Method call. Arguments: Student [id=1535101342, firstName=Семен, lastName=Сидоров, groupNumber=3, enrolled=11.12.2002]
+07.05.2013 12:49:54,032 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:54,032 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:54,070 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:54,070 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:54,108 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:54,108 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:54,146 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:54,146 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:54,185 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:54,186 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:54,234 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:54,234 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:54,289 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:54,289 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:54,371 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:54,371 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:54,416 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:54,416 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:54,457 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:54,457 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:54,511 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:54,512 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:54,561 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:54,561 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:54,609 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:54,609 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:54,660 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:54,660 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:54,698 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:54,698 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:54,734 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:54,735 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:54,773 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:54,773 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:54,832 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:54,832 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:54,871 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:54,871 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:54,908 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:54,908 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:54,946 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:54,946 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]
+07.05.2013 12:49:54,986 DEBUG Thread-3 Server:getGroup:402 - Method call. Arguments: 3
+07.05.2013 12:49:54,987 DEBUG Thread-3 Server:getStudents:237 - Method call. Arguments: Group [fakulty=Gym, number=3]

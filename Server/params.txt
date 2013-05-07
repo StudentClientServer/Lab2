@@ -1,4 +1,0 @@
-dtd file :
-groups.dtd
-xml file:
-groups.xml

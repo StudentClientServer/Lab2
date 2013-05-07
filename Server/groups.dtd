@@ -1,10 +1,11 @@
 <!ELEMENT groups (group*)>
 
-<!ELEMENT group (student*)>
+<!ELEMENT group (students)>
 <!ATTLIST group
 fakulty CDATA #REQUIRED
-number CDATA #REQUIRED
->
+number CDATA #REQUIRED>
+<!ELEMENT students (student*)>
+
 
 <!ELEMENT student EMPTY>
 <!ATTLIST student
@@ -12,5 +13,4 @@ id CDATA #REQUIRED
 firstname CDATA #REQUIRED
 lastname CDATA #REQUIRED
 groupnumber CDATA #REQUIRED
-enrolled CDATA #REQUIRED
->
+enrolled CDATA #REQUIRED>

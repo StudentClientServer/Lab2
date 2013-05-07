@@ -1,33 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE groups SYSTEM "groups.dtd">
 <groups>
-
-<group fakulty="yur" number="2">
-
-
-
-</group>
 <group fakulty="Gym" number="3">
-<student enrolled="01.02.2001" firstname="Вася" groupnumber="3" id="1413073239" lastname="Васичкин"/>
+
+
+
+
+<students>
+<student enrolled="01.02.2001" firstname="Вася" groupnumber="3" id="1413073239" lastname="Васюков"/>
 <student enrolled="01.01.01" firstname="Андрей" groupnumber="3" id="755357428" lastname="Андревич"/>
-
-
-
 <student enrolled="22.03.2013" firstname="Клава" groupnumber="3" id="194131376" lastname="Кузминишна"/>
-
-
 <student enrolled="12.12.13" firstname="Петя" groupnumber="3" id="952753955" lastname="Абрамович"/>
 <student enrolled="10.03.1576" firstname="Иван" groupnumber="3" id="2734" lastname="Рюрикович"/>
 <student enrolled="11.12.1432" firstname="johny" groupnumber="3" id="1975120316" lastname="Walker"/>
+
+
+
+<student enrolled="11.12.2002" firstname="Семен" groupnumber="3" id="1535101342" lastname="Петров"/>
+</students>
 </group>
 
 
 
 
-
-
-<group fakulty="yur" number="7"/>
-<group fakulty="History" number="hs-99">
-<student enrolled="12.11.1222" firstname="AAAA" groupnumber="hs-99" id="1233660949" lastname="ССССС"/>
-</group>
 </groups>
