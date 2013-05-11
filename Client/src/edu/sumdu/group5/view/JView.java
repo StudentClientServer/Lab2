@@ -214,7 +214,7 @@ public class JView extends DefaultTableModel {
                         getColumnModel().addColumnModelListener(this);
                         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                         tb = this;
-                        tb.putClientProperty("JTable.autoStartsEdit", Boolean.FALSE);
+                       // tb.putClientProperty("JTable.autoStartsEdit", Boolean.FALSE);
                         tb.addKeyListener(new KeyListener() {
                                 
                             @Override
@@ -397,7 +397,7 @@ public class JView extends DefaultTableModel {
                                         try {
                                             deleteStudent();
                                         } catch (ClientException e) {
-                                            JOptionPane.showMessageDialog(frame, "Couldn't delete student!" );
+                                            JOptionPane.showMessageDialog(frame, e.getMessage() );
                                             logger.error("Couldn't delete student!!",e);
                                         }
                                             model1.removeRow(tb.getSelectedRow());
@@ -566,8 +566,8 @@ public class JView extends DefaultTableModel {
     /**
      * Gets the object model.
      *
-     * @param isGroup the is group
-     * @param el the el
+     * @param isGroup if true creates new DefaultTableModel with groups, if false - with students  
+     * @param el selected object.In this case is element group
      * @return the object model
      * @throws ClientException 
      */
@@ -576,7 +576,7 @@ public class JView extends DefaultTableModel {
             logger.debug("Called method to get object model");
         }
         elemGr = el;
-        
+        groupsUpdate();
         int rowCount =0;
         if (isGroup) {
             data = new Object[groups.size()][2];
@@ -842,11 +842,15 @@ public class JView extends DefaultTableModel {
             logger.error("Error while deleting student",e);
             throw new ClientException(e);
         }
+        if(stud!=null){
         try{
             client.removeStudent(groupNumber, stud.getId());
         }catch(ServerException e){
             logger.error("Error while deleting student on the server side",e);
             throw new ClientException(e);
+        }
+        }else{
+        	throw new ClientException("There is no this student in model");
         }
     }
     

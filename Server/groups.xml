@@ -16,11 +16,14 @@
 
 
 
-<student enrolled="11.12.2002" firstname="Семен" groupnumber="3" id="1535101342" lastname="Петров"/>
+
 </students>
 </group>
 
 
 
 
+<group fakulty="FizTeh" number="2">
+<students/>
+</group>
 </groups>

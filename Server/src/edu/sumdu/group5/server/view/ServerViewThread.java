@@ -16,9 +16,6 @@ import org.xml.sax.*;
 
 import edu.sumdu.group5.server.model.*;
 
-/**
- * Thread that accepts connections and communicates with the client 
- */
 public class ServerViewThread extends Thread
 {
   private boolean connection;
